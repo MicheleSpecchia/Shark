@@ -4,7 +4,7 @@
             <h2 class="text-2xl font-bold uppercase mb-1">
                 Log In
             </h2>
-            <p class="mb-4">Log in your account to post gigs</p>
+            <p class="mb-4">Log in your account to find a park or to post an Ad</p>
         </header>
 
         <form method="POST" action="/users/authenticate">
@@ -38,7 +38,7 @@
             <div class="mt-8">
                 <p>
                     Don't have an account?
-                    <a href="/register" class="text-laravel">Register</a>
+                    <a href="/register" class="text-laravel">Signup</a>
                 </p>
             </div>
         </form>
