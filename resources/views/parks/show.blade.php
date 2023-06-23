@@ -38,7 +38,7 @@
             <form method="POST" action="/parks/{{$park -> id}}">
                 @csrf
                 @method('DELETE')
-                <button class="text-red-500"> 
+                <button class="text-blue-500"> 
                     <i class="fa-solid fa-trash"></i>
                     Delete 
                 </button>
