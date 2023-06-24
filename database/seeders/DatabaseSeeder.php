@@ -16,30 +16,29 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $user = User::factory()->create([
-            'name' => 'Jhon Doe',
-            'email' => 'john@gmail.com'
-        ]);
-         
-        Park::factory(6)->create(['user_id' => $user->id]);
-        /*\App\Models\Listing::create([
-            'title' => 'Laravel Junior Developer',
-            'tags' => 'laravel, javascript',
-            'company' => 'MikiCorp',
-            'location' => 'Galatina',
-            'email' => 'mikicp@email.com',
-            'website' => 'www.mikicp.com',
-            'description' => 'pizza pasta and spaghetti'
+            'name' => 'Michele Specchia',
+            'email' => 'michele@gmail.com',
+            'role'  => '1',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+            'remember_token' => '2389731509'
         ]);
 
+        $user = User::factory()->create([
+            'name' => 'Luca Faccio',
+            'email' => 'lucafaccio90@gmail.com',
+            'role'  => '2',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+            'remember_token' => '9085876012'
+        ]);
 
-        \App\Models\Listing::create([
-            'title' => 'Full Stack',
-            'tags' => 'laravel, backend, api',
-            'company' => 'MikiCorp',
-            'location' => 'Sulitu',
-            'email' => 'mikicp@email.com',
-            'website' => 'www.mikicp.com',
-            'description' => 'pizza pasta and sugo'
-        ]);*/
+        $user = User::factory()->create([
+            'name' => 'Simone Torto',
+            'email' => 'simo0@gmail.com',
+            'role'  => '3',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+            'remember_token' => '7512367855'
+        ]);
+
     }
+    
 }

@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\ParkController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +18,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ParkController::class, 'index']);
+//Route::get('/', [ParkController::class, 'index'])->middleware('guest');
+Route::get('/', function(){return view('welcome');});
+
+/* REGISTRAZIONE UTENTE */
+
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->middleware('guest');
+
+Route::post('/newuser', [RegisterController::class, 'store'])->middleware('guest');
+
+/* LOGOUT */
+
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
+
+/* LOGIN */
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('showLoginForm')->middleware('guest');
+
+Route::post('/users/authenticate', [LoginController::class, 'authenticate']);
+
+/* MULTIUSER */
+
+Route::get('/admin', function(){return view('admin.admin');})->name('admin')->middleware('admin');
+
+Route::get('/staff', function(){return view('staff');})->name('staff')->middleware('staff');
+
+Route::get('/user', function(){return view('user');})->name('user')->middleware('user');
+
+/*Route::get('/', [ParkController::class, 'index']);
 
 Route::get('/parks/create', [ParkController::class, 'create'])->middleware('auth');
 
@@ -29,16 +59,6 @@ Route::delete('/parks/{park}', [ParkController::class, 'destroy'])->middleware('
 
 Route::get('/parks/manage', [ParkController::class, 'manage'])->middleware('auth');
 
-Route::get('/parks/{park}', [ParkController::class, 'show']);
+Route::get('/parks/{park}', [ParkController::class, 'show']);*/
 
-Route::get('/register', [UserController::class, 'create'])->middleware('guest');
-
-Route::post('/users', [UserController::class, 'store']);
-
-Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
-
-Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
-
-Route::post('/users/authenticate', [UserController::class, 'authenticate']);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Auth::routes();

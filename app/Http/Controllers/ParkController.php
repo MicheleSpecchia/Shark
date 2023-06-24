@@ -10,12 +10,12 @@ use App\Models\User;
 class ParkController extends Controller
 {
     //show all parks
-    public function index()
+    /*public function index()
     {
         return view('parks.index', [
             'parks' => Park::latest()->filter(request(['cap', 'search']))->paginate(6)
         ]);
-    }
+    }*/
 
     //show single park
     public function show(Park $park)
