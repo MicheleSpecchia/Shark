@@ -4,6 +4,8 @@ use App\Http\Controllers\ParkController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,32 +20,19 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-//Route::get('/', [ParkController::class, 'index'])->middleware('guest');
-Route::get('/', function(){return view('welcome');});
+#--- HOME ROUTE---#
+Route::get('/', [HomeController::class, 'index']);
 
-/* REGISTRAZIONE UTENTE */
-
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->middleware('guest');
-
-Route::post('/newuser', [RegisterController::class, 'store'])->middleware('guest');
-
-/* LOGOUT */
-
-Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
-
-/* LOGIN */
-
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('showLoginForm')->middleware('guest');
-
+#--- AUTH ROUTES ---#
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/newuser', [RegisterController::class, 'store']);
+Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('preventback')->name('login');
 Route::post('/users/authenticate', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('/logout');
 
-/* MULTIUSER */
-
-Route::get('/admin', function(){return view('admin.admin');})->name('admin')->middleware('admin');
-
-Route::get('/staff', function(){return view('staff');})->name('staff')->middleware('staff');
-
-Route::get('/user', function(){return view('user');})->name('user')->middleware('user');
+#--- MULTIUSER ROUTES---#
+Route::get('/user', [UserController::class, 'index'])->name('user')->middleware('preventback');
+Route::get('/admin',[AdminController::class, 'index'])->name('admin')->middleware('preventback');
 
 /*Route::get('/', [ParkController::class, 'index']);
 
@@ -60,5 +49,3 @@ Route::delete('/parks/{park}', [ParkController::class, 'destroy'])->middleware('
 Route::get('/parks/manage', [ParkController::class, 'manage'])->middleware('auth');
 
 Route::get('/parks/{park}', [ParkController::class, 'show']);*/
-
-//Auth::routes();

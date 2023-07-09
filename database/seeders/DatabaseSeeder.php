@@ -25,18 +25,10 @@ class DatabaseSeeder extends Seeder
 
         $user = User::factory()->create([
             'name' => 'Luca Faccio',
-            'email' => 'lucafaccio90@gmail.com',
+            'email' => 'lucafaccio@gmail.com',
             'role'  => '2',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'remember_token' => '9085876012'
-        ]);
-
-        $user = User::factory()->create([
-            'name' => 'Simone Torto',
-            'email' => 'simo0@gmail.com',
-            'role'  => '3',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            'remember_token' => '7512367855'
         ]);
 
     }

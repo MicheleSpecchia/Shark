@@ -22,7 +22,7 @@ class User
 
         $user = Auth::user();
 
-        if ($user->role == 3) { //User
+        if ($user->role == 2) { //User
             return $next($request);
         }
 
@@ -30,8 +30,5 @@ class User
             return redirect('/admin');
         }
 
-        if ($user->role == 2) { //Staff
-            return redirect('/staff');
-        }
     }
 }

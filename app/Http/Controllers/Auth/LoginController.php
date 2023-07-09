@@ -38,6 +38,7 @@ class LoginController extends Controller
     {
         return view('users.login');
     }
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -54,15 +55,12 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             $user_role = Auth::user()->role;
-            
+
             switch ($user_role) {
                 case 1:
                     return redirect('/admin');
                     break;
                 case 2:
-                    return redirect('/staff');
-                    break;
-                case 3:
                     return redirect('/user');
                     break;
                 default:
@@ -73,6 +71,11 @@ class LoginController extends Controller
             return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput();
         }
     }
+
+
+    /**
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     */
 
     protected function logout(Request $request)
     {

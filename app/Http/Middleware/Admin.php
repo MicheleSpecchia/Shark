@@ -26,11 +26,7 @@ class Admin
             return $next($request);
         }
 
-        if ($user->role == 2) { //Staff
-            return redirect('/staff');
-        }
-
-        if ($user->role == 3) { //User
+        if ($user->role == 2) { //User
             return redirect('/user');
         }
     }
