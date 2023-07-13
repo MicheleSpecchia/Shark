@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,13 +27,13 @@ Route::get('/', [HomeController::class, 'index']);
 #--- AUTH ROUTES ---#
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/newuser', [RegisterController::class, 'store']);
-Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('preventback')->name('login');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('preventback');
 Route::post('/users/authenticate', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('/logout');
+Route::post('/logout', [LoginController::class, 'logout']);
 
 #--- MULTIUSER ROUTES---#
-Route::get('/user', [UserController::class, 'index'])->name('user')->middleware('preventback');
-Route::get('/admin',[AdminController::class, 'index'])->name('admin')->middleware('preventback');
+Route::get('/user', [UserController::class, 'index'])->middleware('preventback');
+Route::get('/admin',[AdminController::class, 'index'])->middleware('preventback');
 
 /*Route::get('/', [ParkController::class, 'index']);
 

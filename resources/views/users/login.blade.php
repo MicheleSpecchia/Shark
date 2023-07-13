@@ -1,10 +1,10 @@
 <x-layout>
-    <x-card class="p-10 max-w-lg mx-auto mt-24">
+    <div class="p-10 max-w-lg mx-auto mt-24 bg-white border border-laravel rounded p-6">
         <header class="text-center">
             <h2 class="text-2xl font-bold uppercase mb-1">
                 Log In
             </h2>
-            <p class="mb-4">Log in your account to find a park or to post an Ad</p>
+            <p class="mb-4">Accedi al tuo account SHARK</p>
         </header>
 
         <form method="POST" action="/users/authenticate">
@@ -37,10 +37,10 @@
 
             <div class="mt-8">
                 <p>
-                    Don't have an account?
-                    <a href="/register" class="text-laravel">Signup</a>
+                    Non hai un account?
+                    <a href="/register" class="text-laravel">Registrati</a>
                 </p>
             </div>
         </form>
-    </x-card>
+    <div>
 </x-layout>

@@ -1,11 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
 
 class HomeController extends Controller
 {
+
+      /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = RouteServiceProvider::HOME;
+
     /**
      * Create a new controller instance.
      *
@@ -13,7 +21,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        #$this->middleware('guest');
+        #$this->middleware('auth');
     }
 
     /**
@@ -23,6 +31,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        if (Auth::user()) {
+            $user_role = Auth::user()->role;
+
+            switch ($user_role) {
+                case 1:
+                    return view('admin.admin');
+                    break;
+                case 2:
+                    return view('user');
+                    break;
+                default:
+                    Auth::logout();
+                    return redirect('/login')->with('error', 'Oops, qualcosa è andato storto!');
+            }
+        } else {
+            return view('home');
+        }
     }
+
 }
