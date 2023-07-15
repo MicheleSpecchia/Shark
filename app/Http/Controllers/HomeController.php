@@ -36,7 +36,7 @@ class HomeController extends Controller
 
             switch ($user_role) {
                 case 1:
-                    return view('admin.admin');
+                    return view('admin.dashboard');
                     break;
                 case 2:
                     return view('user');
