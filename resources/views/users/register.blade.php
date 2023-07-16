@@ -1,11 +1,21 @@
 <x-layout>
-    <div class="p-10 max-w-lg mx-auto mt-24 bg-white border border-laravel rounded p-6">
-        <header class="text-center">
-            <h2 class="text-2xl font-bold uppercase mb-1">
-                SIGN UP
-            </h2>
-            <p class="mb-4">Crea il tuo account SHARK</p>
-        </header>
+<div class="p-10 max-w-3xl mx-auto mt-24 bg-white border border-laravel rounded p-6 flex items-center">
+        <div class="w-1/2 pr-4">
+            <!-- Box del logo -->
+            <div class="flex items-center justify-center h-full">
+                <img src="./images/logo.png" alt="Logo" class="w-2/3" />
+            </div>
+        </div>
+        <div class="w-1/2 pl-4">
+            <!-- Box del form di registrazione -->
+            <header class="text-center mb-8">
+                <h2 class="text-2xl font-bold uppercase mb-1">
+                    <span class="block">Sign Up</span>
+                </h2>
+                <p class="mb-4">
+                    <span class="block">Crea il tuo account SHARK</span>
+                </p>
+            </header>
 
         <form method="POST" action="/newuser">
             @csrf

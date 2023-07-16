@@ -28,11 +28,11 @@
             <li class="dash-li">
                 <form class="inline" method="POST" action="/logout">
                     <div>
-                    @csrf
-                    <button class="logout" type="submit">
-                        <i class="dash-bx bx bx-log-out-circle"></i>
-                        Logout
-                    </button>
+                        @csrf
+                        <button class="logout" type="submit">
+                            <i class="dash-bx bx bx-log-out-circle"></i>
+                            Logout
+                        </button>
                     </div>
                 </form>
             </li>
@@ -57,150 +57,151 @@
                 <i class='dash-bx bx bx-bell'></i>
                 <span class="count">12</span>
             </a>
+            <a href="#" class="profile">
+                <img src="images/logosolito.png">
+            </a>
         </nav>
 
         <!-- End of Navbar -->
+        <div class="dashboard-container">
+            <main>
 
-        <main>
-            <div class="header">
-                <div class="left">
-                    <h1>Dashboard</h1>
-                    <ul class="breadcrumb">
-                        <li class="dash-li"><a class="dash-a" href="#">
-                                Analytics
-                            </a></li>
-                        /
-                        <li class="dash-li"><a href="#" class="dash-a active">Shop</a></li>
-                    </ul>
-                </div>
-                <a href="#" class="dash-a report">
-                    <i class='dash-bx bx bx-cloud-download'></i>
-                    <span>Download CSV</span>
-                </a>
-            </div>
-
-            <!-- Insights -->
-            <ul class="insights">
-                <li class="dash-li">
-                    <i class='dash-bx bx bx-calendar-check'></i>
-                    <span class="info">
-                        <h3>
-                            1,074
-                        </h3>
-                        <p>Paid Order</p>
-                    </span>
-                </li>
-                <li class="dash-li"><i class='dash-bx bx bx-show-alt'></i>
-                    <span class="info">
-                        <h3>
-                            3,944
-                        </h3>
-                        <p>Site Visit</p>
-                    </span>
-                </li>
-                <li class="dash-li"><i class='dash-bx bx bx-line-chart'></i>
-                    <span class="info">
-                        <h3>
-                            14,721
-                        </h3>
-                        <p>Searches</p>
-                    </span>
-                </li>
-                <li class="dash-li"><i class='dash-bx bx bx-dollar-circle'></i>
-                    <span class="info">
-                        <h3>
-                            $6,742
-                        </h3>
-                        <p>Total Sales</p>
-                    </span>
-                </li>
-            </ul>
-            <!-- End of Insights -->
-
-            <div class="bottom-data">
-                <div class="orders">
-                    <div class="header">
-                        <i class='dash-bx bx bx-receipt'></i>
-                        <h3>Recent Orders</h3>
-                        <i class='dash-bx bx bx-filter'></i>
-                        <i class='dash-bx bx bx-search'></i>
+                <div class="header">
+                    <div class="left">
+                        <h1>Dashboard</h1>
+                        <ul class="breadcrumb">
+                            <li class="dash-li"><a class="dash-a" href="#">
+                                    Analytics
+                                </a></li>
+                            /
+                            <li class="dash-li"><a href="#" class="dash-a active">Shop</a></li>
+                        </ul>
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>User</th>
-                                <th>Order Date</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <img src="images/profile-1.jpg">
-                                    <p>John Doe</p>
-                                </td>
-                                <td>14-08-2023</td>
-                                <td><span class="status completed">Completed</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="images/profile-1.jpg">
-                                    <p>John Doe</p>
-                                </td>
-                                <td>14-08-2023</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="images/profile-1.jpg">
-                                    <p>John Doe</p>
-                                </td>
-                                <td>14-08-2023</td>
-                                <td><span class="status process">Processing</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <a href="#" class="dash-a report">
+                        <i class='dash-bx bx bx-cloud-download'></i>
+                        <span>Download CSV</span>
+                    </a>
                 </div>
 
-                <!-- Reminders -->
-                <div class="reminders">
-                    <div class="header">
-                        <i class='dash-bx bx bx-note'></i>
-                        <h3>Remiders</h3>
-                        <i class='dash-bx bx bx-filter'></i>
-                        <i class='dash-bx bx bx-plus'></i>
+                <!-- Insights -->
+                <ul class="insights">
+                    <li class="dash-li">
+                        <i class='dash-bx bx bx-calendar-check'></i>
+                        <span class="info">
+                            <h3>
+                                1,074
+                            </h3>
+                            <p>Paid Order</p>
+                        </span>
+                    </li>
+                    <li class="dash-li"><i class='dash-bx bx bx-show-alt'></i>
+                        <span class="info">
+                            <h3>
+                                3,944
+                            </h3>
+                            <p>Site Visit</p>
+                        </span>
+                    </li>
+                    <li class="dash-li"><i class='dash-bx bx bx-line-chart'></i>
+                        <span class="info">
+                            <h3>
+                                14,721
+                            </h3>
+                            <p>Searches</p>
+                        </span>
+                    </li>
+                    <li class="dash-li"><i class='dash-bx bx bx-dollar-circle'></i>
+                        <span class="info">
+                            <h3>
+                                $6,742
+                            </h3>
+                            <p>Total Sales</p>
+                        </span>
+                    </li>
+                </ul>
+                <!-- End of Insights -->
+
+                <div class="bottom-data">
+                    <div class="orders">
+                        <div class="header">
+                            <i class='dash-bx bx bx-receipt'></i>
+                            <h3>Recent Orders</h3>
+                            <i class='dash-bx bx bx-filter'></i>
+                            <i class='dash-bx bx bx-search'></i>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Order Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="images/profile-1.jpg">
+                                        <p>John Doe</p>
+                                    </td>
+                                    <td>14-08-2023</td>
+                                    <td><span class="status completed">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="images/profile-1.jpg">
+                                        <p>John Doe</p>
+                                    </td>
+                                    <td>14-08-2023</td>
+                                    <td><span class="status pending">Pending</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="images/profile-1.jpg">
+                                        <p>John Doe</p>
+                                    </td>
+                                    <td>14-08-2023</td>
+                                    <td><span class="status process">Processing</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <ul class="task-list">
-                        <li class="dash-li completed">
-                            <div class="task-title">
-                                <i class='dash-bx bx bx-check-circle'></i>
-                                <p>Start Our Meeting</p>
-                            </div>
-                            <i class='dash-bx bx bx-dots-vertical-rounded'></i>
-                        </li>
-                        <li class="dash-li completed">
-                            <div class="task-title">
-                                <i class='dash-bx bx bx-check-circle'></i>
-                                <p>Analyse Our Site</p>
-                            </div>
-                            <i class='dash-bx bx bx-dots-vertical-rounded'></i>
-                        </li>
-                        <li class="dash-li not-completed">
-                            <div class="task-title">
-                                <i class='bx bx bx-x-circle'></i>
-                                <p>Play Footbal</p>
-                            </div>
-                            <i class='dash-bx bx bx-dots-vertical-rounded'></i>
-                        </li>
-                    </ul>
+
+                    <!-- Reminders -->
+                    <div class="reminders">
+                        <div class="header">
+                            <i class='dash-bx bx bx-note'></i>
+                            <h3>Remiders</h3>
+                            <i class='dash-bx bx bx-filter'></i>
+                            <i class='dash-bx bx bx-plus'></i>
+                        </div>
+                        <ul class="task-list">
+                            <li class="dash-li completed">
+                                <div class="task-title">
+                                    <i class='dash-bx bx bx-check-circle'></i>
+                                    <p>Start Our Meeting</p>
+                                </div>
+                                <i class='dash-bx bx bx-dots-vertical-rounded'></i>
+                            </li>
+                            <li class="dash-li completed">
+                                <div class="task-title">
+                                    <i class='dash-bx bx bx-check-circle'></i>
+                                    <p>Analyse Our Site</p>
+                                </div>
+                                <i class='dash-bx bx bx-dots-vertical-rounded'></i>
+                            </li>
+                            <li class="dash-li not-completed">
+                                <div class="task-title">
+                                    <i class='bx bx bx-x-circle'></i>
+                                    <p>Play Footbal</p>
+                                </div>
+                                <i class='dash-bx bx bx-dots-vertical-rounded'></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End of Reminders-->
                 </div>
-
-                <!-- End of Reminders-->
-
-            </div>
-
-        </main>
-
+            </main>
+        </div>
     </div>
 
     <script src="dashboard.js"></script>
