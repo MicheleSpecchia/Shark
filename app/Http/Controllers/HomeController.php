@@ -36,10 +36,10 @@ class HomeController extends Controller
 
             switch ($user_role) {
                 case 1:
-                    return view('admin.dashboard');
+                    return redirect('/admin');
                     break;
                 case 2:
-                    return view('user');
+                    return redirect('/user');
                     break;
                 default:
                     Auth::logout();

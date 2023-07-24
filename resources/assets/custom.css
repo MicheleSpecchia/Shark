@@ -92,8 +92,8 @@ body {
     margin: 0;
 }
 
-.x-layout {
-    flex: 1;
+.x-card{
+    padding: 70px 0;
 }
 
 /* --- FOOTER --- */
@@ -206,7 +206,7 @@ body {
     --light: #ffffff;
     --primary: #1e4beb;
     --light-primary: #CFE8FF;
-    --grey:#CFE8FF;
+    --grey: #CFE8FF;
     --dark-grey: #AAAAAA;
     --dark: black;
     --danger: #DC3545;
@@ -308,8 +308,6 @@ body {
     margin-left: 10px;
     transition: margin-left 0.3s ease;
 }
-
-
 
 .dash-sidebar .logo .dash-bx {
     min-width: 60px;
