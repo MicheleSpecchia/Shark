@@ -1,17 +1,27 @@
 <x-layout>
-    <x-card class="p-10 max-w-lg mx-auto mt-24">
-        <header class="text-center">
-            <h2 class="text-2xl font-bold uppercase mb-1">
-                Register
-            </h2>
-            <p class="mb-4">Create an account to post gigs</p>
-        </header>
+<div class="p-10 max-w-3xl mx-auto mt-24 bg-white border border-laravel rounded p-6 flex items-center">
+        <div class="w-1/2 pr-4">
+            <!-- Box del logo -->
+            <div class="flex items-center justify-center h-full">
+                <img src="./images/logo.png" alt="Logo" class="w-2/3" />
+            </div>
+        </div>
+        <div class="w-1/2 pl-4">
+            <!-- Box del form di registrazione -->
+            <header class="text-center mb-8">
+                <h2 class="text-2xl font-bold uppercase mb-1">
+                    <span class="block">Sign Up</span>
+                </h2>
+                <p class="mb-4">
+                    <span class="block">Crea il tuo account SHARK</span>
+                </p>
+            </header>
 
-        <form method="POST" action="/users">
+        <form method="POST" action="/newuser">
             @csrf
             <div class="mb-6">
                 <label for="name" class="inline-block text-lg mb-2">
-                    Name
+                    Nome
                 </label>
                 <input type="text" class="border border-gray-200 rounded p-2 w-full" name="name" value="{{old('name')}}" />
 
@@ -41,7 +51,7 @@
 
             <div class="mb-6">
                 <label for="password2" class="inline-block text-lg mb-2">
-                    Confirm Password
+                    Conferma Password
                 </label>
                 <input type="password" class="border border-gray-200 rounded p-2 w-full" name="password_confirmation" value="{{old('password_confirmation')}}" />
 
@@ -58,10 +68,10 @@
 
             <div class="mt-8">
                 <p>
-                    Already have an account?
-                    <a href="/login" class="text-laravel">Login</a>
+                    Hai già un account?
+                    <a href="/login" class="text-laravel">Accedi</a>
                 </p>
             </div>
         </form>
-    </x-card>
+</div>
 </x-layout>

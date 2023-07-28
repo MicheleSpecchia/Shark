@@ -2,7 +2,13 @@
 
 use App\Http\Controllers\ParkController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,30 +21,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ParkController::class, 'index']);
+#--- HOME ROUTE---#
+Route::get('/', [HomeController::class, 'index']);
 
+#--- AUTH ROUTES ---#
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/newuser', [RegisterController::class, 'store']);
+Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('preventback');
+Route::post('/users/authenticate', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+#--- MULTIUSER ROUTES---#
+Route::get('/user', [UserController::class, 'index'])->middleware('preventback');
+Route::get('/admin',[AdminController::class, 'index'])->middleware('preventback');
+
+#--- PARKS ---#
+Route::get('/parks/search', [ParkController::class, 'search'])->middleware('auth');
 Route::get('/parks/create', [ParkController::class, 'create'])->middleware('auth');
-
 Route::post('/parks', [ParkController::class, 'store'])->middleware('auth');
-
 Route::get('/parks/{park}/edit', [ParkController::class, 'edit'])->middleware('auth');
-
 Route::put('/parks/{park}', [ParkController::class, 'update'])->middleware('auth');
-
 Route::delete('/parks/{park}', [ParkController::class, 'destroy'])->middleware('auth');
-
 Route::get('/parks/manage', [ParkController::class, 'manage'])->middleware('auth');
-
-Route::get('/parks/{park}', [ParkController::class, 'show']);
-
-Route::get('/register', [UserController::class, 'create'])->middleware('guest');
-
-Route::post('/users', [UserController::class, 'store']);
-
-Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
-
-Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
-
-Route::post('/users/authenticate', [UserController::class, 'authenticate']);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/parks/{park}', [ParkController::class, 'show'])->middleware('auth');

@@ -10,12 +10,12 @@ use App\Models\User;
 class ParkController extends Controller
 {
     //show all parks
-    public function index()
+    /*public function index()
     {
         return view('parks.index', [
             'parks' => Park::latest()->filter(request(['cap', 'search']))->paginate(6)
         ]);
-    }
+    }*/
 
     //show single park
     public function show(Park $park)
@@ -23,6 +23,19 @@ class ParkController extends Controller
         return view('parks.show', [
             'park' => $park
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        $query = Park::query();
+
+        // Filtraggio in base ai parametri di ricerca
+        $query->filter($request->only(['cap', 'search']));
+
+        // Ottenere i risultati paginati
+        $parks = $query->paginate(10);
+
+        return view('user', compact('parks'));
     }
 
     //show create form
@@ -59,7 +72,7 @@ class ParkController extends Controller
         return view('parks.edit', ['park' => $park]);
     }
 
-    //store park date
+    //store park data
     public function update(Request $request, Park $park)
     {
         if ($park->user_id != auth()->id()) {

@@ -21,7 +21,20 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                //return redirect(RouteServiceProvider::HOME);
+                $user_role = Auth::user()->role;
+
+                switch ($user_role) {
+                    case 1:
+                        return redirect('/admin');
+                        break;
+                    case 2:
+                        return redirect('/user');
+                        break;
+                    default:
+                        Auth::logout();
+                        return redirect('/login')->with('error', 'Oops, qualcosa è andato storto!');
+                }
             }
         }
 
