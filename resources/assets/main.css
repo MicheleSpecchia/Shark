@@ -19,14 +19,14 @@ ol {
 }
 
 a {
-  color: #008CFF;
+  color: #1e4beb;
 }
 
 a:hover,
 a:active,
 a:focus {
   transition: all ease-in-out 0.3s;
-  color: #0393D2;
+  color: #1e4beb;
 }
 
 .dropdown-item.active,
@@ -57,7 +57,7 @@ a:hover {
 }
 
 .theme-bg-primary {
-  background-color: #0393D2;
+  background-color: #1e4beb;
 }
 
 .theme-bg-secondary {
@@ -81,7 +81,7 @@ a:hover {
 }
 
 .theme-text-primary {
-  color: #0393D2;
+  color: #1e4beb;
 }
 
 .theme-text-secondary {
@@ -126,18 +126,18 @@ a:hover {
 
 .btn-shop {
   background-color: #ffffff;
-  color: #0393D2;
+  color: #1e4beb;
   border-radius: 50px;
   min-width: 150px;
 }
 .btn-shop:hover {
-  background-color: #0393D2;
+  background-color: #1e4beb;
   color: #ffffff;
 }
 
 .link-btn {
   background-color: #EFFAFF;
-  color: #0393D2;
+  color: #1e4beb;
   border-radius: 50px;
   min-width: 60px;
   height: 40px;
@@ -146,7 +146,7 @@ a:hover {
   align-items: center;
 }
 .link-btn:hover {
-  background-color: #0393D2;
+  background-color: #1e4beb;
   color: #ffffff;
 }
 
@@ -169,14 +169,14 @@ a:hover {
   border: none;
 }
 .recomended-btn:hover {
-  background-color: #0393D2;
+  background-color: #1e4beb;
 }
 
 .theme-btn-outline {
   background-color: #ffffff;
-  color: #0393D2;
+  color: #1e4beb;
   border-radius: 50px;
-  border: 1px solid #0393D2;
+  border: 1px solid #1e4beb;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -185,7 +185,7 @@ a:hover {
   font-size: 0.8rem;
 }
 .theme-btn-outline:hover {
-  background-color: #0393D2;
+  background-color: #1e4beb;
   color: #ffffff;
 }
 
@@ -249,10 +249,10 @@ a:hover {
   }
 }
 .page-menu li a:hover {
-  color: #0393D2;
+  color: #1e4beb;
 }
 .page-menu li a.active {
-  color: #0393D2;
+  color: #1e4beb;
 }
 
 .user i {
@@ -310,7 +310,7 @@ a:hover {
 }
 .cust-tab li .nav-link:hover,
 .cust-tab li .nav-link.active:hover {
-  color: #0393D2;
+  color: #1e4beb;
 }
 .cust-tab li .nav-link.active:after {
   content: "";
@@ -337,14 +337,14 @@ a:hover {
 }
 .cust-pills .nav-item .nav-link:hover {
   border-color: transparent;
-  color: #0393D2;
+  color: #1e4beb;
 }
 .cust-pills .nav-item span {
-  border: 1px solid #0393D2;
+  border: 1px solid #1e4beb;
 }
 .cust-pills .nav-item .active span {
-  background: #0393D2 !important;
-  border: 1px solid #0393D2;
+  background: #1e4beb !important;
+  border: 1px solid #1e4beb;
   position: relative;
 }
 
@@ -403,12 +403,12 @@ a:hover {
 }
 .search-pan .dropdown .dropdown-menu .plus-minus-input .input-group-button button {
   background-color: #ffffff;
-  border: 1px solid #0393D2;
-  color: #0393D2;
+  border: 1px solid #1e4beb;
+  color: #1e4beb;
   border-radius: 0.2rem;
 }
 .search-pan .dropdown .dropdown-menu .plus-minus-input .input-group-button button:hover {
-  background-color: #0393D2;
+  background-color: #1e4beb;
   color: #ffffff;
 }
 .search-pan .dropdown .dropdown-menu .plus-minus-input .input-group-field {
@@ -460,7 +460,7 @@ a:hover {
 }
 
 .btn-search {
-  background-color: #0393D2;
+  background-color: #1e4beb;
   min-height: 48px;
   color: #ffffff;
   max-width: 175px;
@@ -517,7 +517,7 @@ a:hover {
 .mode-switch input[type=checkbox]:checked + label.mode-switch-inner:after {
   content: attr(data-on);
   left: 80px;
-  background: #0393D2;
+  background: #1e4beb;
 }
 .mode-switch input[type=checkbox]:checked + label.mode-switch-inner:before {
   content: attr(data-off);
@@ -546,7 +546,7 @@ a:hover {
   width: 80px;
   height: 30px;
   line-height: 30px;
-  background: #0393D2;
+  background: #1e4beb;
   border-radius: 50px;
   position: absolute;
   left: 0px;
@@ -582,10 +582,11 @@ a:hover {
   border-radius: 50px;
 }
 
+
 .footer {
   padding-top: 3rem;
   padding-bottom: 3rem;
-  background-color: #ffffff;
+  background-color: #1e4beb;
 }
 .footer .fl-menu li {
   list-style: none;
@@ -621,11 +622,13 @@ a:hover {
 }
 
 .recommended {
-  padding-top: 7.5rem;
-  padding-bottom: 7.5rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
 }
 .recommended .card-wrap {
   background-color: #ffffff;
+  margin-bottom: 40px;
+  margin-left: 40px;
 }
 .recommended .card-wrap .con-img-wrap {
   position: relative;
@@ -639,7 +642,7 @@ a:hover {
   transform: scale(1.1);
 }
 .recommended .card-wrap .con-img-wrap .offer-tag {
-  background-color: #0393D2;
+  background-color: #1e4beb;
   border-radius: 0 0 50% 50%;
   width: 50px;
   height: 45px;
@@ -669,7 +672,7 @@ a:hover {
   cursor: pointer;
 }
 .recommended .card-wrap .con-img-wrap .wishlist-tag:hover {
-  background: #0393D2;
+  background: #1e4beb;
   color: #ffffff;
 }
 .recommended .card-wrap .con-wrap .rating-cover {
@@ -682,7 +685,7 @@ a:hover {
   color: #9F9F9F;
 }
 .recommended .card-wrap .con-wrap .timing i {
-  color: #0393D2;
+  color: #1e4beb;
 }
 
 .special-offers {
@@ -783,7 +786,7 @@ a:hover {
 }
 .experience .video-icon {
   border-radius: 50%;
-  background-color: #0393D2;
+  background-color: #1e4beb;
   color: #ffffff;
   line-height: 60px;
   width: 60px;
@@ -797,7 +800,7 @@ a:hover {
   background-color: #000000;
 }
 .experience .video-icon:hover i {
-  color: #0393D2;
+  color: #1e4beb;
 }
 .experience .video-icon i {
   color: #ffffff;
