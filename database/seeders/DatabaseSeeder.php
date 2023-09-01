@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Michele Specchia',
             'email' => 'michele@gmail.com',
             'role'  => '1',
+            'indirizzo' => 'Via Capretta Felice 1',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'remember_token' => '2389731509'
         ]);
@@ -27,9 +28,12 @@ class DatabaseSeeder extends Seeder
             'name' => 'Luca Faccio',
             'email' => 'lucafaccio@gmail.com',
             'role'  => '2',
+            'indirizzo' => 'Via Capretta Triste 1',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'remember_token' => '9085876012'
         ]);
+
+        $parks = Park::factory(12)->create();
 
     }
     

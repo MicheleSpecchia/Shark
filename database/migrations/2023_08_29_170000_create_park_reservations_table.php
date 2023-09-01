@@ -9,30 +9,26 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('parks', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('address');
-            $table->string('cap');
-            $table->string('location');
-            $table->longText('description');
-            $table->float('stars');
+            $table->foreignId('park_id')->constrained()->onDelete('cascade');
+            $table->datetime('start_time');
+            $table->datetime('end_time');
             $table->float('price');
-            $table->integer('automobili');
-            $table->integer('motocicli');
-            $table->integer('furgoni');
+            $table->string('veicolo');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('parks');
+        Schema::dropIfExists('reservations');
     }
-
 };

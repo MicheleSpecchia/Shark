@@ -44,7 +44,7 @@ class ParkController extends Controller
         return view('parks.create');
     }
 
-    //store park date
+    //store park data
     public function store(Request $request)
     {
         $form_field = $request->validate([
@@ -110,4 +110,5 @@ class ParkController extends Controller
     {
         return view('parks.manage', ['parks' => auth()->user()->parks()->get()]);
     }
+
 }

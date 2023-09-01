@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Notifications\ReservationConfirmed;
 
 class User extends Authenticatable
 {
@@ -43,7 +44,32 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function parks(){
+    public function parks()
+    {
         return $this->hasMany(Park::class, 'user_id');
+    }
+
+    public function parkReviews()
+    {
+        return $this->hasMany(ParkReview::class);
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function confirmReservation(Request $request, $reservationId)
+    {
+        // Trova la prenotazione e confermala
+        $reservation = Reservation::find($reservationId);
+        $reservation->confirmed = true;
+        $reservation->save();
+
+        // Invia una notifica all'utente
+        $user = $reservation->user;
+        $user->notify(new ReservationConfirmed());
+
+        // Altre operazioni
     }
 }

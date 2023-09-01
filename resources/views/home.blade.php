@@ -1,7 +1,21 @@
 <div>
     <x-layout>
-        @include('partials._search')
-        @include('partials._desc')
+
+    @include('partials._navbar')
+
+        <!-- Contenuto principale -->
+        <div class="content">
+            <!-- Titolo e sottotitolo -->
+            <h1>Parcheggia dove vuoi.<br>Quando vuoi.</h1>
+            <h2>Prenota ora il tuo parcheggio</h2>
+            
+            <!-- NavBar -->
+            @include('partials._search')
+        </div>
+
+        <!-- Implementare desc e footer -->
+        <!--include('partials._desc')
+        @include('partials._footer')-->
     </x-layout>
-    @include('partials._footer')
+    
 </div>

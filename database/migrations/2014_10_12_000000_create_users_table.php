@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->integer('saldo')->default('0');
+            $table->string('indirizzo');
             $table->integer('role')->default('2'); //1-admin 2-user
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

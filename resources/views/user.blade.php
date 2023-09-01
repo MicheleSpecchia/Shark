@@ -6,21 +6,11 @@
             <div class="row mt-5">
 
                 @unless(count($parks)==0)
-
                 @foreach($parks as $park)
-
-
-
                 <x-park-card :park="$park" />
-
-
-
-
                 @endforeach
-
-                @else
-                <p> no ads Found </p>
                 @endunless
+                
             </div>
     </section>
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ParkController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -44,3 +45,9 @@ Route::put('/parks/{park}', [ParkController::class, 'update'])->middleware('auth
 Route::delete('/parks/{park}', [ParkController::class, 'destroy'])->middleware('auth');
 Route::get('/parks/manage', [ParkController::class, 'manage'])->middleware('auth');
 Route::get('/parks/{park}', [ParkController::class, 'show'])->middleware('auth');
+
+#--- RESERVATIONS ---#
+Route::get('/prenota/{park}', [ReservationController::class, 'show'])->name('prenota.show')->middleware('auth');
+Route::post('prenota', [ReservationController::class, 'store'])->middleware('auth');
+
+

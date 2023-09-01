@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Park;
 
+use App\Models\Park;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-        /**
+    /**
      * Create a new controller instance.
      *
      * @return void
