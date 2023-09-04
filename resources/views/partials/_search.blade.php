@@ -24,7 +24,7 @@
             // Inizia la ricerca dalla prima lettera digitata
             if (query.length > 0) {
                 // Esegui una chiamata AJAX all'API di Geonames
-                fetch(`http://api.geonames.org/search?name_startsWith=${query}&country=IT&username=pippone`)
+                fetch(`http://api.geonames.org/search?name_startsWith=${query}&country=IT&cities=cities5000&username=pippone`)
                     .then(response => response.text()) // Converti la risposta in testo
                     .then(str => (new window.DOMParser()).parseFromString(str, "text/xml")) // Converti la stringa di testo in un oggetto XML
                     .then(data => {
