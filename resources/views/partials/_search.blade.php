@@ -14,7 +14,9 @@
         <option value="camper">Camper</option>
     </select>
     <!-- Bottone per avviare la ricerca -->
-    <button id="search-btn" type="submit"><i class="fa-solid fa-magnifying-glass-location"></i></button>
+    <button id="search-btn" type="submit"><i class="fa-solid fa-magnifying-glass-location"></i></button> <!-- Lente di ingrandimento-->
+
+
     <script>
         // Aggiungi un listener all'input per rilevare quando l'utente digita
         document.getElementById('location').addEventListener('input', function() {
@@ -24,7 +26,7 @@
             // Inizia la ricerca dalla prima lettera digitata
             if (query.length > 0) {
                 // Esegui una chiamata AJAX all'API di Geonames
-                fetch(`http://api.geonames.org/search?name_startsWith=Ge&country=IT&cities=cities5000&username=pippone`)
+                fetch(`http://api.geonames.org/search?name_startsWith=${query}&country=IT&lang=it&cities=cities15000&orderby=population&username=pippone`)
                     .then(response => response.text()) // Converti la risposta in testo
                     .then(str => (new window.DOMParser()).parseFromString(str, "text/xml")) // Converti la stringa di testo in un oggetto XML
                     .then(data => {
@@ -42,9 +44,11 @@
                         for (let i = 0; i < geonames.length; i++) {
                             // Ottieni il nome della città dall'elemento 'name'
                             const cityName = geonames[i].getElementsByTagName('name')[0].textContent;
+                            const toponymName = geonames[i].getElementsByTagName('toponymName')[0].textContent;
 
                             // Se la città non è già stata aggiunta al set
-                            if (!addedCities.has(cityName)) {
+                            // Per Bug all'interno dell'api bisogna effettuare qualche operazione di fixing sul dataset
+                            if (!addedCities.has(cityName) && cityName.substring(0, 3) === toponymName.substring(0, 3)) {
                                 // Crea un nuovo elemento 'option' per la città
                                 const option = document.createElement('option');
                                 option.value = cityName;
