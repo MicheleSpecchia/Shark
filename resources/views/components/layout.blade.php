@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;50">
     <link rel="icon" type="image/png" sizes="100x100" href="{{asset('favicon.ico')}}">
     <link rel="icon" href="images/favicon.ico" />
+
     @vite(['resources/js/app.js'])
 
 </head>
