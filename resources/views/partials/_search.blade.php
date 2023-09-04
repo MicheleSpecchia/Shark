@@ -14,7 +14,7 @@
         <option value="camper">Camper</option>
     </select>
     <!-- Bottone per avviare la ricerca -->
-    <button id="search-btn" type="submit">Cerca</button>
+    <button id="search-btn" type="submit"><i class="fa-solid fa-magnifying-glass-location"></i></button>
     <script>
         // Aggiungi un listener all'input per rilevare quando l'utente digita
         document.getElementById('location').addEventListener('input', function() {
@@ -24,7 +24,7 @@
             // Inizia la ricerca dalla prima lettera digitata
             if (query.length > 0) {
                 // Esegui una chiamata AJAX all'API di Geonames
-                fetch(`http://api.geonames.org/search?name_startsWith=${query}&country=IT&cities=cities5000&username=pippone`)
+                fetch(`http://api.geonames.org/search?name_startsWith=Ge&country=IT&cities=cities5000&username=pippone`)
                     .then(response => response.text()) // Converti la risposta in testo
                     .then(str => (new window.DOMParser()).parseFromString(str, "text/xml")) // Converti la stringa di testo in un oggetto XML
                     .then(data => {

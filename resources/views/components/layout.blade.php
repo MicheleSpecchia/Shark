@@ -9,6 +9,8 @@
     <title>SHARK</title>
     <!-- Favicon icon -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;50">
+    <script src="https://kit.fontawesome.com/3b7cab5fda.js" crossorigin="anonymous"></script>
+
     <link rel="icon" type="image/png" sizes="100x100" href="{{asset('favicon.ico')}}">
     <link rel="icon" href="images/favicon.ico" />
 

@@ -1,11 +1,12 @@
 /* Stili di base del corpo del documento */
 body {
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(160deg, #d6367c, #5b2f56);
+  background: linear-gradient(to bottom, #1a2a6c, #caf9ff); /* Blu scuro a celeste molto chiaro */
   margin: 0;
   padding: 0;
-  height: 100vh;
+  height: cover;
 }
+
 
 /* Stili per la navbar */
 .navbar {
@@ -36,7 +37,7 @@ body {
 
 /* Effetto hover per i link della navbar */
 .navbar a:hover {
-  border-bottom: 2px solid #d6367c;
+  border-bottom: 2px solid #caf9ff;
 }
 
 /* Contenitore principale che contiene il titolo, sottotitolo e barra di ricerca */
@@ -113,17 +114,17 @@ h1, h2, .search-bar {
 
 /* Stili per il bottone di ricerca */
 .search-bar button {
-  padding: 10px;
+  background-color: transparent;
   border: none;
-  border-radius: 15px;
-  font-family: 'Roboto', sans-serif;
-  background-color: #fff;
-  transition: background-color 0.3s;
+  font-size: 1.5em;
   cursor: pointer;
+  transition: transform 0.3s ease; /* Prepara l'animazione */
+  color: #1a2a6c
 }
+
 
 /* Effetto hover per il bottone di ricerca */
 .search-bar button:hover {
-  background-color: #d6367c;
+  transform: rotate(10deg) scale(1.1); /* Ruota l'icona quando si passa il mouse sopra */
   color: #fff;
 }
