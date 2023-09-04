@@ -126,6 +126,6 @@ h1, h2, .search-bar {
 
 /* Effetto hover per il bottone di ricerca */
 .search-bar button:hover {
-  transform: rotate(10deg) scale(1.1); /* Ruota l'icona quando si passa il mouse sopra */
+  transform: rotate(360deg) scale(1.2); /* Ruota l'icona quando si passa il mouse sopra */
   color: #fff;
 }
