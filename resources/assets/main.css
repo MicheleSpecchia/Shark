@@ -1,8 +1,8 @@
 /* Stili di base del corpo del documento */
 body {
+
   font-family: 'Roboto', sans-serif;
   background: linear-gradient(to bottom, #1a2a6c, #caf9ff); /* Blu scuro a celeste molto chiaro */
-
   margin: 0;
   padding: 0;
   height: cover;
@@ -26,6 +26,18 @@ body {
 .nav-right {
   float: right;
   margin-right: 5%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-right ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-right li {
+  margin-left: 10px; /* Spazio tra gli elementi della lista */
 }
 
 /* Stili per i link della navbar */
@@ -39,7 +51,22 @@ body {
 
 /* Effetto hover per i link della navbar */
 .navbar a:hover {
-  border-bottom: 2px solid #caf9ff;
+
+  border-bottom: 2px solid #ffffff;
+}
+
+.logout-button {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Effetto hover per il bottone di logout */
+.logout-button:hover {
+  color: red;
+
 }
 
 /* Contenitore principale che contiene il titolo, sottotitolo e barra di ricerca */
@@ -69,7 +96,9 @@ h2 {
 }
 
 /* Animazione per la dissolvenza in entrata */
-h1, h2, .search-bar {
+h1,
+h2,
+.search-bar {
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 0.5s forwards 0.25s;
@@ -78,8 +107,8 @@ h1, h2, .search-bar {
 /* Keyframes per l'animazione */
 @keyframes fadeInUp {
   to {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -87,7 +116,8 @@ h1, h2, .search-bar {
 #site-logo {
   margin: 0;
   padding: 0;
-  max-width: 85px; /* Dimensione massima del logo */
+  width: 64px;
+
 }
 
 /* Stili per la barra di ricerca */
@@ -104,7 +134,8 @@ h1, h2, .search-bar {
 }
 
 /* Stili per gli input e i select nella barra di ricerca */
-.search-bar input, .search-bar select {
+.search-bar input,
+.search-bar select {
   padding: 10px;
   border: none;
   border-radius: 15px;
@@ -130,6 +161,120 @@ h1, h2, .search-bar {
   transform: rotate(360deg) scale(1.2); /* Ruota l'icona quando si passa il mouse sopra */
   color: #fff;
 }
+
+
+/* Reset dei margini e dei padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Stile del contenitore principale */
+.login-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Stile del contenitore del logo e del modulo di accesso */
+.logo-form-container {
+  display: flex;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid #1e4beb;
+}
+
+/* Stile del logo */
+.logo {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+}
+
+/* Stile del modulo di accesso */
+.login-form {
+  flex: 1;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 500px;
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 40px;
+  color: #333;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  display: block;
+  font-weight: bold;
+  text-align: left;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-form label {
+  font-weight: bold;
+}
+
+.login-form button {
+  width: 50%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 20px
+}
+
+.login-form button:hover {
+  background-color: #0056b3;
+}
+
+.additional-links {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.additional-links a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.additional-links a:hover {
+  text-decoration: underline;
+}
+
 
 
 /* css per profilo utente */
@@ -209,9 +354,9 @@ h1, h2, .search-bar {
   transform: scale(1.05); /* Zoom del 5% quando il cursore è sopra la card */
 }
 
-
 .container-fluid {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Altezza minima della viewport del browser */
 }
+

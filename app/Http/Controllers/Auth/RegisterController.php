@@ -63,7 +63,9 @@ class RegisterController extends Controller
     protected function store(Request $request)
     {
         $form_field = $request->validate([
-            'name' => ['required', 'min:3'],
+            'nome' => ['required'],
+            'cognome' => ['required'],
+            'Indirizzo' => ['required'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => 'required|confirmed|min:6'
         ]);

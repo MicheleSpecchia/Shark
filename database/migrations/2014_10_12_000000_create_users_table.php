@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nome');
+            $table->string('cognome');
             $table->string('email')->unique();
             $table->integer('saldo')->default('0');
             $table->string('indirizzo');

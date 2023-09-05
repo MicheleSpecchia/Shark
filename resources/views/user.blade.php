@@ -1,7 +1,8 @@
 <x-layout>
+    @include('partials._navbar')
     @include('partials._search')
 
-    <section class="recommended" id="deals">
+    
         <div class="container">
             <div class="row mt-5">
 
@@ -12,7 +13,7 @@
                 @endunless
                 
             </div>
-    </section>
+        </div> 
 
     <div class="mt-6-p-4">
         {{$parks->links()}}
