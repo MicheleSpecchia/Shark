@@ -1,12 +1,13 @@
 /* Stili di base del corpo del documento */
 body {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(to bottom, #3498db, #f0f0f0);
-  ;
+
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to bottom, #1a2a6c, #caf9ff); /* Blu scuro a celeste molto chiaro */
   margin: 0;
   padding: 0;
   height: cover;
 }
+
 
 /* Stili per la navbar */
 .navbar {
@@ -17,7 +18,8 @@ body {
 /* Posizionamento degli elementi sulla sinistra della navbar */
 .nav-left {
   float: left;
-  margin-left: 0;
+  margin-left: 7.8%;
+  margin-top: -15px
 }
 
 /* Posizionamento degli elementi sulla destra della navbar */
@@ -49,6 +51,7 @@ body {
 
 /* Effetto hover per i link della navbar */
 .navbar a:hover {
+
   border-bottom: 2px solid #ffffff;
 }
 
@@ -63,6 +66,7 @@ body {
 /* Effetto hover per il bottone di logout */
 .logout-button:hover {
   color: red;
+
 }
 
 /* Contenitore principale che contiene il titolo, sottotitolo e barra di ricerca */
@@ -113,7 +117,7 @@ h2,
   margin: 0;
   padding: 0;
   width: 64px;
-  /* Dimensione massima del logo */
+
 }
 
 /* Stili per la barra di ricerca */
@@ -143,20 +147,21 @@ h2,
 
 /* Stili per il bottone di ricerca */
 .search-bar button {
-  padding: 10px;
+  background-color: transparent;
   border: none;
-  border-radius: 15px;
-  font-family: 'Roboto', sans-serif;
-  background-color: #fff;
-  transition: background-color 0.3s;
+  font-size: 1.5em;
   cursor: pointer;
+  transition: transform 0.3s ease; /* Prepara l'animazione */
+  color: #1a2a6c
 }
+
 
 /* Effetto hover per il bottone di ricerca */
 .search-bar button:hover {
-  background-color: #d6367c;
+  transform: rotate(360deg) scale(1.2); /* Ruota l'icona quando si passa il mouse sopra */
   color: #fff;
 }
+
 
 /* Reset dei margini e dei padding */
 * {
@@ -268,5 +273,90 @@ h2,
 
 .additional-links a:hover {
   text-decoration: underline;
+}
+
+
+
+/* css per profilo utente */
+.card {
+  margin-left: 30px;
+  width: 350px; /* Larghezza desiderata */
+  height: cover;
+  border-radius: 5px; /* Bordo arrotondato per la card */
+  padding: 40px; /* Spaziatura interna */
+  margin-right: 20px;
+  box-shadow: 3px 3px 5px rgba(0.3, 0.2, 0.9, 0.7); /* Ombra */
+  
+  background-color: #F5F5F5; /* Aggiungi un colore di sfondo se necessario */
+}
+
+
+.card a {
+  text-align: center;
+  color: grey;
+  line-height: 100px;
+}
+
+
+.profile-image {
+  width: 250px; /* Larghezza desiderata per il contenitore quadrato */
+  height: 250px; /* Altezza desiderata per il contenitore quadrato */
+  overflow: hidden; /* Nasconde parte dell'immagine che supera le dimensioni */
+  border-radius: 50%; /* Rendi il contenitore rotondo impostando il bordo arrotondato al 50% */
+  display: flex; /* Utilizza il flexbox */
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center; /* Centra verticalmente */
+  margin: 0 auto; /* Centra il contenitore orizzontalmente */
+}
+
+.profile-image img {
+  width: 100%; /* Riempie completamente il contenitore quadrato */
+  height: auto; /* Impedisce il ridimensionamento forzato dell'immagine in altezza */
+}
+
+
+.card p{
+  font-size: 40px;
+  text-align: center;
+  margin-top: 10px; /* Spaziatura tra l'immagine e la descrizione */
+  color: grey;
+} 
+
+
+.profile {
+  padding: 40px;
+  border-radius: 5px;
+  background-color: #F5F5F5;
+  box-shadow: 3px 3px 5px rgba(0.3, 0.2, 0.9, 0.7); /* Ombra */
+  background-size: cover;
+  width: 550px;
+  height: 300px;
+  transition: transform 0.3s ease;
+}
+
+.profile p{
+  margin-top: 80px;
+  text-align: center;
+  font-size: 30px;
+  font-family: 'Roboto', sans-serif;
+  color: gray;
+  font-weight: 900;
+}
+
+.profile img {
+  border: 1px solid black;
+  border-radius: 20px;
+  max-width: 100%; /* L'immagine si adatterà alla larghezza massima del contenitore */
+  height: auto; /* L'altezza verrà regolata proporzionalmente per mantenere l'aspetto originale */
+}
+
+.profile:hover {
+  transform: scale(1.05); /* Zoom del 5% quando il cursore è sopra la card */
+}
+
+.container-fluid {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Altezza minima della viewport del browser */
 }
 
