@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('park_id')->constrained()->onDelete('cascade');
-            $table->datetime('start_time');
-            $table->datetime('end_time');
+            $table->date('data_inizio');
+            $table->date('data_fine');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->float('price');
             $table->string('veicolo');
             $table->timestamps();

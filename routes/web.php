@@ -41,13 +41,13 @@ Route::get('/parks/search', [ParkController::class, 'search'])->middleware('auth
 Route::get('/parks/create', [ParkController::class, 'create'])->middleware('auth');
 Route::post('/parks', [ParkController::class, 'store'])->middleware('auth');
 Route::get('/parks/{park}/edit', [ParkController::class, 'edit'])->middleware('auth');
+Route::get('/parks/{park}', [ParkController::class, 'show'])->middleware('auth');
 Route::put('/parks/{park}', [ParkController::class, 'update'])->middleware('auth');
 Route::delete('/parks/{park}', [ParkController::class, 'destroy'])->middleware('auth');
 Route::get('/parks/manage', [ParkController::class, 'manage'])->middleware('auth');
-Route::get('/parks/{park}', [ParkController::class, 'show'])->middleware('auth');
 
 #--- RESERVATIONS ---#
-Route::get('/prenota/{park}', [ReservationController::class, 'show'])->name('prenota.show')->middleware('auth');
+Route::get('/prenotazioni', [ReservationController::class, 'show'])->name('prenota.show')->middleware('auth');
 Route::post('prenota', [ReservationController::class, 'store'])->middleware('auth');
 
 

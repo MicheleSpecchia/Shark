@@ -68,7 +68,7 @@ class LoginController extends Controller
                     return redirect('/login')->with('error', 'Oops, qualcosa è andato storto!');
             }
         } else {
-            return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput();
+            return back()->withErrors(['password' => 'Invalid Credentials'])->onlyInput();
         }
     }
 

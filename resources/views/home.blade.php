@@ -14,8 +14,6 @@
         </div>
 
         <!-- Implementare desc e footer -->
-        <!--include('partials._desc')
-        @include('partials._footer')-->
     </x-layout>
     
 </div>
