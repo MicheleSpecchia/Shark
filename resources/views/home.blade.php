@@ -12,8 +12,6 @@
             <!-- NavBar -->
             @include('partials._search')
         </div>
-
-        <!-- Implementare desc e footer -->
     </x-layout>
     
 </div>
