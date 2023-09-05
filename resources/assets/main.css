@@ -1,11 +1,13 @@
 /* Stili di base del corpo del documento */
 body {
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to bottom, #3498db, #f0f0f0);
+  background: linear-gradient(to bottom, #1a2a6c, #caf9ff); /* Blu scuro a celeste molto chiaro */
+
   margin: 0;
   padding: 0;
   height: cover;
 }
+
 
 /* Stili per la navbar */
 .navbar {
@@ -17,6 +19,7 @@ body {
 .nav-left {
   float: left;
   margin-left: 7.8%;
+  margin-top: -15px
 }
 
 /* Posizionamento degli elementi sulla destra della navbar */
@@ -36,7 +39,7 @@ body {
 
 /* Effetto hover per i link della navbar */
 .navbar a:hover {
-  border-bottom: 2px solid #d6367c;
+  border-bottom: 2px solid #caf9ff;
 }
 
 /* Contenitore principale che contiene il titolo, sottotitolo e barra di ricerca */
@@ -84,7 +87,7 @@ h1, h2, .search-bar {
 #site-logo {
   margin: 0;
   padding: 0;
-  max-width: 100px; /* Dimensione massima del logo */
+  max-width: 85px; /* Dimensione massima del logo */
 }
 
 /* Stili per la barra di ricerca */
@@ -113,18 +116,18 @@ h1, h2, .search-bar {
 
 /* Stili per il bottone di ricerca */
 .search-bar button {
-  padding: 10px;
+  background-color: transparent;
   border: none;
-  border-radius: 15px;
-  font-family: 'Roboto', sans-serif;
-  background-color: #fff;
-  transition: background-color 0.3s;
+  font-size: 1.5em;
   cursor: pointer;
+  transition: transform 0.3s ease; /* Prepara l'animazione */
+  color: #1a2a6c
 }
+
 
 /* Effetto hover per il bottone di ricerca */
 .search-bar button:hover {
-  background-color: #d6367c;
+  transform: rotate(360deg) scale(1.2); /* Ruota l'icona quando si passa il mouse sopra */
   color: #fff;
 }
 
