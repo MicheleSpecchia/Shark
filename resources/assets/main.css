@@ -5,7 +5,7 @@ body {
   background: linear-gradient(to bottom, #1a2a6c, #caf9ff); /* Blu scuro a celeste molto chiaro */
   margin: 0;
   padding: 0;
-  height: cover;
+  height: 100vh;
 }
 
 
