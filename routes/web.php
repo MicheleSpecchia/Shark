@@ -50,4 +50,7 @@ Route::get('/parks/{park}', [ParkController::class, 'show'])->middleware('auth')
 Route::get('/prenota/{park}', [ReservationController::class, 'show'])->name('prenota.show')->middleware('auth');
 Route::post('prenota', [ReservationController::class, 'store'])->middleware('auth');
 
+#--- PAGINA PROFILO UTENTE ---#
+Route::get('/userProfile', [HomeController::class, 'userProfile']);
+
 
