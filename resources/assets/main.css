@@ -4,7 +4,137 @@ body {
   background: linear-gradient(to bottom, #1a2a6c, #caf9ff); /* Blu scuro a celeste molto chiaro */
   margin: 0;
   padding: 0;
-  height: cover;
+  height: 100%;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+
+
+.hero {
+  width: 100%;
+  height: 40px;
+  color: #525252;
+}
+
+nav {
+  background: none;
+  width: 100%;
+  padding: 10px 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.logo {
+  width: 120px;
+
+}
+
+.user-pic{
+  width: 70px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+nav ul {
+  width: 100%;
+  text-align: right;
+}
+
+nav ul li {
+  display: inline-block;
+  list-style: none;
+  margin: 10px 20px;
+}
+
+nav ul li a {
+  color: #ffff;
+  text-decoration: none;
+}
+
+.sub-menu-wrap{
+  position: absolute;
+  top: 100%;
+  right: 10%;
+  width: 320px;
+  display: none;
+  transition: max-height 0.5s ease-in-out;
+}
+
+
+.sub-menu {
+  background-color: #fff;
+  padding: 20px;
+  margin: 10px;
+  margin-top: -15px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info h2{
+  color: #1a2a6c;
+}
+
+.user-info h3 {
+  font-weight: 500;
+}
+
+.user-info img{
+  width: 60px;
+  border-radius: 50%;
+  margin: 15px;
+}
+
+.sub-menu hr {
+  border: 0;
+  height: 1px;
+  width: 100%;
+  background: #ccc;
+  margin: 15px 0 10px;
+}
+
+.sub-menu-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #525252;
+  margin: 12px 0;
+}
+
+.sub-menu-link p{
+  width: 100%;
+}
+
+.sub-menu-link img{
+  width: 40px;
+  background: #e5e5e5;
+  border-radius: 50%;
+  padding: 8px;
+  margin-right: 15px;
+}
+
+.sub-menu-link span {
+  font-size: 22px;
+  transition: transform 0.5s;
+}
+
+.sub-menu-link:hover span{
+  transform: translateX(5px);
+}
+
+.sub-menu-link:hover p{
+  font-weight: 600;
 }
 
 
@@ -23,12 +153,24 @@ body {
 
 /* Posizionamento degli elementi sulla destra della navbar */
 .nav-right {
+  width: 500px;
   float: right;
   margin-right: 5%;
+  
+}
+
+
+.nav-right img  {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid black;
+  margin-right: 10px;
 }
 
 /* Stili per i link della navbar */
 .navbar a {
+  margin-right: 30px;
   display: inline-block;
   color: white;
   padding: 10px 15px;
@@ -40,6 +182,9 @@ body {
 .navbar a:hover {
   border-bottom: 2px solid #caf9ff;
 }
+
+
+
 
 /* Contenitore principale che contiene il titolo, sottotitolo e barra di ricerca */
 .content {

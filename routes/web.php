@@ -51,3 +51,7 @@ Route::get('/prenota/{park}', [ReservationController::class, 'show'])->name('pre
 Route::post('prenota', [ReservationController::class, 'store'])->middleware('auth');
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

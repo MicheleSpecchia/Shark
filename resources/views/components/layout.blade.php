@@ -14,6 +14,19 @@
     <link rel="icon" type="image/png" sizes="100x100" href="{{asset('favicon.ico')}}">
     <link rel="icon" href="images/favicon.ico" />
 
+    <script>
+        function miaFunction() {
+            var subMenuWrap = document.querySelector('.sub-menu-wrap');
+            if (subMenuWrap.style.display === 'none' || subMenuWrap.style.display === '') {
+                subMenuWrap.style.display = 'block'; // Mostra l'elemento
+            } else {
+                subMenuWrap.style.display = 'none'; // Nasconde l'elemento
+            }
+        }
+
+
+    </script>
+
     @vite(['resources/js/app.js'])
 
 </head>

@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -23,6 +22,8 @@ class RegisterController extends Controller
     |
     */
 
+    use RegistersUsers;
+
     /**
      * Where to redirect users after registration.
      *
@@ -35,12 +36,6 @@ class RegisterController extends Controller
      *
      * @return void
      */
-
-    public function showRegistrationForm()
-    {
-        return view('users.register');
-    }
-
     public function __construct()
     {
         $this->middleware('guest');
@@ -52,6 +47,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -59,22 +62,12 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-
-    protected function store(Request $request)
+    protected function create(array $data)
     {
-        $form_field = $request->validate([
-            'name' => ['required', 'min:3'],
-            'email' => ['required', 'email', Rule::unique('users', 'email')],
-            'password' => 'required|confirmed|min:6'
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
         ]);
-
-        $form_field['password'] = bcrypt($form_field['password']);
-
-        $user = User::create($form_field);
-
-        auth()->login($user);
-        
-        return redirect('/user')->with('message', 'user created and logged in');
     }
-   
 }
