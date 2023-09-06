@@ -66,8 +66,7 @@ class RegisterController extends Controller
             'nome' => ['required'],
             'cognome' => ['required'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
-            'indirizzo' => ['required'],
-            'password' => 'required|confirmed|min:6'
+            'password' => 'required|min:8'
         ]);
 
         $form_field['password'] = bcrypt($form_field['password']);

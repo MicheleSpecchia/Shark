@@ -1,15 +1,14 @@
 /* Stili di base del corpo del documento */
 body {
-
   font-family: 'Roboto', sans-serif;
   background: linear-gradient(to bottom, #1a2a6c, #caf9ff); /* Blu scuro a celeste molto chiaro */
   margin: 0;
   padding: 0;
-  height: cover;
+  background-attachment: fixed;
 }
 
 
-/* Stili per la navbar */
+/*---NAVBAR---*/
 .navbar {
   overflow: hidden;
   padding: 40px 30px;
@@ -55,6 +54,7 @@ body {
   border-bottom: 2px solid #ffffff;
 }
 
+/*---LOGOUT---*/
 .logout-button {
   background-color: transparent;
   border: none;
@@ -120,7 +120,7 @@ h2,
 
 }
 
-/* Stili per la barra di ricerca */
+/*---SEARCHBAR---*/
 .search-bar {
   display: flex;
   justify-content: flex-start;
@@ -170,7 +170,28 @@ h2,
   box-sizing: border-box;
 }
 
-/* Stile del contenitore principale */
+/*---LOGIN---*/
+
+/* Stile per il contenitore che avrà lo sfondo spezzato */
+.custom-background-container {
+  position: relative;
+  height: 100vh;
+  /* Altezza a schermo intero */
+  overflow: hidden;
+}
+
+/* Prima parte dello sfondo (colore superiore) */
+.custom-background-container::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 60%;
+  height: 100vh;
+  background: linear-gradient(to bottom, #caf9ff, #1a2a6c);
+  clip-path: polygon(0 100%, 0 0, 100% 0, 70% 100%);
+  z-index: -1;
+}
+
 .login-container {
   display: flex;
   justify-content: center;
@@ -277,7 +298,7 @@ h2,
 
 
 
-/* css per profilo utente */
+/*---USERPROFILE---*/
 .card {
   margin-left: 30px;
   width: 350px; /* Larghezza desiderata */
@@ -359,4 +380,3 @@ h2,
   flex-direction: column;
   min-height: 100vh; /* Altezza minima della viewport del browser */
 }
-
