@@ -64,10 +64,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         return User::create([
-            'name' => $data['name'],
+            'nome' => $data['name'],
+           ' cognome' => ['required'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+
+        $form_field = $request->validate([
+            'nome' => ['required'],
+            'cognome' => ['required'],
+            'email' => ['required', 'email', Rule::unique('users', 'email')],
+            'password' => 'required|min:8'
+
         ]);
     }
 }

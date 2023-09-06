@@ -5,7 +5,6 @@
       <div class="nav-left">
           <img src="{{asset('images/logo.png')}}" alt="Nome del tuo sito" id="site-logo">
       </div>
-
      
         <div class="nav-right" style="margin-right: 20px">
           <a href="#">About</a>
@@ -90,3 +89,4 @@
   
 
   
+
