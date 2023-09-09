@@ -18,6 +18,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;50">
     <script src="https://kit.fontawesome.com/3b7cab5fda.js" crossorigin="anonymous"></script>
 
+    <script>
+        function miaFunction() {
+            var subMenuWrap = document.querySelector('.sub-menu-wrap');
+            if (subMenuWrap.style.display === 'none' || subMenuWrap.style.display === '') {
+                subMenuWrap.style.display = 'block'; // Mostra l'elemento
+            } else {
+                subMenuWrap.style.display = 'none'; // Nasconde l'elemento
+            }
+        }
+    </script>
+
+
 
 
     @vite(['resources/js/app.js'])
