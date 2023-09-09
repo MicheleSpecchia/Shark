@@ -1,22 +1,25 @@
 @props(['park'])
 
-<div class="col-12  col-md-4 mb-4 mb-lg-0" onclick="window.location.href='/parks/{{$park->id}}';" style="cursor: pointer;">
-    <div class="card-wrap">
+<div class="col-12 col-md-4 col-lg-3 mb-5" onclick="window.location.href='/parks/{{$park->id}}';" style="cursor: pointer;">
+    <div class="card-wrap p-3" style="background-color: rgba(255, 255, 255, 0.7); border-radius: 15px;">
         <div class="con-img-wrap m-auto">
-            <img src="{{$park->foto ? asset('storage/' . $park->foto) : asset('/images/vision.png')}}" class="img-fluid mx-auto d-block" alt="product picture">
-            <span class="wishlist-tag"><i class="bi bi-heart"></i></span>
+            <img src="{{$park->foto ? asset('storage/' . $park->foto) : asset('/images/vision.png')}}" class="img-fluid mx-auto d-block" style="border-radius: 15px;" alt="product picture">
         </div>
         <div class="con-wrap mt-4">
-            <h2 class="fs-6 mt-4 fw-bold text-truncate">{{$park->address}}</h2>
-            <p class="mb-2 theme-text-accent-two small">{{$park->location}}</p>
+            <h2 class="fs-4 mt-4 fw-bold" style="color: #1a2a6c;">{{$park->location}}</h2>
             <div class="d-flex bottom mb-2">
                 <div class="rating-cover">
-                    <span class="p-1 small rounded-1 bg-info theme-text-white">4.5</span>
-                    <span class="me-2 small theme-text-accent-one">Exceptional</span>
-                    <span class="small">2,914 reviews</span>
+                    @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= round($park->rating))
+                            <i class="fas fa-star" style="color: #1a2a6c;"></i>
+                        @else
+                            <i class="far fa-star" style="color: #1a2a6c;"></i>
+                        @endif
+                    @endfor
+                    <span class="ml-2 small" style="color: #1a2a6c;">{{ $park->reviews_count ?? '0' }} reviews</span>
                 </div>
             </div>
-            <p class="mb-0 theme-text-accent-one">Starting from US$69</p>
+            <p class="mb-0 fs-5" style="color: #1a2a6c;">Starting from US$69</p>
         </div>
     </div>
 </div>
