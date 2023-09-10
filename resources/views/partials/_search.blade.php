@@ -1,70 +1,116 @@
-<!-- Barra di ricerca per il parcheggio -->
-<form class="search-bar" action="URL_DOVE_INVIARE_I_DATI" method="get">
-    <!-- Input per la ricerca del luogo con una tendina associata per i suggerimenti -->
-    <input type="text" id="location" name="location" placeholder="Luogo" list="citiesList">
-    <datalist id="citiesList"></datalist>
-    <!-- Input per data e ora di arrivo -->
-    <input type="datetime-local" id="arrival" name="arrival" placeholde>
-    <!-- Input per data e ora di fine -->
-    <input type="datetime-local" id="end" name="end" placeholder="Data">
-    <!-- Selezione tipo di veicolo -->
-    <select id=" vehicle-type" name="vehicle-type">
-        <option value="auto">Auto</option>
-        <option value="moto">Moto</option>
-        <option value="camper">Camper</option>
-    </select>
-    <!-- Bottone per avviare la ricerca -->
-    <button id="search-btn" type="submit"><i class="fa-solid fa-magnifying-glass-location"></i></button> <!-- Lente di ingrandimento-->
+<div class="row">
+    <div class="col-md-6">
+        <div class="search-bar">
+            <form action="" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col">
+                        <div class="combined-input">
+                            <input type="text" id="location" name="location" placeholder="Città, Indirizzo.." class="location-input">
+                        </div>
 
+                        <div id="app-cover">
+                            <input type="checkbox" id="options-view-button">
+                            <div id="select-button" class="brd">
+                                <div id="selected-value">
+                                    <span>Veicolo</span>
+                                </div>
+                                <div id="chevrons">
+                                    <i class="fas fa-chevron-up"></i>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                            <div id="options">
+                                <div class="option">
+                                    <input class="s-c top" type="radio" name="platform" value="codepen">
+                                    <input class="s-c bottom" type="radio" name="platform" value="codepen">
+                                    <i class="fab fa-codepen"></i>
+                                    <span class="label">CodePen</span>
+                                    <span class="opt-val">CodePen</span>
+                                </div>
+                                <div class="option">
+                                    <input class="s-c top" type="radio" name="platform" value="dribbble">
+                                    <input class="s-c bottom" type="radio" name="platform" value="dribbble">
+                                    <i class="fab fa-dribbble"></i>
+                                    <span class="label">Dribbble</span>
+                                    <span class="opt-val">Dribbble</span>
+                                </div>
+                                <div id="option-bg"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <script>
-        // Aggiungi un listener all'input per rilevare quando l'utente digita
-        document.getElementById('location').addEventListener('input', function() {
-            // Ottieni il valore corrente dell'input
-            const query = this.value;
+                <div class="row">
+                    <div class="col">
+                        <div class="search-form">
+                            <div class="date-input">
+                                <input type="text" id="date-input" name="check-in" placeholder="Data" oninput="showTimeSelect('date-input', 'time-input')">
+                                <span class="icon-sb2"> <i class="fa-solid fa-calendar-day" style="color: #bdbec1;"></i></span>
+                            </div>
+                            <div class="time-input">
+                                <select id="time-input" name="time-in" style="display: none;"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="search-form">
+                            <div class="date-output">
+                                <input type="text" id="date-output" name="check-out" placeholder="Data" oninput="showTimeSelect('date-output', 'time-output')">
+                                <span class="icon-sb2"> <i class="fa-solid fa-calendar-day" style="color: #bdbec1;"></i></span>
+                            </div>
+                            <div class="time-output">
+                                <select id="time-output" name="time-out" style="display: none;"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit">Cerca<i class="fa-solid fa-magnifying-glass-location"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-            // Inizia la ricerca dalla prima lettera digitata
-            if (query.length > 0) {
-                // Esegui una chiamata AJAX all'API di Geonames
-                fetch(`http://api.geonames.org/search?name_startsWith=${query}&country=IT&lang=it&cities=cities15000&orderby=population&username=pippone`)
-                    .then(response => response.text()) // Converti la risposta in testo
-                    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml")) // Converti la stringa di testo in un oggetto XML
-                    .then(data => {
-                        // Ottieni l'elemento datalist
-                        const datalist = document.getElementById('citiesList');
-                        datalist.innerHTML = ''; // Pulisci le opzioni precedenti
-
-                        // Ottieni tutti gli elementi 'geoname' dalla risposta
-                        const geonames = data.getElementsByTagName('geoname');
-
-                        // Set per tracciare le città già aggiunte e garantire l'unicità
-                        const addedCities = new Set();
-
-                        // Itera su ogni elemento 'geoname'
-                        for (let i = 0; i < geonames.length; i++) {
-                            // Ottieni il nome della città dall'elemento 'name'
-                            const cityName = geonames[i].getElementsByTagName('name')[0].textContent;
-                            const toponymName = geonames[i].getElementsByTagName('toponymName')[0].textContent;
-
-                            // Se la città non è già stata aggiunta al set
-                            // Per Bug all'interno dell'api bisogna effettuare qualche operazione di fixing sul dataset
-                            if (!addedCities.has(cityName) && cityName.substring(0, 3) === toponymName.substring(0, 3)) {
-                                // Crea un nuovo elemento 'option' per la città
-                                const option = document.createElement('option');
-                                option.value = cityName;
-
-                                // Aggiungi l'opzione al datalist
-                                datalist.appendChild(option);
-
-                                // Aggiungi la città al set per tracciare le città già aggiunte
-                                addedCities.add(cityName);
-                            }
-                        }
-                    });
-            }
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#date-input", {
+            dateFormat: "Y-m-d",
+            enableTime: false,
         });
-    </script>
 
+        flatpickr("#date-output", {
+            dateFormat: "Y-m-d",
+            enableTime: false,
+        });
+    });
 
+    function showTimeSelect(inputElement, selectElement) {
+        var select = document.getElementById(selectElement);
+        select.style.display = 'block';
 
-</form>
+        var startTime = new Date();
+        startTime.setHours(0, 0, 0, 0);
+        var timeOptions = [];
+
+        for (var i = 0; i < 24 * 2; i++) {
+            var formattedTime = formatTime(startTime);
+            var option = new Option(formattedTime, formattedTime);
+            timeOptions.push(option);
+            startTime.setMinutes(startTime.getMinutes() + 30);
+        }
+
+        timeOptions.forEach(function(option) {
+            select.appendChild(option);
+        });
+    }
+
+    function formatTime(time) {
+        var hours = time.getHours().toString().padStart(2, '0');
+        var minutes = time.getMinutes().toString().padStart(2, '0');
+        return hours + ':' + minutes;
+    }
+</script>

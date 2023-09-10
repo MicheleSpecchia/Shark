@@ -1,0 +1,125 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="search-bar">
+                <form action="" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" id="location" name="location" placeholder="Città, Indirizzo.. ">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="search-form">
+                                <div class="date-input">
+                                    <input type="text" id="date-input" name="check-in" placeholder="Data" oninput="showTimeInput(this)">
+                                </div>
+                                <div class="time-input">
+                                    <select id="time-input" name="time-in" style="display: none;"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="search-form">
+                                <div class="date-output">
+                                    <input type="text" id="date-output" name="check-out" placeholder="Data" oninput="showTimeOutput(this)">
+                                </div>
+                                <div class="time-output">
+                                    <select id="time-output" name="time-out" style="display: none;"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit">Cerca</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function showTimeInput(dateInput) {
+        var timeInput = document.getElementById('time-input');
+
+        if (dateInput.value !== '') {
+            timeInput.style.display = 'block';
+        } else {
+            timeInput.style.display = 'none';
+        }
+    }
+
+    function showTimeOutput(dateOutput) {
+        var timeOutput = document.getElementById('time-output');
+
+        if (dateOutput.value !== '') {
+            timeOutput.style.display = 'block';
+        } else {
+            timeOutput.style.display = 'none';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#date-input", {
+            dateFormat: "Y-m-d",
+            enableTime: false,
+        });
+
+        flatpickr("#date-output", {
+            dateFormat: "Y-m-d",
+            enableTime: false,
+        });
+    });
+
+    function showTimeOutput(dateOutput) {
+        var timeOutputSelect = document.getElementById('time-output');
+        timeOutputSelect.style.display = 'block';
+
+        var startTime = new Date();
+        startTime.setHours(0, 0, 0, 0);
+        var timeOptions = [];
+
+        for (var i = 0; i < 24 * 2; i++) {
+            var formattedTime = formatTime(startTime);
+            var option = new Option(formattedTime, formattedTime);
+            timeOptions.push(option);
+            startTime.setMinutes(startTime.getMinutes() + 30);
+        }
+
+        timeOptions.forEach(function(option) {
+            timeOutputSelect.appendChild(option);
+        });
+    }
+
+    function showTimeInput(dateInput) {
+        var timeInputSelect = document.getElementById('time-input');
+        timeInputSelect.style.display = 'block';
+
+
+        var startTime = new Date();
+        startTime.setHours(0, 0, 0, 0);
+        var timeOptions = [];
+
+        for (var i = 0; i < 24 * 2; i++) {
+            var formattedTime = formatTime(startTime);
+            var option = new Option(formattedTime, formattedTime);
+            timeOptions.push(option);
+            startTime.setMinutes(startTime.getMinutes() + 30);
+        }
+
+        timeOptions.forEach(function(option) {
+            timeInputSelect.appendChild(option);
+        });
+    }
+
+    function formatTime(time) {
+        var hours = time.getHours().toString().padStart(2, '0');
+        var minutes = time.getMinutes().toString().padStart(2, '0');
+        return hours + ':' + minutes;
+    }
+</script>
