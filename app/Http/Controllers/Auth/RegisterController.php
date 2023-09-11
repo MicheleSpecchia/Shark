@@ -65,6 +65,7 @@ class RegisterController extends Controller
         $form_field = $request->validate([
             'nome' => ['required'],
             'cognome' => ['required'],
+            'Indirizzo' => ['required'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => 'required|min:8'
         ]);
