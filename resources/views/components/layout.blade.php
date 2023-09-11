@@ -21,6 +21,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 
+    <script>
+        function miaFunction() {
+            var subMenuWrap = document.querySelector('.sub-menu-wrap');
+            if (subMenuWrap.style.display === 'none' || subMenuWrap.style.display === '') {
+                subMenuWrap.style.display = 'block'; // Mostra l'elemento
+            } else {
+                subMenuWrap.style.display = 'none'; // Nasconde l'elemento
+            }
+        }
+    </script>
+
+
 
 
     @vite(['resources/js/app.js'])
