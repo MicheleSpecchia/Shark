@@ -1,10 +1,10 @@
 /* Stili di base del corpo del documento */
 body {
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to bottom, #1a2a6c, #caf9ff); /* Blu scuro a celeste molto chiaro */
+  background: linear-gradient(to bottom, #1a2a6c, #caf9ff);
+  background-attachment: fixed;
   margin: 0;
   padding: 0;
-  background-attachment: fixed;
 }
 
 /* NAVBAR-UTENTE */
@@ -13,9 +13,8 @@ body {
   padding: 0;
   font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
+
 }
-
-
 
 .hero {
   width: 100%;
@@ -199,7 +198,7 @@ h2,
 
 }
 
-/*---SEARCHBAR---*/
+/* Stili per la barra di ricerca */
 .search-bar {
   display: flex;
   justify-content: flex-start;
@@ -249,28 +248,7 @@ h2,
   box-sizing: border-box;
 }
 
-/*---LOGIN---*/
-
-/* Stile per il contenitore che avrà lo sfondo spezzato */
-.custom-background-container {
-  position: relative;
-  height: 100vh;
-  /* Altezza a schermo intero */
-  overflow: hidden;
-}
-
-/* Prima parte dello sfondo (colore superiore) */
-.custom-background-container::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  width: 60%;
-  height: 100vh;
-  background: linear-gradient(to bottom, #caf9ff, #1a2a6c);
-  clip-path: polygon(0 100%, 0 0, 100% 0, 70% 100%);
-  z-index: -1;
-}
-
+/* Stile del contenitore principale */
 .login-container {
   display: flex;
   justify-content: center;
@@ -377,7 +355,7 @@ h2,
 
 
 
-/*---USERPROFILE---*/
+/* css per profilo utente */
 .card {
   margin-left: 30px;
   width: 350px; /* Larghezza desiderata */
@@ -397,6 +375,15 @@ h2,
   line-height: 100px;
 }
 
+.card-wrap {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card-wrap:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
 
 .profile-image {
   width: 250px; /* Larghezza desiderata per il contenitore quadrato */
@@ -459,3 +446,4 @@ h2,
   flex-direction: column;
   min-height: 100vh; /* Altezza minima della viewport del browser */
 }
+

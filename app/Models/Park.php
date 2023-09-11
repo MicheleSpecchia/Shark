@@ -35,6 +35,18 @@ class Park extends Model
     {
         return $this->hasMany(ParkImage::class);
     }
+    // Nel modello Park.php
+
+    public function getAverageRatingAttribute()
+    {
+        return $this->parkReviews->avg('rating');
+    }
+
+    public function getReviewsCountAttribute()
+    {
+        return $this->parkReviews->count();
+    }
+
 
     public function parkReviews()
     {
