@@ -50,8 +50,8 @@ class HomeController extends Controller
         }
     }
 
-    public function userProfile(){
-        return view('userProfile');
+    public function editProfile(){
+        return view('editProfile');
     }
 
 }

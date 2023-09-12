@@ -65,4 +65,4 @@ Route::post('/parks/{park}/reservations/{reservation}/reviews', [ParkController:
 
 
 #--- PAGINA PROFILO UTENTE ---#
-Route::get('/userProfile', [HomeController::class, 'userProfile']);
+Route::get('/editProfile', [HomeController::class, 'editProfile']);
