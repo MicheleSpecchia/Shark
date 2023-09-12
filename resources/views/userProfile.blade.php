@@ -2,7 +2,7 @@
     <x-layout>
         @include('partials._navbar')
 
-        <div class="container-fluid" style="isplay: flex; height: 100%; width: 100%; flex-direction: row-reverse;">
+        <div class="container-fluid" style="display: flex; height: 100%; width: 100%; flex-direction: row-reverse;">
             <div class="container" style="padding: 50px; flex: 1;">
                 <!-- Contenuto del secondo container -->
                 <div class="row">
