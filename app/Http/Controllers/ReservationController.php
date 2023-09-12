@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use Illuminate\Validation\Rule;
+use App\Models\ParkReview;
 
 class ReservationController extends Controller
 {
@@ -33,13 +34,14 @@ class ReservationController extends Controller
         // Logica per ottenere l'elenco delle prenotazioni
     }
 
-    public function show()
+    public function userReservations()
     {
         $user = auth()->user();
-        $reservations = $user->reservations; // Utilizza la relazione definita nel modello User
+        $reservations = $user->reservations;
 
         return view('reservation', compact('reservations'));
     }
+
 
     public function update(Request $request, $id)
     {
@@ -48,6 +50,9 @@ class ReservationController extends Controller
 
     public function destroy($id)
     {
-        // Logica per cancellare una prenotazione
+        $reservation = Reservation::findOrFail($id);
+        $reservation->delete();
+    
+        return back()->with('message', 'Prenotazione cancellata con successo.');
     }
 }

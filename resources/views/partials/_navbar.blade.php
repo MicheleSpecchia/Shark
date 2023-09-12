@@ -1,35 +1,84 @@
-  <!-- Barra di navigazione -->
-  <div class="navbar">
-      <!-- Sezione logo sulla sinistra della navbar -->
-      <div class="nav-left">
-          <img src="{{asset('images/logo.png')}}" alt="Nome del tuo sito" id="site-logo">
-      </div>
+<div class="hero">
+    <nav>
+        <img src="{{asset('images/logo.png')}}" class="logo">
+        <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Affitta con Shark</a></li>
+            <li><a href="#">Tutorial</a></li>
+            @guest
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Sing up</a></li>
+            @endguest
+        </ul>
 
-      <!-- Link sulla destra della navbar -->
-      <div class="nav-right">
+        @auth
+        <img src="{{asset('images/user.png')}}" class="user-pic" onclick="miaFunction()">
 
-          @guest
-          <a href="#">About</a>
-          <a href="#">Affitta con Shark</a>
-          <a href="#">Tutorial</a>
-          <a href="/login">Login</a>
-          <a href="/register">SignUp</a>
-          @endguest
-          @auth
-          <a href="/prenotazioni">Prenotazioni</a>
-          <a href="/manage">BoxAuto</a>
+        <div class="sub-menu-wrap" id="subMenu">
+            <div class="sub-menu" style="border-radius: 10px">
+                <div class="user-info">
+                    <img src="{{asset('images/user.png')}}" class="user-pic">
+                    <h2 style="margin-top: 30px; transition: none">Username</h2>
+                </div>
+                <hr>
 
-          <a>
-              <form class="inline" method="POST" action="/logout">
-                  @csrf
-                  <button class="logout-button" type="submit">
-                      <i class="fa-solid fa-door-closed"></i>
-                      <i class="fas fa-door-open" style="display: none;"></i>
-                      Logout
-                  </button>
-              </form>
-          </a>
-          @endauth
+                <a href="#" class="sub-menu-link">
+                    <img src="{{asset('images/profile.png')}}" alt="">
+                    <p>Edit profile</p>
+                    <span>></span>
+                </a>
 
-      </div>
-  </div>
+                <a href="#" class="sub-menu-link">
+                    <img src="{{asset('images/setting.png')}}" alt="">
+                    <p>Settings</p>
+                    <span>></span>
+                </a>
+
+                <a href="#" class="sub-menu-link">
+                    <img src="{{asset('images/help.png')}}" alt="">
+                    <p>Help and support</p>
+                    <span>></span>
+                </a>
+
+                <a href="{{ route('user.reservations') }}" class="sub-menu-link">
+                    <img src="{{asset('images/reservation.png')}}" alt="">
+                    <p>Prenotazioni effettuate</p>
+                    <span>></span>
+                </a>
+
+                <a href="#" class="sub-menu-link" onclick="performLogout()">
+                    <img src="{{asset('images/logout.png')}}" alt="">
+                    <p>Logout</p>
+                    <span>></span>
+                </a>
+            </div>
+        </div>
+        @endauth
+
+    </nav>
+</div>
+
+<script>
+    function performLogout() {
+        // Crea un elemento di modulo nascosto
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/logout';
+
+        // Aggiungi un campo nascosto per il token CSRF (assicurati di averlo disponibile)
+        var csrfTokenInput = document.createElement('input');
+        csrfTokenInput.type = 'hidden';
+        csrfTokenInput.name = '_token';
+        csrfTokenInput.value = '{{ csrf_token() }}';
+        form.appendChild(csrfTokenInput);
+
+        // Aggiungi il modulo al corpo del documento e invialo
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
+
+<br>
+<br>
+<br>
+<br>

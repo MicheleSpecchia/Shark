@@ -34,7 +34,8 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 #--- MULTIUSER ROUTES---#
 Route::get('/user', [UserController::class, 'index'])->middleware('preventback');
-Route::get('/admin',[AdminController::class, 'index'])->middleware('preventback');
+Route::get('/admin', [AdminController::class, 'index'])->middleware('preventback');
+
 
 #--- PARKS ---#
 Route::post('/parks/search', [ParkController::class, 'search']);
@@ -45,12 +46,23 @@ Route::get('/parks/{park}', [ParkController::class, 'show'])->middleware('auth')
 Route::put('/parks/{park}', [ParkController::class, 'update'])->middleware('auth');
 Route::delete('/parks/{park}', [ParkController::class, 'destroy'])->middleware('auth');
 Route::get('/parks/manage', [ParkController::class, 'manage'])->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/parks/{park}/reviews/create', [ParkController::class, 'createReview'])->name('reviews.create');
+    Route::post('/parks/{park}/reviews', [ParkController::class, 'storeReview'])->name('reviews.store');
+});
+
+
 
 #--- RESERVATIONS ---#
 Route::get('/prenotazioni', [ReservationController::class, 'show'])->name('prenota.show')->middleware('auth');
 Route::post('prenota', [ReservationController::class, 'store'])->middleware('auth');
+Route::get('/user-reservations', [ReservationController::class, 'userReservations'])->name('user.reservations')->middleware('auth');
+Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy')->middleware('auth');
+Route::get('/parks/{park}/reservations/{reservation}/reviews/create', [ParkController::class, 'createReview'])->name('reviews.create')->middleware('auth');
+Route::post('/parks/{park}/reservations/{reservation}/reviews', [ParkController::class, 'storeReview'])->name('reviews.store')->middleware('auth');
+
+
+
 
 #--- PAGINA PROFILO UTENTE ---#
 Route::get('/userProfile', [HomeController::class, 'userProfile']);
-
-
