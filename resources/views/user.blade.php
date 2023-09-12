@@ -7,7 +7,7 @@
 
 
     <div class="container">
-        <div class="row mt-5">
+        <div class="row d-flex mt-5">
 
             @unless(count($parks)==0)
             @foreach($parks as $park)
