@@ -2,22 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use App\Models\Park;
+use App\Models\Reservation;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 
 class ParkController extends Controller
 {
-    //show all parks
-    /*public function index()
-    {
-        return view('parks.index', [
-            'parks' => Park::latest()->filter(request(['cap', 'search']))->paginate(6)
-        ]);
-    }*/
 
-    //show single park
     public function show(Park $park)
     {
         return view('parks.show', [
@@ -27,14 +21,50 @@ class ParkController extends Controller
 
     public function search(Request $request)
     {
+        $location = $request->input('location');
+        $vehicle = $request->input('veicolo');
+        $checkInDate = $request->input('check-in');
+        $checkOutDate = $request->input('check-out');
+        $checkInTime = $request->input('time-in');
+        $checkOutTime = $request->input('time-out');
+
         $query = Park::query();
 
-        // Filtraggio in base ai parametri di ricerca
-        $query->filter($request->only(['cap', 'search']));
+        $query->where('location', 'like', "$location%");
 
-        // Ottenere i risultati paginati
-        $parks = $query->paginate(10);
+        if ($vehicle === 'auto') {
+            $query->where('automobili', 1);
+        } elseif ($vehicle === 'moto') {
+            $query->where('motocicli', 1);
+        } elseif ($vehicle === 'camper') {
+            $query->where('furgoni', 1);
+        }
 
+        $parks = $query->get();
+        $availableParks = [];
+
+        foreach ($parks as $park) {
+            $overlappingReservations = Reservation::where('park_id', $park->id)
+                ->where(function ($query) use ($checkInDate, $checkOutDate, $checkInTime, $checkOutTime) {
+                    $query->where(function ($query) use ($checkInDate, $checkOutDate) {
+                        $query->where('data_fine', '>', $checkInDate)
+                            ->where('data_inizio', '<', $checkOutDate);
+                    })->orWhere(function ($query) use ($checkInTime, $checkOutTime) {
+                        $query->where('end_time', '>', $checkInTime)
+                            ->where('start_time', '<', $checkOutTime);
+                    });
+                })
+                ->get();
+
+
+            if ($overlappingReservations->isEmpty()) {
+                $availableParks[] = $park;
+            }
+        }
+        
+        $perPage = 10; // Numero di parcheggi per pagina
+        $page = $request->input('page', 1); // Ottieni il numero di pagina dalla richiesta
+        $parks = new Paginator($availableParks, $perPage, $page);
         return view('user', compact('parks'));
     }
 
@@ -110,5 +140,4 @@ class ParkController extends Controller
     {
         return view('parks.manage', ['parks' => auth()->user()->parks()->get()]);
     }
-
 }

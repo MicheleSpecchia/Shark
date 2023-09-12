@@ -121,7 +121,6 @@ h2,
 
 .search-bar {
   width: 700px;
-  /* Imposta la larghezza desiderata per il form */
 }
 
 .container .row {
@@ -145,10 +144,9 @@ h2,
   position: relative;
 }
 
-
+.search-form .location input[type="text"],
 .search-form .date-input input[type="text"],
-.search-form .date-output input[type="text"]
-{
+.search-form .date-output input[type="text"] {
   width: 100%;
   padding: 20px;
   border-radius: 7px;
@@ -156,47 +154,24 @@ h2,
   padding-left: 30px;
 }
 
-.combined-input {
-  display: flex;
-}
-
-.location-input{
-  flex: 1;
-  padding: 20px;
-  border-radius: 7px;
-  border: 1px solid grey;
-  padding-left: 30px;
-}
-
-.veicolo-input{
-  border-radius: 7px;
-  border: 1px solid grey;
-  padding-left: 30px;
+.search-form .date-input input[type="text"],
+.search-form .date-output input[type="text"] {
+  cursor: pointer;
 }
 
 
-.icon-sb1 {
+.icon-sb {
   position: absolute;
-  left: 10px; /* Posizione dell'icona a sinistra */
-  top: 50%; /* Altezza centrale rispetto all'input */
-  transform: translateY(-50%); /* Per centrare verticalmente l'icona */
-  font-family: 'Font Awesome'; /* Font dell'icona (esempio) */
-  font-size: 24px; /* Dimensione dell'icona */
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.icon-sb2 {
-  position: absolute;
-  left: 10px; /* Posizione dell'icona a sinistra */
-  top: 50%; /* Altezza centrale rispetto all'input */
-  transform: translateY(-50%); /* Per centrare verticalmente l'icona */
-  font-family: 'Font Awesome'; /* Font dell'icona (esempio) */
-  font-size: 20px; /* Dimensione dell'icona */
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Font Awesome';
+  font-size: 20px;
   margin-left: 2px;
   margin-right: 20px;
 }
 
+.search-form .veicolo select,
 .search-form .time-output select,
 .search-form .time-input select {
   position: absolute;
@@ -208,6 +183,14 @@ h2,
   border: none;
   border-radius: 7px;
   background-color: #ffffff;
+  cursor: pointer;
+}
+
+.search-form .veicolo select:focus,
+.search-form .time-output select:focus,
+.search-form .time-input select:focus {
+  outline: none;
+  border-color: none;
 }
 
 .search-bar button {
