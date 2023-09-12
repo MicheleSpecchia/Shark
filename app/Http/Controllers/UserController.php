@@ -26,7 +26,7 @@ class UserController extends Controller
     public function index()
     {
         return view('user', [
-            'parks' => Park::latest()->filter(request(['cap', 'search']))->paginate(6)
+            'parks' => Park::latest()->filter(request(['cap', 'search']))->paginate(8)
         ]);
     }
 }
