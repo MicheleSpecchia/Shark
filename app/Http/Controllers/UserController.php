@@ -29,4 +29,6 @@ class UserController extends Controller
             'parks' => Park::latest()->filter(request(['cap', 'search']))->paginate(8)
         ]);
     }
+
+    
 }
