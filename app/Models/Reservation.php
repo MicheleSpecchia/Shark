@@ -30,5 +30,10 @@ class Reservation extends Model
     {
         return $this->belongsTo(Park::class);
     }
+
+    public function review()
+    {
+        return $this->hasOne(ParkReview::class, 'reservation_id');
+    }
     
 }

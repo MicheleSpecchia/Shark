@@ -16,6 +16,7 @@
         <div class="row mt-5">
             @unless($reservations->isEmpty())
             @foreach($reservations as $reservation)
+            @if(is_null($reservation->review)) <!-- Controllo per verificare se la recensione esiste o meno -->
             <div class="col-12 col-md-4 col-lg-3 mb-5">
                 <div class="card-wrap p-3" style="background-color: rgba(255, 255, 255, 0.7); border-radius: 15px;">
                     <div class="con-wrap mt-4">
@@ -42,11 +43,11 @@
                     </div>
                 </div>
             </div>
+            @endif <!-- Fine del controllo per la recensione -->
             @endforeach
             @else
             <p class="mb-4">Non hai ancora effettuato nessuna prenotazione.</p>
             @endunless
         </div>
     </div>
-
 </x-layout>
