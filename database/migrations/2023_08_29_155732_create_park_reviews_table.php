@@ -16,10 +16,12 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('park_id')->constrained()->onDelete('cascade');
             $table->unsignedTinyInteger('rating'); // Valutazione da 1 a 5 stelle
+            $table->string('title');  // Aggiungi questa riga per la colonna del titolo
             $table->text('feedback');
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      */

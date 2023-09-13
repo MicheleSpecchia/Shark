@@ -8,6 +8,12 @@ use App\Models\Park;
 use App\Models\Reservation;
 use Illuminate\Validation\Rule;
 use App\Models\User;
+use App\Models\ParkReview;
+use App\Models\Reservation;
+use Carbon\Carbon;
+
+
+
 
 class ParkController extends Controller
 {
@@ -68,6 +74,48 @@ class ParkController extends Controller
         return view('user', compact('parks'));
     }
 
+    public function createReview(Park $park, Reservation $reservation)
+    {
+        // Verifica che la prenotazione appartenga al parco specificato
+        if ($park->id != $reservation->park_id) {
+            abort(403, 'Mismatch between park and reservation.');
+        }
+
+
+        // verifica che la prenotazione sia stata completata
+        if ($reservation->data_fine < now() && $reservation->user_id == auth()->id()) {
+            return view('create_review', ['park' => $park, 'reservation' => $reservation]);
+        } else {
+            abort(403, 'Unauthorized Action');
+        }
+    }
+
+    public function storeReview(Request $request, Park $park, Reservation $reservation)
+    {
+        // Validazione dei dati inseriti dall'utente
+        $data = $request->validate([
+            'title' => 'required|max:255',
+            'feedback' => 'required',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        // Creazione di una nuova recensione e assegnazione dei dati
+        $review = new ParkReview($data);
+
+        // Assegnazione degli ID dell'utente, del parco e della prenotazione alla recensione
+        $review->user_id = auth()->id();
+        $review->park_id = $park->id;
+        $review->reservation_id = $reservation->id;  // Questa è la nuova riga
+
+        // Salvataggio della recensione nel database
+        $review->save();
+
+        // Reindirizzamento verso la pagina delle prenotazioni con un messaggio di conferma
+        return redirect()->route('user.reservations')->with('message', 'Recensione inviata con successo!');
+    }
+
+
+
     //show create form
     public function create()
     {
@@ -84,6 +132,7 @@ class ParkController extends Controller
             'civico' => 'required',
             'description' => 'required'
         ]);
+
 
         if ($request->hasFile('foto')) {
             $form_field['foto'] = $request->file('foto')->store('fotos', 'public');

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 use App\Models\Park;
 use App\Models\User;
+use Database\Seeders\ParkReviewSeeder;
+use Database\Seeders\ReservationSeeder; // Assumendo che tu abbia un seeder per le Reservation.
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -37,6 +37,10 @@ class DatabaseSeeder extends Seeder
 
         $parks = Park::factory(12)->create();
 
-    }
-    
+        // Assumendo che tu abbia un ReservationSeeder per generare le prenotazioni
+        $this->call(ReservationsTableSeeder::class);
+
+        // Ora che hai utenti, parchi e prenotazioni, genera le recensioni dei parchi
+        $this->call(ParkReviewSeeder::class);
+    }    
 }
