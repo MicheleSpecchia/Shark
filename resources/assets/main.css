@@ -379,7 +379,12 @@ h2,
   color: #fff;
 }
 
-
+/* Reset dei margini e dei padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 /*---LOGIN---*/
 
 /* Stile per il contenitore che avrà lo sfondo spezzato */
@@ -519,10 +524,7 @@ h2,
   /* Spaziatura interna */
   margin-right: 20px;
   box-shadow: 3px 3px 5px rgba(0.3, 0.2, 0.9, 0.7);
-  /* Ombra */
-
   background-color: #F5F5F5;
-  /* Aggiungi un colore di sfondo se necessario */
 }
 
 
@@ -617,6 +619,27 @@ h2,
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Altezza minima della viewport del browser */
+}
+
+
+.title-header {
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.custom-card {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+}
+
+.reservation-header {
+  color: #1a2a6c;
+  font-weight: bold;
+}
+
+
+.reservation-header {
+  animation: none; /* Disabilita qualsiasi animazione */
 }
 
 /*--- PAGINA SHOW PARK ---*/
@@ -784,4 +807,3 @@ input[type="time"] {
 .btn-primary:hover {
   background-color: #0056b3;
 }
-
