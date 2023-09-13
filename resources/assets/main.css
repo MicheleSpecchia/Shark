@@ -95,7 +95,8 @@ h2 {
 /* Animazione per la dissolvenza in entrata */
 h1,
 h2,
-.search-bar {
+.search-bar,
+.home-search-bar {
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 0.5s forwards 0.25s;
@@ -212,6 +213,59 @@ h2,
 
 .home-search-bar button:hover i {
   transform: rotate(360deg) scale(1.2);
+}
+
+/*--- USER-SEARCHBAR ---*/
+
+.search-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  padding: 20px 10% 0 10%;
+  margin: 0 auto;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  width: auto;
+  margin-top: 20px;
+}
+
+.search-bar input,
+.search-bar select {
+  padding: 10px;
+  border: none;
+  border-radius: 15px;
+  font-family: 'Roboto', sans-serif;
+  background-color: #fff;
+  flex: 1;
+  width: 60%;
+}
+
+.search-bar button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  /* Prepara l'animazione */
+  color: #1a2a6c
+}
+
+
+/* Effetto hover per il bottone di ricerca */
+.search-bar button:hover {
+  transform: rotate(360deg) scale(1.2);
+  /* Ruota l'icona quando si passa il mouse sopra */
+  color: #fff;
 }
 
 /*---LOGIN---*/

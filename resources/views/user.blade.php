@@ -1,7 +1,10 @@
 <x-layout>
     @include('partials._navbar')
-    @include('partials._search')
 
+    <div class="search-content">
+        @include('partials._search')
+    </div>
+    
     <div class="container">
         <div class="row mt-5">
 

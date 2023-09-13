@@ -7,7 +7,8 @@
                     <div class="col">
                         <div class="search-form">
                             <div class="location">
-                                <input type="text" id="location" name="location" placeholder="Città, Indirizzo.." class="location-input">
+                                <input type="text" id="location" name="location" placeholder="Città, Indirizzo.." class="location-input" list="citiesList">
+                                <datalist id="citiesList"></datalist>
                                 <span class="icon-sb"> <i class="fa fa-map-marker" style="color: #bdbec1;"></i></span>
                             </div>
                             <div class="veicolo">
@@ -64,8 +65,8 @@
             dateFormat: 'yy-mm-dd',
             minDate: 0, // Impedisce di selezionare date passate
             onSelect: function(selectedDate) {
-                showTimeSelect('date-input', 'time-input');
                 $("#date-output").datepicker("option", "minDate", selectedDate);
+                showTimeSelect('date-input', 'time-input');
             }
         });
         $("#date-output").datepicker({
@@ -76,15 +77,14 @@
                 $("#date-input").datepicker("option", "maxDate", selectedDate);
             }
         });
+        $("#time-input").on("change", function() {
+            showTimeSelect('date-output', 'time-output');
+        });
     });
 
     function showTimeSelect(inputElement, selectElement) {
         var select = document.getElementById(selectElement);
         select.style.display = 'block';
-
-        var startTime = new Date();
-        startTime.setHours(0, 0, 0, 0);
-        var timeOptions = [];
 
         var startDate = $("#date-input").datepicker("getDate");
         var endDate = $("#date-output").datepicker("getDate");
@@ -96,28 +96,32 @@
             if (startDate && startDate.getDate() === currentTime.getDate() && startDate.getMonth() === currentTime.getMonth() && startDate.getFullYear() === currentTime.getFullYear()) {
                 var selectStart = document.getElementById("time-input");
                 var selectEnd = document.getElementById("time-output");
-                var startTime = new Date(currentTime);
+                var time = new Date(currentTime);
 
                 // Imposta l'orario minimo per inizio e fine
-                startTime.setMinutes(Math.ceil(currentTime.getMinutes() / 30) * 30); // Arrotonda all'ora più vicina
-    
+                time.setMinutes(Math.ceil(currentTime.getMinutes() / 30) * 30); // Arrotonda all'ora più vicina
+
                 //SVUOTO LE OPTION DI DATA INIZIO
                 select.innerHTML = "";
 
                 // Aggiungi le opzioni di orario con un intervallo di 30 minuti a partire dall'orario corrente
-                for (var i = 0; i < 24 * 2 && startTime <= new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), 23, 31); i++) {
-                    var formattedTime = formatTime(startTime);
+                for (var i = 0; i < 24 * 2 && time <= new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), 23, 31); i++) {
+                    var formattedTime = formatTime(time);
 
-                    if (startTime >= currentTime) {
+                    if (time >= currentTime) {
                         var option = new Option(formattedTime, formattedTime);
                         select.appendChild(option);
                     }
 
-                    startTime.setMinutes(startTime.getMinutes() + 30);
+                    time.setMinutes(time.getMinutes() + 30);
                 }
             } else {
 
+                var startTime = new Date();
+                startTime.setHours(0, 0, 0, 0);
+                var timeOptions = [];
                 select.innerHTML = "";
+
                 for (var i = 0; i < 24 * 2; i++) {
                     var formattedTime = formatTime(startTime);
                     var option = new Option(formattedTime, formattedTime);
@@ -130,6 +134,9 @@
                 });
             }
 
+            if (endDate) {
+                showTimeSelect('date-output', 'time-output');
+            }
         }
 
         if (inputElement === 'date-output') {
@@ -154,6 +161,9 @@
 
             } else {
 
+                var startTime = new Date();
+                startTime.setHours(0, 0, 0, 0);
+                var timeOptions = [];
                 select.innerHTML = "";
 
                 for (var i = 0; i < 24 * 2; i++) {
@@ -168,6 +178,8 @@
                 });
             }
         }
+        $("#time-input option[value='23:30']").remove();
+
     }
 
     function formatTime(time) {
@@ -175,4 +187,34 @@
         var minutes = time.getMinutes().toString().padStart(2, '0');
         return hours + ':' + minutes;
     }
+
+    document.getElementById('location').addEventListener('input', function() {
+        const query = this.value;
+        if (query.length > 0) {
+            fetch(`http://api.geonames.org/search?name_startsWith=${query}&country=IT&lang=it&cities=cities15000&orderby=population&username=pippone`)
+                .then(response => response.text())
+                .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+                .then(data => {
+                    const datalist = document.getElementById('citiesList');
+                    datalist.innerHTML = '';
+
+                    const geonames = data.getElementsByTagName('geoname');
+                    const addedCities = new Set();
+
+                    for (let i = 0; i < geonames.length; i++) {
+                        const cityName = geonames[i].getElementsByTagName('name')[0].textContent;
+                        const toponymName = geonames[i].getElementsByTagName('toponymName')[0].textContent;
+
+                        if (!addedCities.has(cityName) && cityName.substring(0, 3) === toponymName.substring(0, 3)) {
+                            const option = document.createElement('option');
+                            option.value = cityName;
+
+                            datalist.appendChild(option);
+
+                            addedCities.add(cityName);
+                        }
+                    }
+                });
+        }
+    });
 </script>
