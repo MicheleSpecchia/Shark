@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Pagination\Paginator;
 use App\Models\Park;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
@@ -26,7 +26,7 @@ class UserController extends Controller
     public function index()
     {
         return view('user', [
-            'parks' => Park::latest()->filter(request(['cap', 'search']))->paginate(8)
+            'parks' => Park::latest()->paginate(6)
         ]);
     }
 

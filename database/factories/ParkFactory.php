@@ -21,9 +21,9 @@ class ParkFactory extends Factory
             'stars' => $this ->faker ->numberBetween(1,5),
             'price' => $this ->faker ->numberBetween(1,2),
             'description' => $this ->faker ->paragraph(5),
-            'automobili' => '0',
-            'motocicli'  => '0',
-            'furgoni'    => '0',
+            'automobili' => '1',
+            'motocicli'  => '1',
+            'camper'    => '0',
         ];
     }
 }

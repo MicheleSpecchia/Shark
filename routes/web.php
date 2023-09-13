@@ -38,7 +38,7 @@ Route::get('/admin', [AdminController::class, 'index'])->middleware('preventback
 
 
 #--- PARKS ---#
-Route::get('/parks/search', [ParkController::class, 'search'])->middleware('auth');
+Route::post('/parks/search', [ParkController::class, 'search']);
 Route::get('/parks/create', [ParkController::class, 'create'])->middleware('auth');
 Route::post('/parks', [ParkController::class, 'store'])->middleware('auth');
 Route::get('/parks/{park}/edit', [ParkController::class, 'edit'])->middleware('auth');

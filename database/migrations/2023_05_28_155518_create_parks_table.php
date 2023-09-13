@@ -20,9 +20,9 @@ return new class extends Migration
             $table->longText('description');
             $table->float('stars');
             $table->float('price');
-            $table->integer('automobili');
-            $table->integer('motocicli');
-            $table->integer('furgoni');
+            $table->boolean('automobili');
+            $table->boolean('motocicli');
+            $table->boolean('camper');
             $table->timestamps();
         });
     }
