@@ -12,17 +12,17 @@
         </ul>
 
         @auth
-        <img src="{{asset('images/user.png')}}" class="user-pic" onclick="miaFunction()">
+        <img src="{{auth()->user()->avatar}}" class="user-pic" onclick="miaFunction()">
 
         <div class="sub-menu-wrap" id="subMenu">
             <div class="sub-menu" style="border-radius: 10px">
                 <div class="user-info">
-                    <img src="{{asset('images/user.png')}}" class="user-pic">
-                    <h2 style="margin-top: 30px; transition: none">Username</h2>
+                    <img src="{{ auth()->user()->avatar  }}" class="user-pic">
+                    <h2 style="margin-top: 30px; transition: none">{{ auth()->user()->nome }}</h2>
                 </div>
                 <hr>
 
-                <a href="#" class="sub-menu-link">
+                <a href="/editProfile" class="sub-menu-link">
                     <img src="{{asset('images/profile.png')}}" alt="">
                     <p>Edit profile</p>
                     <span>></span>
