@@ -30,7 +30,9 @@ class UserController extends Controller
         ]);
     }
 
+    
 
+    
     public function update(Request $request)
     {
         // Valida i dati del form
@@ -52,6 +54,7 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Immagine del profilo aggiornata con successo.');
     }
+    
 
     public function updateProfile(Request $request)
     {
@@ -80,6 +83,8 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'Dati dell\'utente aggiornati con successo.');
+
+        
     }
 
 
