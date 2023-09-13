@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->string('avatar')->default('avatars/profile.png');
+            $table->string('avatar')->default('storage/profiles/profile.png');
         });
     }
 
