@@ -1,11 +1,16 @@
 <x-layout>
     @include('partials._navbar')
 
+
     <div class="content2">
         @include('partials._search')
     </div>
 
 
+    <div class="search-content">
+        @include('partials._search')
+    </div>
+    
     <div class="container">
         <div class="row d-flex mt-5">
 

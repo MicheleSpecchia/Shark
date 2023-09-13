@@ -7,13 +7,13 @@ body {
   padding: 0;
 }
 
+
 /* NAVBAR-UTENTE */
 *{
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
-
 }
 
 .hero {
@@ -43,6 +43,7 @@ nav {
   cursor: pointer;
   margin-left: 30px;
 }
+
 
 nav ul {
   width: 100%;
@@ -126,6 +127,7 @@ nav ul li a {
   margin: 12px 0;
 }
 
+
 .sub-menu-link button{
   display: flex;
   align-items: center;
@@ -145,6 +147,7 @@ nav ul li a {
   padding: 8px;
   margin-right: 15px;
 }
+
 
 .sub-menu-link span {
   font-size: 22px;
@@ -201,7 +204,8 @@ h2 {
 /* Animazione per la dissolvenza in entrata */
 h1,
 h2,
-.search-bar {
+.search-bar,
+.home-search-bar {
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 0.5s forwards 0.25s;
@@ -223,7 +227,117 @@ h2,
 
 }
 
-/* Stili per la barra di ricerca */
+
+/*---HOME-SEARCHBAR---*/
+
+.home-search-bar {
+  width: 700px;
+}
+
+.container .row {
+  margin-bottom: 20px;
+}
+
+.home-search-bar .col {
+  display: inline-block;
+  width: 48%;
+  margin-right: 2%;
+}
+
+.home-search-bar label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  height: 23px;
+}
+
+.search-form {
+  position: relative;
+}
+
+.search-form .location input[type="text"],
+.search-form .date-input input[type="text"],
+.search-form .date-output input[type="text"] {
+  width: 100%;
+  padding: 20px;
+  border-radius: 7px;
+  border: 1px solid grey;
+  padding-left: 30px;
+}
+
+.search-form .date-input input[type="text"],
+.search-form .date-output input[type="text"] {
+  cursor: pointer;
+}
+
+
+.icon-sb {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Font Awesome';
+  font-size: 20px;
+  margin-left: 2px;
+  margin-right: 20px;
+}
+
+.search-form .veicolo select,
+.search-form .time-output select,
+.search-form .time-input select {
+  position: absolute;
+  top: 50%;
+  left: 77%;
+  transform: translate(-33%, -50%);
+  width: 33%;
+  padding: 20px;
+  border: none;
+  border-radius: 7px;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.search-form .veicolo select:focus,
+.search-form .time-output select:focus,
+.search-form .time-input select:focus {
+  outline: none;
+  border-color: none;
+}
+
+.home-search-bar button {
+  background-color: #1a2a6c;
+  color: #fff;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  padding: 20px;
+  border-radius: 7px;
+  font-size: 24px;
+}
+
+.home-search-bar button i {
+  margin-left: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.home-search-bar button:hover i {
+  transform: rotate(360deg) scale(1.2);
+}
+
+
+/*--- USER-SEARCHBAR ---*/
+
+.search-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  padding: 20px 10% 0 10%;
+  margin: 0 auto;
+}
+
 .search-bar {
   display: flex;
   justify-content: flex-start;
@@ -236,7 +350,6 @@ h2,
   margin-top: 20px;
 }
 
-/* Stili per gli input e i select nella barra di ricerca */
 .search-bar input,
 .search-bar select {
   padding: 10px;
@@ -248,25 +361,23 @@ h2,
   width: 60%;
 }
 
-/* Stili per il bottone di ricerca */
 .search-bar button {
   background-color: transparent;
   border: none;
   font-size: 1.5em;
   cursor: pointer;
-  transition: transform 0.3s ease; /* Prepara l'animazione */
+  transition: transform 0.3s ease;
+  /* Prepara l'animazione */
   color: #1a2a6c
 }
 
 
 /* Effetto hover per il bottone di ricerca */
 .search-bar button:hover {
-  transform: rotate(360deg) scale(1.2); /* Ruota l'icona quando si passa il mouse sopra */
+  transform: rotate(360deg) scale(1.2);
+  /* Ruota l'icona quando si passa il mouse sopra */
   color: #fff;
 }
-
-
-
 
 /* Reset dei margini e dei padding */
 * {
@@ -274,8 +385,27 @@ h2,
   padding: 0;
   box-sizing: border-box;
 }
+/*---LOGIN---*/
 
-/* Stile del contenitore principale */
+/* Stile per il contenitore che avrà lo sfondo spezzato */
+.custom-background-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Prima parte dello sfondo (colore superiore) */
+.custom-background-container::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 60%;
+  height: 100vh;
+  background: linear-gradient(to bottom, #caf9ff, #1a2a6c);
+  clip-path: polygon(0 100%, 0 0, 100% 0, 70% 100%);
+  z-index: -1;
+}
+
 .login-container {
   display: flex;
   justify-content: center;
@@ -385,14 +515,16 @@ h2,
 /* css per profilo utente */
 .card {
   margin-left: 30px;
-  width: 350px; /* Larghezza desiderata */
+  width: 350px;
+  /* Larghezza desiderata */
   height: cover;
-  border-radius: 5px; /* Bordo arrotondato per la card */
-  padding: 40px; /* Spaziatura interna */
+  border-radius: 5px;
+  /* Bordo arrotondato per la card */
+  padding: 40px;
+  /* Spaziatura interna */
   margin-right: 20px;
-  box-shadow: 3px 3px 5px rgba(0.3, 0.2, 0.9, 0.7); /* Ombra */
-  animation: fadeInUp 0.5s forwards;
-  background-color: #F5F5F5; /* Aggiungi un colore di sfondo se necessario */
+  box-shadow: 3px 3px 5px rgba(0.3, 0.2, 0.9, 0.7);
+  background-color: #F5F5F5;
 }
 
 
@@ -413,42 +545,54 @@ h2,
 }
 
 .profile-image {
-  width: 250px; /* Larghezza desiderata per il contenitore quadrato */
-  height: 250px; /* Altezza desiderata per il contenitore quadrato */
-  overflow: hidden; /* Nasconde parte dell'immagine che supera le dimensioni */
-  border-radius: 50%; /* Rendi il contenitore rotondo impostando il bordo arrotondato al 50% */
-  display: flex; /* Utilizza il flexbox */
-  justify-content: center; /* Centra orizzontalmente */
-  align-items: center; /* Centra verticalmente */
-  margin: 0 auto; /* Centra il contenitore orizzontalmente */
+  width: 250px;
+  /* Larghezza desiderata per il contenitore quadrato */
+  height: 250px;
+  /* Altezza desiderata per il contenitore quadrato */
+  overflow: hidden;
+  /* Nasconde parte dell'immagine che supera le dimensioni */
+  border-radius: 50%;
+  /* Rendi il contenitore rotondo impostando il bordo arrotondato al 50% */
+  display: flex;
+  /* Utilizza il flexbox */
+  justify-content: center;
+  /* Centra orizzontalmente */
+  align-items: center;
+  /* Centra verticalmente */
+  margin: 0 auto;
+  /* Centra il contenitore orizzontalmente */
 }
 
 .profile-image img {
-  width: 100%; /* Riempie completamente il contenitore quadrato */
-  height: auto; /* Impedisce il ridimensionamento forzato dell'immagine in altezza */
+  width: 100%;
+  /* Riempie completamente il contenitore quadrato */
+  height: auto;
+  /* Impedisce il ridimensionamento forzato dell'immagine in altezza */
 }
 
 
-.card p{
+.card p {
   font-size: 40px;
   text-align: center;
-  margin-top: 10px; /* Spaziatura tra l'immagine e la descrizione */
+  margin-top: 10px;
+  /* Spaziatura tra l'immagine e la descrizione */
   color: grey;
-} 
+}
 
 
 .profile {
   padding: 40px;
   border-radius: 5px;
   background-color: #F5F5F5;
-  box-shadow: 3px 3px 5px rgba(0.3, 0.2, 0.9, 0.7); /* Ombra */
+  box-shadow: 3px 3px 5px rgba(0.3, 0.2, 0.9, 0.7);
+  /* Ombra */
   background-size: cover;
   width: 550px;
   height: 300px;
   transition: transform 0.3s ease;
 }
 
-.profile p{
+.profile p {
   margin-top: 80px;
   text-align: center;
   font-size: 30px;
@@ -460,12 +604,15 @@ h2,
 .profile img {
   border: 1px solid black;
   border-radius: 20px;
-  max-width: 100%; /* L'immagine si adatterà alla larghezza massima del contenitore */
-  height: auto; /* L'altezza verrà regolata proporzionalmente per mantenere l'aspetto originale */
+  max-width: 100%;
+  /* L'immagine si adatterà alla larghezza massima del contenitore */
+  height: auto;
+  /* L'altezza verrà regolata proporzionalmente per mantenere l'aspetto originale */
 }
 
 .profile:hover {
-  transform: scale(1.05); /* Zoom del 5% quando il cursore è sopra la card */
+  transform: scale(1.05);
+  /* Zoom del 5% quando il cursore è sopra la card */
 }
 
 .container-fluid {
@@ -473,6 +620,7 @@ h2,
   flex-direction: column;
   min-height: 100vh; /* Altezza minima della viewport del browser */
 }
+
 
 .title-header {
   color: #FFFFFF;
@@ -492,4 +640,170 @@ h2,
 
 .reservation-header {
   animation: none; /* Disabilita qualsiasi animazione */
+}
+
+/*--- PAGINA SHOW PARK ---*/
+.show-park {
+  padding: 20px;
+  margin: 10px;
+}
+
+.show-park img {
+  border-radius: 20px;
+}
+
+.show-park h3 {
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+}
+
+.reservation-card {
+  border: 2px solid #f0f0f0;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+  width: 40%;
+  margin: 0 auto;
+  display: block;
+}
+
+.form-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="date"],
+input[type="time"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-book {
+  background-color: #ff5a5f;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-book:hover {
+  background-color: #d9534f;
+}
+
+
+/*--- EDIT PROFILE */
+
+.img-account-profile {
+  height: 10rem;
+}
+.rounded-circle {
+  border-radius: 50% !important;
+}
+.card {
+  box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+  width: 500px;
+}
+.card .card-header {
+  font-weight: 500;
+}
+.card-header:first-child {
+  border-radius: 0.35rem 0.35rem 0 0;
+}
+.card-header {
+  padding: 1rem 1.35rem;
+  margin-bottom: 0;
+  background-color: rgba(33, 40, 50, 0.03);
+  border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+}
+.form-control, .dataTable-input {
+  display: block;
+  width: 100%;
+  padding: 0.875rem 1.125rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1;
+  color: #69707a;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #c5ccd6;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.35rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* Stile generale per i moduli */
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Stile per i titoli dei moduli */
+.form-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Stile per i campi del modulo */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Stile per le etichette dei campi */
+.form-label {
+  font-weight: 500;
+}
+
+/* Stile per gli input dei campi */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Stile per i pulsanti */
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
 }
