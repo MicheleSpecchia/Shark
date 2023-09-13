@@ -10,6 +10,8 @@
                                 <input type="text" id="location" name="location" placeholder="Città, Indirizzo.." class="location-input" list="citiesList">
                                 <datalist id="citiesList"></datalist>
                                 <span class="icon-sb"> <i class="fa fa-map-marker" style="color: #bdbec1;"></i></span>
+                                @error('location')
+                                @enderror
                             </div>
                             <div class="veicolo">
                                 <select id="veicolo-select" name="veicolo" class="veicolo-input">
@@ -17,6 +19,8 @@
                                     <option value="moto">Moto</option>
                                     <option value="camper">Camper</option>
                                 </select>
+                                @error('veicolo')
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -28,6 +32,8 @@
                             <div class="date-input">
                                 <input type="text" id="date-input" name="date-input" placeholder="Data di inizio" readonly>
                                 <span class="icon-sb"> <i class="fa-solid fa-calendar-day" style="color: #bdbec1;"></i></span>
+                                @error('date-input')
+                                @enderror
                             </div>
                             <div class="time-input">
                                 <select id="time-input" name="time-input" style="display: none;"></select>
@@ -39,6 +45,8 @@
                             <div class="date-output">
                                 <input type="text" id="date-output" name="date-output" placeholder="Data di fine" readonly>
                                 <span class="icon-sb"> <i class="fa-solid fa-calendar-day" style="color: #bdbec1;"></i></span>
+                                @error('date-output')
+                                @enderror
                             </div>
                             <div class="time-output">
                                 <select id="time-output" name="time-output" style="display: none;"></select>

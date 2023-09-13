@@ -21,12 +21,23 @@ class ParkController extends Controller
 
     public function search(Request $request)
     {
+
+
+        $form_field = $request->validate([
+            'location' => ['required'],
+            'veicolo' => ['required'],
+            'date-input' => ['required'],
+            'date-output' => ['required'],
+            'time-input' => ['required'],
+            'time-output' => ['required'],
+        ]);
+        
         $location = $request->input('location');
         $vehicle = $request->input('veicolo');
-        $checkInDate = $request->input('check-in');
-        $checkOutDate = $request->input('check-out');
-        $checkInTime = $request->input('time-in');
-        $checkOutTime = $request->input('time-out');
+        $checkInDate = $request->input('date-input');
+        $checkOutDate = $request->input('date-output');
+        $checkInTime = $request->input('time-input');
+        $checkOutTime = $request->input('time-output');
 
         $query = Park::query();
 
@@ -61,8 +72,8 @@ class ParkController extends Controller
                 $availableParks[] = $park;
             }
         }
-        
-        $perPage = 10; // Numero di parcheggi per pagina
+
+        $perPage = 8; // Numero di parcheggi per pagina
         $page = $request->input('page', 1); // Ottieni il numero di pagina dalla richiesta
         $parks = new Paginator($availableParks, $perPage, $page);
         return view('user', compact('parks'));
