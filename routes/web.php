@@ -66,3 +66,5 @@ Route::post('/parks/{park}/reservations/{reservation}/reviews', [ParkController:
 
 #--- PAGINA PROFILO UTENTE ---#
 Route::get('/editProfile', [HomeController::class, 'editProfile']);
+
+Route::post('/updateProfile', [UserController::class, 'update'])->name('profile.update');

@@ -11,19 +11,19 @@
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
                     <!-- Profile picture image-->
-                    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                    <img class="img-account-profile rounded-circle mb-2" src="{{ asset(auth()->user()->avatar) }}" alt="">
                     <!-- Profile picture help block-->
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     <!-- Profile picture upload button-->
                     
-                    <form method="POST" enctype="multipart/form-data">
-                        @csrf 
-                        <input type="file" name="avatar">
-                        <br>
-                        <br>
-                        <button class="btn btn-primary" type="submit">Upload new image</button>
+                    <form method="POST" enctype="multipart/form-data" action="{{ route('profile.update') }}">
+    @csrf
+    <input type="file" name="avatar">
+    <br><br>
+    <button class="btn btn-primary" type="submit">Upload new image</button>
+</form>
 
-                    </form>
+
                     
                 </div>
             </div>
@@ -34,8 +34,6 @@
                 <div class="card-header">Account Details</div>
                 <div class="card-body">
                     <form method="POST">
-                        @csfr 
-                        @method('PUT')
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (first name)-->
