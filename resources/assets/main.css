@@ -612,9 +612,10 @@ h2,
 }
 
 .custom-card {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: #ffffff; /* Rende lo sfondo completamente bianco */
   border-radius: 15px;
 }
+
 
 .reservation-header {
   color: #1a2a6c;
@@ -642,11 +643,9 @@ h2,
 }
 
 .reservation-card {
-  border: 2px solid #f0f0f0;
-  background-color: #fff;
+  background-color: transparent;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
