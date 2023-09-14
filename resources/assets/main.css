@@ -32,9 +32,8 @@ nav {
   position: relative;
 }
 
-.logo {
+.logo-img {
   width: 120px;
-
 }
 
 .user-pic{
@@ -82,8 +81,6 @@ nav ul li a {
   z-index: 1000; /* assicurati che appaia sopra gli altri elementi */
   font-size: 14px;
 }
-
-
 
 .sub-menu {
   background-color: #fff;

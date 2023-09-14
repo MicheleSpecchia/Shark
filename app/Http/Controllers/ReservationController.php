@@ -14,7 +14,7 @@ class ReservationController extends Controller
     {
         $form_field = $request->validate([
             'user_id' => 'required',
-            'park_id' => 'required|exists:parks,id',  // assicurati che il park_id esista nella tabella dei parchi
+            'park_id' => 'required|exists:parks,id',
             'data_inizio' => 'required',
             'data_fine' => 'required',
             'start_time' => 'required',

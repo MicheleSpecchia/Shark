@@ -1,14 +1,14 @@
 
-<form class="search-bar" action="URL_DOVE_INVIARE_I_DATI" method="get">
+<form class="search-bar" action="/parks/search" method="POST">
 
-    <input type="text" id="location" name="location" placeholder="Luogo" list="citiesList">
+    <input type="text" id="location" name="location" placeholder="Città" list="citiesList">
     <datalist id="citiesList"></datalist>
 
-    <input type="datetime-local" id="arrival" name="arrival" placeholde>
+    <input type="text" id="date-input" name="date-output" placeholder="Data inizio">
 
-    <input type="datetime-local" id="end" name="end" placeholder="Data">
+    <input type="text" id="date-output" name="date-output" placeholder="Data fine">
 
-    <select id=" vehicle-type" name="vehicle-type">
+    <select id="veicolo" name="veicolo">
         <option value="auto">Auto</option>
         <option value="moto">Moto</option>
         <option value="camper">Camper</option>

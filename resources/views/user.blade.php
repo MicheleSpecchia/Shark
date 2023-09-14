@@ -2,11 +2,6 @@
     @include('partials._navbar')
 
 
-    <div class="content2">
-        @include('partials._search')
-    </div>
-
-
     <div class="search-content">
         @include('partials._search')
     </div>
