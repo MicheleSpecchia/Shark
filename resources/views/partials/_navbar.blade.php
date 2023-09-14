@@ -1,6 +1,8 @@
 <div class="hero">
     <nav>
-        <img src="{{asset('images/logo.png')}}" class="logo-img">
+        <a href="/">
+            <img src="{{asset('images/logo.png')}}" class="logo-img">
+        </a>
         <ul>
             <li><a href="#">About</a></li>
             <li><a href="#">Affitta con Shark</a></li>

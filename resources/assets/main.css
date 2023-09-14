@@ -171,18 +171,6 @@ nav ul li a {
   margin: 0 auto;
 }
 
-.content2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* Allinea all'inizio invece di "center" */
-  text-align: left;
-  padding: 20px 10% 0 10%; /* Riduci il padding superiore e laterale, e aggiungi spazio in alto */
-  margin: 0 auto;
-}
-
-
-
 /* Stili per i titoli */
 h1 {
   font-size: 80px;
@@ -324,7 +312,6 @@ h2,
 
 
 /*--- USER-SEARCHBAR ---*/
-
 .search-content {
   display: flex;
   flex-direction: column;

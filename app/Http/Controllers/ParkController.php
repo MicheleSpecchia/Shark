@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\ParkReview;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -26,8 +27,6 @@ class ParkController extends Controller
 
     public function search(Request $request)
     {
-
-
         $form_field = $request->validate([
             'location' => ['required'],
             'veicolo' => ['required'],
@@ -36,7 +35,7 @@ class ParkController extends Controller
             'time-input' => ['required'],
             'time-output' => ['required'],
         ]);
-        
+
         $location = $request->input('location');
         $vehicle = $request->input('veicolo');
         $checkInDate = $request->input('date-input');
@@ -78,10 +77,20 @@ class ParkController extends Controller
             }
         }
 
-        $perPage = 8; // Numero di parcheggi per pagina
-        $page = $request->input('page', 1); // Ottieni il numero di pagina dalla richiesta
+        $perPage = 8;
+        $page = $request->input('page', 1);
         $parks = new Paginator($availableParks, $perPage, $page);
-        return view('user', compact('parks'));
+        if (Auth::user()) {
+            $user_role = Auth::user()->role;
+
+            switch ($user_role) {
+                case 2:
+                    return view('user', compact('parks'));
+                    break;
+            }
+        } else {
+            return view('home-parks', compact('parks'));
+        }
     }
 
     public function createReview(Park $park, Reservation $reservation)

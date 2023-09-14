@@ -8,7 +8,7 @@
                 <img src="{{asset('images/vision.png')}}" alt="" style="width: 95%">
             </div>
             <div class="col-lg-4 col-sm-12" style="margin-top: 20px">
-                <h2 style="">{{ $park->location }} </h2> <br> {{ $park->address }} <br><br> Descrizione: <br>{{ $park->description }}</h3>
+                <h2>{{ $park->location }} </h2> <br> {{ $park->address }} <br><br> Descrizione: <br>{{ $park->description }}</h3>
             </div>
             <div class="col-lg-4" style="justify-content: center; align-items: center;display: flex">
 

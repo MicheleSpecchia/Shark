@@ -19,8 +19,6 @@
                                     <option value="moto">Moto</option>
                                     <option value="camper">Camper</option>
                                 </select>
-                                @error('veicolo')
-                                @enderror
                             </div>
                         </div>
                     </div>
