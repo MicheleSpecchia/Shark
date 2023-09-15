@@ -2,9 +2,6 @@
     <div class="custom-background-container">
         <div class="login-container">
             <div class="logo-form-container">
-                <div class="logo">
-                    <a href="/"><img src="{{asset('images/logo.png')}}" alt="Logo"></a>
-                </div>
                 <div class="login-form">
                     <h2>Crea un account</h2>
                     <form action="/newuser" method="POST">
@@ -39,8 +36,6 @@
 
                     <div class="additional-links">
                         <a href="/login">Hai già un account?</a>
-                        <span> | </span>
-                        <a href="">Password dimenticata?</a>
                     </div>
                 </div>
             </div>

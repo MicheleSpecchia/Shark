@@ -73,3 +73,7 @@ Route::post('/updateAvatar', [UserController::class, 'update'])->name('avatar.up
 
 Route::post('/updateProfile', [UserController::class, 'updateProfile'])->name('profile.update');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
