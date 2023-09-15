@@ -30,7 +30,7 @@
             <div class="col-12 col-md-4 col-lg-3 mb-5 reservation-card">
                 <div class="card-wrap p-3 custom-card">
                     <!-- Dettagli della prenotazione -->
-                    <h3 class="fs-4 mt-4 fw-bold card-title">Prenotazione #{{ $reservation->id }}</h3>
+                    <h3 class="fs-4 mt-4 fw-bold card-title">ID: {{ $reservation->id }}</h3>
                     <p><strong>Data Inizio:</strong> {{ $reservation->data_inizio }}</p>
                     <p><strong>Data Fine:</strong> {{ $reservation->data_fine }}</p>
                     <p><strong>Ora Inizio:</strong> {{ $reservation->start_time }}</p>
