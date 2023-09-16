@@ -9,7 +9,7 @@ class Park extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'address', 'cap', 'location', 'description', 'stars', 'price', 'automobili', 'motocicli', 'camper'];
+    protected $fillable = ['user_id', 'address', 'cap', 'location', 'description', 'stars', 'automobili', 'motocicli', 'camper', 'camere', 'tastierino', 'aperto', 'chiuso', 'totem', 'privato', 'scambio', 'shark', 'price'];
 
     public function user()
     {
@@ -20,7 +20,6 @@ class Park extends Model
     {
         return $this->hasMany(ParkImage::class);
     }
-    // Nel modello Park.php
 
     public function getAverageRatingAttribute()
     {

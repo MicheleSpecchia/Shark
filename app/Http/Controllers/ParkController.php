@@ -6,6 +6,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use App\Models\Park;
 use App\Models\Reservation;
+use App\Models\ParkImage;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\ParkReview;
@@ -150,38 +151,146 @@ class ParkController extends Controller
         return redirect()->route('user.reservations')->with('message', 'Recensione inviata con successo!');
     }
 
-
-
-    //show create form
     public function create()
     {
-        return view('parks.create');
+        $currentStep = 1;
+        return view('parks.create', compact('currentStep'));
+    }
+
+    public function storeStep1(Request $request)
+    {
+        $form_field = $request->validate([
+            'location' => 'required',
+            'address' => 'required',
+            'cap' => 'required',
+        ]);
+
+        session(['step1' => $form_field]);
+        $currentStep = 2;
+        return view('parks.create', compact('currentStep'));
+    }
+
+    public function storeStep2(Request $request)
+    {
+        $form_field = $request->validate([
+            'image_path' => 'required',
+            'description' => 'required',
+        ]);
+
+        session(['step2' => $form_field]);
+
+        $currentStep = 3;
+        return view('parks.create', compact('currentStep'));
+    }
+
+    public function storeStep3(Request $request)
+    {
+        $form_field = $request->validate([
+            'automobili',
+            'motocicli',
+            'camper',
+            'optional',
+            'camere',
+            'tastierino',
+            'aperto',
+            'chiuso',
+            'totem',
+            'privato',
+        ]);
+
+        session(['step3' => $form_field]);
+        $currentStep = 4;
+        return view('parks.create', compact('currentStep'));
+    }
+
+    public function storeStep4(Request $request)
+    {
+        $form_field = $request->validate([
+            'scambio',
+            'shark',
+        ]);
+
+        session(['step4' => $form_field]);
+
+        $currentStep = 5;
+        return view('parks.create', compact('currentStep'));
+    }
+
+    public function storeStep5(Request $request)
+    {
+        $form_field = $request->validate([
+            'price' => 'required',
+        ]);
+
+        session(['step5' => $form_field]);
+
+        $currentStep = 6;
+        return view('parks.create', compact('currentStep'));
+    }
+
+    public function storeStep6(Request $request)
+    {
+        $form_field = $request->validate([
+            'cond'
+        ]);
+
+        session(['step6' => $form_field]);
     }
 
     //store park data
     public function store(Request $request)
     {
-        $form_field = $request->validate([
-            'address' => 'required',
-            'cap' => 'required',
-            'location' => 'required',
-            'civico' => 'required',
-            'description' => 'required'
-        ]);
+        $step1Data = session('step1');
+        $step2Data = session('step2');
+        $step3Data = session('step3');
+        $step4Data = session('step4');
+        $step5Data = session('step5');
+        $step6Data = session('step6');
 
 
         if ($request->hasFile('foto')) {
             $form_field['foto'] = $request->file('foto')->store('fotos', 'public');
         }
 
-        $form_field['user_id'] = auth()->id();
+        $park = new Park;
 
-        Park::create($form_field);
+        //step1
+        $park['user_id'] = auth()->id();
+        $park['address'] = $step1Data['address'];
+        $park['cap'] = $step1Data['cap'];
+        $park['location'] = $step1Data['location'];
+
+        //step2
+        $park['description'] = $step2Data['description'];
+
+        //step3
+        $park['automobili'] = in_array('automobili', $step3Data) ? 1 : 0;
+        $park['motocicli'] = in_array('motocicli', $step3Data) ? 1 : 0;
+        $park['camper'] = in_array('camper', $step3Data)  ? 1 : 0;
+        $park['camere'] = in_array('camere', $step3Data)  ? 1 : 0;
+        $park['tastierino'] = in_array('tastierino', $step3Data)  ? 1 : 0;
+        $park['aperto'] = in_array('aperto', $step3Data)  ? 1 : 0;
+        $park['chiuso'] = in_array('chiuso', $step3Data)  ? 1 : 0;
+        $park['totem'] = in_array('totem', $step3Data)  ? 1 : 0;
+        $park['privato'] = in_array('privato', $step3Data)  ? 1 : 0;
+
+        //step4
+        $park['scambio'] = in_array('scambio', $step4Data)  ? 1 : 0;
+        $park['shark'] = in_array('shark', $step4Data)  ? 1 : 0;
+
+        //step5
+        $park['price'] = $step5Data['price'];
+
+        $park->save();
+
+        $parkImg = new ParkImage;
+        $parkImg['park_id'] = $park['id'];
+        $parkImg['image_path'] = $step2Data['image_path'];
+
 
         return redirect('/')->with('message', 'Annuncio created successfully!');
     }
 
-    //show edit form
     public function edit(Park $park)
     {
         return view('parks.edit', ['park' => $park]);

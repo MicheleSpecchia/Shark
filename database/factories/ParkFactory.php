@@ -15,15 +15,23 @@ class ParkFactory extends Factory
     {
         return [
             'user_id' => '2',
-            'address' => $this ->faker ->address(),
-            'cap' => $this ->faker ->postcode(),
-            'location' => $this ->faker ->city(),
-            'stars' => $this ->faker ->numberBetween(1,5),
-            'price' => $this ->faker ->numberBetween(1,2),
-            'description' => $this ->faker ->paragraph(5),
+            'address' => $this->faker->address(),
+            'cap' => $this->faker->postcode(),
+            'location' => $this->faker->city(),
+            'stars' => $this->faker->numberBetween(1, 5),
+            'description' => $this->faker->paragraph(5),
             'automobili' => '1',
             'motocicli'  => '1',
             'camper'    => '0',
+            'camere' => $this->faker->numberBetween(0, 1),
+            'tastierino' => $this->faker->numberBetween(0, 1),
+            'aperto' => $this->faker->numberBetween(0, 1),
+            'chiuso' => $this->faker->numberBetween(0, 1),
+            'totem' => $this->faker->numberBetween(0, 1),
+            'privato' => $this->faker->numberBetween(0, 1),
+            'scambio' => 0,
+            'shark' => 1,
+            'price' => $this->faker->numberBetween(1, 2),
         ];
     }
 }

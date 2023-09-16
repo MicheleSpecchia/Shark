@@ -9,7 +9,7 @@ body {
 
 
 /* NAVBAR-UTENTE */
-*{
+* {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
@@ -36,7 +36,7 @@ nav {
   width: 120px;
 }
 
-.user-pic{
+.user-pic {
   width: 70px;
   border-radius: 50%;
   cursor: pointer;
@@ -60,7 +60,7 @@ nav ul li a {
   text-decoration: none;
 }
 
-.sub-menu-wrap{
+.sub-menu-wrap {
   position: absolute;
   z-index: 5;
   top: 100%;
@@ -69,16 +69,19 @@ nav ul li a {
   display: none;
   transition: max-height 0.5s ease-in-out;
 }
+
 .notification {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #28a745; /* colore di sfondo verde per il successo */
+  background-color: #28a745;
+  /* colore di sfondo verde per il successo */
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000; /* assicurati che appaia sopra gli altri elementi */
+  z-index: 1000;
+  /* assicurati che appaia sopra gli altri elementi */
   font-size: 14px;
 }
 
@@ -94,15 +97,15 @@ nav ul li a {
   align-items: center;
 }
 
-.user-info h2{
-  color:  black;
+.user-info h2 {
+  color: black;
 }
 
 .user-info h3 {
   font-weight: 500;
 }
 
-.user-info img{
+.user-info img {
   width: 60px;
   border-radius: 50%;
   margin: 15px;
@@ -125,7 +128,7 @@ nav ul li a {
 }
 
 
-.sub-menu-link button{
+.sub-menu-link button {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -133,11 +136,11 @@ nav ul li a {
   margin: 12px 0;
 }
 
-.sub-menu-link p{
+.sub-menu-link p {
   width: 100%;
 }
 
-.sub-menu-link img{
+.sub-menu-link img {
   width: 40px;
   background: #e5e5e5;
   border-radius: 50%;
@@ -151,11 +154,11 @@ nav ul li a {
   transition: transform 0.5s;
 }
 
-.sub-menu-link:hover span{
+.sub-menu-link:hover span {
   transform: translateX(5px);
 }
 
-.sub-menu-link:hover p{
+.sub-menu-link:hover p {
   font-weight: 600;
   background-attachment: fixed;
 }
@@ -369,6 +372,7 @@ h2,
   padding: 0;
   box-sizing: border-box;
 }
+
 /*---LOGIN---*/
 
 /* Stile per il contenitore che avrà lo sfondo spezzato */
@@ -519,13 +523,13 @@ h2,
 }
 
 .card-wrap {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card-wrap:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .profile-image {
@@ -602,7 +606,8 @@ h2,
 .container-fluid {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Altezza minima della viewport del browser */
+  min-height: 100vh;
+  /* Altezza minima della viewport del browser */
 }
 
 
@@ -624,7 +629,8 @@ h2,
 
 
 .reservation-header {
-  animation: none; /* Disabilita qualsiasi animazione */
+  animation: none;
+  /* Disabilita qualsiasi animazione */
 }
 
 /*--- PAGINA SHOW PARK ---*/
@@ -665,8 +671,8 @@ h2,
 
 label {
   display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  font: bold;
 }
 
 input[type="date"],
@@ -697,26 +703,33 @@ input[type="time"] {
 .img-account-profile {
   height: 10rem;
 }
+
 .rounded-circle {
   border-radius: 50% !important;
 }
+
 .card {
   box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
   width: 500px;
 }
+
 .card .card-header {
   font-weight: 500;
 }
+
 .card-header:first-child {
   border-radius: 0.35rem 0.35rem 0 0;
 }
+
 .card-header {
   padding: 1rem 1.35rem;
   margin-bottom: 0;
   background-color: rgba(33, 40, 50, 0.03);
   border-bottom: 1px solid rgba(33, 40, 50, 0.125);
 }
-.form-control, .dataTable-input {
+
+.form-control,
+.dataTable-input {
   display: block;
   width: 100%;
   padding: 0.875rem 1.125rem;
@@ -790,6 +803,144 @@ input[type="time"] {
 .btn-primary:hover {
   background-color: #0056b3;
 }
+
+
+/*CREATE FORM*/
+
+.create-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.create-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  flex: 1;
+  padding: 20px;
+  margin-top: 64px;
+  margin-bottom: 20px;
+  width: 700px;
+}
+
+.create-card h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  color: black;
+}
+
+.create-card label {
+  display: block;
+  margin-top: 10px;
+}
+
+.create-card input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.create-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #0056b3;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 24px;
+}
+
+.create-card .create-btn:hover {
+  background-color: #1a2a6c;
+}
+
+
+.hidden-checkbox {
+  display: none;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.custom-checkbox {
+  flex-basis: calc(33.33% - 10px); /* Distribuisci su 3 colonne con 10px di spazio tra loro */
+  margin-bottom: 10px; /* Distanza verticale tra le righe */
+  cursor: pointer;
+}
+
+.custom-label {
+  background-color: white;
+  display: inline-block;
+  padding: 5px 10px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.custom-label:hover {
+  border-color: #0056b3;
+}
+
+.hidden-checkbox:checked+.custom-label {
+  border-color: #0056b3;
+}
+
+/* Aggiungi questo CSS al tuo file CSS o in linea nello stile della pagina */
+
+.price-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px; /* Spazio tra il campo e altri elementi */
+}
+
+.price-input-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom:30px;
+}
+
+.price-input {
+  padding: 10px;
+  border: 2px solid #ccc; 
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  width: 128px; 
+}
+
+.price-btn{
+  color: black;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin: 0 5px; /* Spazio tra i pulsanti e il campo di input */
+}
+
+
+.price-btn:hover {
+  background-color: #0056b3; /* Cambia colore al passaggio del mouse */
+}
+
+/* Rimuovi il pulsante up/down dell'input number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
 
 
 /*--- SHOW PARK ---*/
@@ -939,4 +1090,5 @@ input[type="time"] {
   font-size: 20px;
   margin-top: 10px;
 }
+
 

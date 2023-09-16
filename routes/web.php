@@ -37,11 +37,15 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/user', [UserController::class, 'index'])->middleware('preventback');
 Route::get('/admin', [AdminController::class, 'index'])->middleware('preventback');
 
-
 #--- PARKS ---#
 Route::post('/parks/search', [ParkController::class, 'search']);
 Route::get('/parks/create', [ParkController::class, 'create'])->middleware('auth');
-Route::post('/parks', [ParkController::class, 'store'])->middleware('auth');
+Route::post('/parks/create/step1', [ParkController::class, 'storeStep1'])->middleware('auth');
+Route::post('/parks/create/step2', [ParkController::class, 'storeStep2'])->middleware('auth');
+Route::post('/parks/create/step3', [ParkController::class, 'storeStep3'])->middleware('auth');
+Route::post('/parks/create/step4', [ParkController::class, 'storeStep4'])->middleware('auth');
+Route::post('/parks/create/step5', [ParkController::class, 'storeStep5'])->middleware('auth');
+Route::post('/parks/store', [ParkController::class, 'store'])->middleware('auth');
 Route::get('/parks/{park}/edit', [ParkController::class, 'edit'])->middleware('auth');
 Route::get('/parks/{park}', [ParkController::class, 'show'])->middleware('auth');
 Route::put('/parks/{park}', [ParkController::class, 'update'])->middleware('auth');
