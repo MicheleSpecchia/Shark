@@ -846,3 +846,92 @@ input[type="time"] {
   font-size: 20px;
   margin-top: 10px;
 }
+
+
+/*STILI PER DASHBOARD*/
+.dashboard-overview {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-overview .navbar {
+  background-color: #14215c;
+  color: #caf9ff;
+  padding: 15px 0;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-overview .container {
+  display: flex;
+  min-height: calc(100vh - 50px);
+}
+
+.dashboard-overview .sidebar {
+  width: 20%;
+  background-color: #1a2a6c;
+  padding: 20px 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-overview .sidebar a {
+  display: block;
+  color: #caf9ff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-bottom: 1px solid #2c3b8c;
+}
+
+.dashboard-overview .sidebar a:hover {
+  background-color: #2c3b8c;
+  border-left: 5px solid #caf9ff;
+}
+
+.dashboard-overview .main-content {
+  flex: 1;
+  background-color: #f4f8ff;
+  padding: 30px;
+  border-left: 2px solid #1a2a6c;
+}
+
+.dashboard-overview .main-content-header {
+  border-bottom: 2px solid #1a2a6c;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.dashboard-overview .table-container {
+  border: 1px solid #1a2a6c;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+}
+
+.dashboard-overview .chart-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.dashboard-overview .chart-container {
+  position: relative;
+  height: 80%;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dashboard-overview h1 {
+  font-size: 24px;  /* rendilo più piccolo, ad esempio 24px */
+  color: #1a2a6c;  /* colore specificato */
+  text-decoration: underline;  /* sottolineato */
+  /* e puoi anche aggiungere altre proprietà se necessario */
+}
