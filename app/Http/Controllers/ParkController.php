@@ -21,8 +21,14 @@ class ParkController extends Controller
 
     public function show(Park $park)
     {
+        $park->load('user');
+        
+        $reviews = $park->reviews;
+        
+
         return view('parks.show', [
-            'park' => $park
+            'park' => $park,
+            'reviews' => $reviews,
         ]);
     }
 
@@ -43,6 +49,17 @@ class ParkController extends Controller
         $checkOutDate = $request->input('date-output');
         $checkInTime = $request->input('time-input');
         $checkOutTime = $request->input('time-output');
+
+        /*--- sessione avvio     ---*/
+        
+
+        session()->put('search.location', $request->input('location'));
+        session()->put('search.date-input', $request->input('date-input'));
+        session()->put('search.time-input', $request->input('time-input'));
+        session()->put('search.date-output', $request->input('date-output'));
+        session()->put('search.time-output', $request->input('time-output'));
+        session()->put('search.veicolo', $request->input('veicolo'));
+
 
         $query = Park::query();
 

@@ -19,7 +19,7 @@ class ReservationController extends Controller
             'data_fine' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
-            'veicolo' => 'required'         
+            'veicolo' => 'required'
         ]);
 
         // Ottieni il parco specificato dal park_id
@@ -31,7 +31,8 @@ class ReservationController extends Controller
         $form_field['price'] = $park->price;
 
         Reservation::create($form_field);
-        return redirect('/')->with('message', 'Prenotazione effettuata con successo.');
+        return view('/userreservation')->with('message', 'Prenotazione effettuata con successo.');
+        /*return view('user');*/
     }
 
     public function index()
@@ -44,9 +45,16 @@ class ReservationController extends Controller
         $user = auth()->user();
         $reservations = $user->reservations;
 
+        // Map each reservation to add the required timestamps
+        $reservations = $reservations->map(function ($reservation) {
+            $reservation->startTimestamp = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $reservation->data_inizio . ' ' . $reservation->start_time, 'Europe/Rome');
+            $reservation->endTimestamp = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $reservation->data_fine . ' ' . $reservation->end_time, 'Europe/Rome');
+            $reservation->currentTimestamp = \Carbon\Carbon::now('Europe/Rome');
+            return $reservation;
+        });
+
         return view('reservation', compact('reservations'));
     }
-
 
     public function update(Request $request, $id)
     {
