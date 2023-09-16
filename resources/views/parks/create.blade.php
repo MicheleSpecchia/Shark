@@ -1,78 +1,232 @@
 <x-layout>
+    @include('partials._navbar')
+    <div class="create-container">
 
-        <header class="text-center">
-            <h2 class="text-2xl font-bold uppercase mb-1">
-                Create Ads
-            </h2>
-            <p class="mb-4">Share a park</p>
-        </header>
+        <!-- Barra di avanzamento -->
+        <div class="create-progress">
+            <div class="create-progress-bar" id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
 
-        <form method="POST" action="/parks" enctype="multipart/form-data">
-            @csrf
-            <div class="mb-6">
-                <label for="address" class="inline-block text-lg mb-2">Address</label>
-                <input type="text" class="border border-gray-200 rounded p-2 w-full" name="address" value="{{old('address')}}" />
+        @if ($currentStep === 1)
+
+        <div class="create-card">
+            <form id="create-form" method="POST" action="/parks/create/step1">
+                @csrf
+
+                <h2>Dati Parcheggio</h2>
+
+                <label for="location">Città</label>
+                <input type="text" id="location" name="location" class="form-control" required>
+
+                @error('location')
+                <p class="text-danger text-xs mb-2">{{$message}}</p>
+                @enderror
+
+
+                <label for="address">Indirizzo</label>
+                <input type="text" id="address" name="address" class="form-control" required>
 
                 @error('address')
-                <p class="text-red-500 text-xs mt-1"> {{$message}} </p>
+                <p class="text-danger text-xs mb-2">{{$message}}</p>
                 @enderror
-            </div>
 
-            <div class="mb-6">
-                <label for="cap" class="inline-block text-lg mb-2">Cap</label>
-                <input type="text" class="border border-gray-200 rounded p-2 w-full" name="cap" value="{{old('cap')}}" />
+
+                <label for="cap">CAP</label>
+                <input type="text" id="cap" name="cap" class="form-control" required>
 
                 @error('cap')
-                <p class="text-red-500 text-xs mt-1"> {{$message}} </p>
+                <p class="text-danger text-xs mb-2">{{$message}}</p>
                 @enderror
-            </div>
 
-            <div class="mb-6">
-                <label for="location" class="inline-block text-lg mb-2">Park Location</label>
-                <input type="text" class="border border-gray-200 rounded p-2 w-full" name="location" placeholder="Example: Remote, Boston MA, etc" value="{{old('location')}}" />
-                @error('location')
-                <p class="text-red-500 text-xs mt-1"> {{$message}} </p>
-                @enderror
-            </div>
 
-            <div class="mb-6">
-                <label for="civico" class="inline-block text-lg mb-2">Civico</label>
-                <input type="text" class="border border-gray-200 rounded p-2 w-full" name="civico" value="{{old('civico')}}" />
-                @error('civico')
-                <p class="text-red-500 text-xs mt-1"> {{$message}} </p>
-                @enderror
-            </div>
+                <button type="submit" class="create-btn btn-primary">Avanti</button>
 
-            <div class="mb-6">
-                <label for="foto" class="inline-block text-lg mb-2">
-                    Pics
-                </label>
-                <input type="file" class="border border-gray-200 rounded p-2 w-full" name="foto" />
+            </form>
+        </div>
+        @endif
 
-                @error('foto')
-                <p class="text-red-500 text-xs mt-1"> {{$message}} </p>
-                @enderror
-            </div>
+        @if ($currentStep === 2)
 
-            <div class="mb-6">
-                <label for="description" class="inline-block text-lg mb-2">
-                    Park Description
-                </label>
-                <textarea class="border border-gray-200 rounded p-2 w-full" name="description" rows="10" placeholder="Include tasks, requirements, salary, etc">
-                {{old('description')}}
-                </textarea>
-                @error('description')
-                <p class="text-red-500 text-xs mt-1"> {{$message}} </p>
-                @enderror
-            </div>
+        <div class="create-card">
+            <form id="card-form" method="POST" action="/parks/create/step2">
+                @csrf
+                <h2>Altri dettagli</h2>
 
-            <div class="mb-6">
-                <button class="bg-laravel text-white rounded py-2 px-4 hover:bg-black">
-                    Create Ads
-                </button>
+                <label for="image_path">Foto</label>
+                <input type="file" id="image_path" name="image_path[]" class="form-control" multiple required>
 
-                <a href="/" class="text-black ml-4"> Back </a>
-            </div>
-        </form>
-    
+                <label for="description">Descrizione</label>
+                <input type="text" id="description" name="description" class="form-control" required>
+
+                <button type="submit" class="create-btn btn-primary">Avanti</button>
+
+            </form>
+        </div>
+        @endif
+
+        @if ($currentStep === 3)
+        <div class="create-card">
+            <form id="create-form" method="POST" action="/parks/create/step3">
+                @csrf
+                <h2>Altri dettagli</h2>
+
+                <h3>Quali veicoli può ospitare?</h3>
+                <div class="checkbox-container">
+
+                    <div class="custom-checkbox">
+                        <input type="checkbox" id="automobili" name="automobili" value="automobili" class="hidden-checkbox">
+                        <label for="automobili" class="custom-label">
+                            automobili</label>
+                    </div>
+
+                    <div class="custom-checkbox">
+                        <input type="checkbox" id="motocicli" name="motocicli" value="motocicli" class="hidden-checkbox">
+                        <label for="motocicli" class="custom-label">motocicli</label>
+                    </div>
+
+                    <div class="custom-checkbox">
+                        <input type="checkbox" id="camper" name="camper" value="camper" class="hidden-checkbox">
+                        <label for="camper" class="custom-label">camper</label>
+                    </div>
+                </div>
+
+                <h3>Quali optional presenta?</h3>
+                <div class="checkbox-container">
+                    <div class="custom-checkbox">
+                        <input type="checkbox" id="camere" name="camere" value="camere" class="hidden-checkbox">
+                        <label for="camere" class="custom-label">videosorveglianza</label>
+                    </div>
+                    <div class="custom-checkbox">
+                        <input type="checkbox" id="tastierino" name="tastierino" value="tastierino" class="hidden-checkbox">
+                        <label for="tastierino" class="custom-label">tastierino</label>
+                    </div>
+                    <div class="custom-checkbox">
+                        <input type="checkbox" id="privato" name="privato" value="privato" class="hidden-checkbox">
+                        <label for="privato" class="custom-label">privato</label>
+                    </div>
+                    <div class="custom-checkbox">
+                        <input type="checkbox" id="aperto" name="aperto" value="aperto" class="hidden-checkbox">
+                        <label for="aperto" class="custom-label">all'aperto</label>
+                    </div>
+                    <div class="custom-checkbox">
+                        <input type="checkbox" id="chiuso" name="chiuso" value="chiuso" class="hidden-checkbox">
+                        <label for="chiuso" class="custom-label">al chiuso</label>
+                    </div>
+                    <div class="custom-checkbox">
+                        <input type="checkbox" id="totem" name="totem" value="totem" class="hidden-checkbox">
+                        <label for="totem" class="custom-label">totem elettrico</label>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="create-btn btn-primary">Avanti</button>
+
+            </form>
+        </div>
+        @endif
+
+        @if ($currentStep === 4)
+        <div class="create-card">
+            <form id="create-form" method="POST" action="/parks/create/step4">
+                <h2>Metodo di Noleggio</h2>
+                @csrf
+
+                <p>Puoi decidere se accordarti con l'affittuario tramite scambio di chiavi:</p>
+                <div class="custom-checkbox" data-group="only1">
+                    <input type="checkbox" id="scambio" name="scambio" value="scambio" class="hidden-checkbox">
+                    <label for="scambio" class="custom-label">scambio di chiavi</label>
+                </div>
+
+                <p>Puoi optare per la nostra offerta <a href="/offer">Shark Connect<a>: </p>
+
+                <div class="custom-checkbox" data-group="only1">
+                    <input type="checkbox" id="shark" name="shark" value="shark" class="hidden-checkbox">
+                    <label for="shark" class="custom-label">Shark Connect</label>
+                </div>
+
+                <button type="submit" class="create-btn btn-primary">Avanti</button>
+            </form>
+        </div>
+        @endif
+
+        @if ($currentStep === 5)
+        <div class="create-card">
+            <form id="create-form" method="POST" action="/parks/create/step5">
+                @csrf
+                <h2>Accordiamo il prezzo</h2>
+                <div class="price-input-container">
+                    <label for="price">Prezzo in euro sui 30 minuti:</label>
+                    <div class="price-input-wrapper">
+                        <button type="button" class="price-btn" id="decrement">-</button>
+                        <input type="number" id="price" name="price" class="price-input" value="0" min="0">
+                        <button type="button" class="price-btn" id="increment">+</button>
+                    </div>
+                </div>
+                <p>Il prezzo da inserire si basa sui 30 minuti.</p>
+                <p>Il 90% del guadagno verrà accreditato direttamente sul tuo conto.</p>
+                <p>Il 10% sarà preso per supportare la piattaforma.</p>
+
+
+                <button type="submit" class="create-btn btn-primary">Avanti</button>
+            </form>
+        </div>
+        @endif
+
+
+        @if ($currentStep === 6)
+        <div class="create-card">
+            <form id="create-form" method="POST" action="/parks/store">
+                @csrf
+                <h2>Termini e condizioni</h2>
+
+                <label for="cond">Termini e condizioni</label>
+                <input type="checkbox" id="cond" name="cond" value="cond" required> Accetto Termini e Condizioni
+
+
+
+                <button type="submit" class="create-btn btn-primary">Avanti</button>
+            </form>
+        </div>
+        @endif
+    </div>
 </x-layout>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const scambioCheckbox = document.getElementById("scambio");
+        const sharkCheckbox = document.getElementById("shark");
+
+        scambioCheckbox.addEventListener("change", function() {
+            if (scambioCheckbox.checked) {
+                sharkCheckbox.checked = false;
+            }
+        });
+
+        sharkCheckbox.addEventListener("change", function() {
+            if (sharkCheckbox.checked) {
+                scambioCheckbox.checked = false;
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const priceInput = document.getElementById("price");
+        const incrementButton = document.getElementById("increment");
+        const decrementButton = document.getElementById("decrement");
+
+        incrementButton.addEventListener("click", function() {
+            let currentPrice = parseFloat(priceInput.value) || 0;
+            currentPrice += 1;
+            priceInput.value = currentPrice;
+        });
+
+        decrementButton.addEventListener("click", function() {
+            let currentPrice = parseFloat(priceInput.value) || 0;
+            currentPrice -= 1;
+            if (currentPrice < 0) {
+                currentPrice = 0;
+            }
+            priceInput.value = currentPrice;
+        });
+    });
+</script>

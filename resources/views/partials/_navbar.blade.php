@@ -5,9 +5,12 @@
         </a>
         <ul>
             <li><a href="#">About</a></li>
-            <li><a href="#">Affitta con Shark</a></li>
-            <li><a href="#">Tutorial</a></li>
+            @auth
+            <li><a href="/parks/create">Affitta con Shark</a></li>
+            @endauth
+            <li><a href="/user-reservations">Tutorial</a></li>
             @guest
+            <li><a href="/login">Affitta con Shark</a></li>
             <li><a href="/login">Login</a></li>
             <li><a href="/register">Sing up</a></li>
             @endguest
@@ -30,9 +33,9 @@
                     <span>></span>
                 </a>
 
-                <a href="#" class="sub-menu-link">
+                <a href="/parks/manage" class="sub-menu-link">
                     <img src="{{asset('images/setting.png')}}" alt="">
-                    <p>Settings</p>
+                    <p>I tuoi parcheggi</p>
                     <span>></span>
                 </a>
 
