@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +61,8 @@ Route::get('/user-reservations', [ReservationController::class, 'userReservation
 Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy')->middleware('auth');
 Route::get('/parks/{park}/reservations/{reservation}/reviews/create', [ParkController::class, 'createReview'])->name('reviews.create')->middleware('auth');
 Route::post('/parks/{park}/reservations/{reservation}/reviews', [ParkController::class, 'storeReview'])->name('reviews.store')->middleware('auth');
-
+Route::post('prenota', [ReservationController::class, 'store'])->middleware('auth');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 
 
@@ -71,3 +73,7 @@ Route::post('/updateAvatar', [UserController::class, 'update'])->name('avatar.up
 
 Route::post('/updateProfile', [UserController::class, 'updateProfile'])->name('profile.update');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

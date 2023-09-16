@@ -7,9 +7,9 @@
         <!-- Titolo -->
         <h4 class="title-header mb-2" id="mainTitle">
             @if(count($reservations->where('review', null)) > 0)
-                Cancella una prenotazione o lascia una recensione :)
+            Cancella una prenotazione o lascia una recensione :)
             @else
-                Per il momento, non hai prenotazioni da gestire
+            Per il momento, non hai prenotazioni da gestire
             @endif
         </h4>
 
@@ -24,31 +24,31 @@
 
             <!-- Ciclo tra tutte le prenotazioni -->
             @foreach($reservations as $reservation)
-                <!-- Controllo se la prenotazione non ha una recensione -->
-                @if(is_null($reservation->review))
-                    <!-- Visualizzazione della prenotazione -->
-                    <div class="col-12 col-md-4 col-lg-3 mb-5 reservation-card">
-                        <div class="card-wrap p-3 custom-card">
-                            <!-- Dettagli della prenotazione -->
-                            <h3 class="fs-4 mt-4 fw-bold card-title">Prenotazione #{{ $reservation->id }}</h3>
-                            <p><strong>Data Inizio:</strong> {{ $reservation->data_inizio }}</p>
-                            <p><strong>Data Fine:</strong> {{ $reservation->data_fine }}</p>
-                            <p><strong>Ora Inizio:</strong> {{ $reservation->start_time }}</p>
-                            <p><strong>Ora Fine:</strong> {{ $reservation->end_time }}</p>
-                            <p><strong>Prezzo:</strong> {{ $reservation->price }}€</p>
-                            <p><strong>Veicolo:</strong> {{ $reservation->veicolo }}</p>
+            <!-- Controllo se la prenotazione non ha una recensione -->
+            @if(is_null($reservation->review))
+            <!-- Visualizzazione della prenotazione -->
+            <div class="col-12 col-md-4 col-lg-3 mb-5 reservation-card">
+                <div class="card-wrap p-3 custom-card">
+                    <!-- Dettagli della prenotazione -->
+                    <h3 class="fs-4 mt-4 fw-bold card-title">ID: {{ $reservation->id }}</h3>
+                    <p><strong>Data Inizio:</strong> {{ $reservation->data_inizio }}</p>
+                    <p><strong>Data Fine:</strong> {{ $reservation->data_fine }}</p>
+                    <p><strong>Ora Inizio:</strong> {{ $reservation->start_time }}</p>
+                    <p><strong>Ora Fine:</strong> {{ $reservation->end_time }}</p>
+                    <p><strong>Prezzo:</strong> {{ $reservation->price }}€</p>
+                    <p><strong>Veicolo:</strong> {{ $reservation->veicolo }}</p>
 
-                            <!-- Controllo sulla data della prenotazione per decidere quali azioni mostrare -->
-                            @if(\Carbon\Carbon::now()->lt($reservation->data_inizio))
-                                <button class="btn btn-danger delete-reservation" data-id="{{ $reservation->id }}">Cancella</button>
-                            @elseif(\Carbon\Carbon::now()->gt($reservation->data_fine))
-                                <a href="{{ route('reviews.create', ['park' => $reservation->park_id, 'reservation' => $reservation->id]) }}" class="btn btn-success">Rate</a>
-                            @else
-                                <button class="btn btn-secondary" disabled title="Per effettuare una recensione devi attendere la fine del servizio.">Rate</button>
-                            @endif
-                        </div>
-                    </div>
-                @endif
+                    <!-- Controllo sulla data della prenotazione per decidere quali azioni mostrare -->
+                    @if($reservation->currentTimestamp->lt($reservation->startTimestamp))
+                    <button class="btn btn-danger delete-reservation" data-id="{{ $reservation->id }}">Cancella</button>
+                    @elseif($reservation->currentTimestamp->gt($reservation->endTimestamp))
+                    <a href="{{ route('reviews.create', ['park' => $reservation->park_id, 'reservation' => $reservation->id]) }}" class="btn btn-success">Rate</a>
+                    @else
+                    <button class="btn btn-secondary" disabled>Rate</button>
+                    @endif
+                </div>
+            </div>
+            @endif
             @endforeach
         </div>
     </div>
