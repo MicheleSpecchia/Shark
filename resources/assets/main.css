@@ -791,6 +791,99 @@ input[type="time"] {
   background-color: #0056b3;
 }
 
+
+/*--- SHOW PARK ---*/
+.park-details {
+  color: #fff;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+}
+
+.park-details h1 {
+  font-size: 36px;
+  margin-top: 10px;
+}
+
+.park-details p {
+  font-size: 18px;
+}
+
+.park-rating {
+  font-size: 24px;
+  color: #1a2a6c;
+}
+
+.park-price {
+  font-size: 24px;
+  margin-top: 10px;
+  color: #1a2a6c;
+}
+
+.booking-form {
+  padding: 20px;
+}
+
+.booking-form .form-group {
+  margin-bottom: 15px;
+}
+
+.booking-form .btn-book {
+  background-color: #1a2a6c;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+}
+
+.reviews {
+  margin-top: 20px;
+}
+
+.review {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.review h3 {
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.review-rating {
+  font-size: 24px;
+  color: #1a2a6c;
+}
+
+.owner-details {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center; /* Centro l'avatar e il nome verticalmente */
+}
+
+.owner-details img.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.owner-info {
+  flex-grow: 1; /* Fa espandere il nome per occupare lo spazio disponibile */
+}
+
+.owner-name {
+  font-size: 35px;
+  font-weight: bold;
+  color: #1a2a6c;
+}
+
 /*Sezione about*/
 .highlight {
   color: #007BFF;
@@ -846,3 +939,4 @@ input[type="time"] {
   font-size: 20px;
   margin-top: 10px;
 }
+
