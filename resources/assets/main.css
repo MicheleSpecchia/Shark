@@ -617,7 +617,8 @@ h2,
 }
 
 .custom-card {
-  background-color: #ffffff; /* Rende lo sfondo completamente bianco */
+  background-color: #ffffff;
+  /* Rende lo sfondo completamente bianco */
   border-radius: 15px;
 }
 
@@ -844,6 +845,15 @@ input[type="time"] {
   border-radius: 10px;
 }
 
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  /* Spazia i pulsanti in modo uniforme */
+  align-items: center;
+  /* Allinea verticalmente i pulsanti al centro se necessario */
+  margin-top: 24px;
+}
+
 .create-btn {
   display: block;
   width: 100%;
@@ -855,12 +865,12 @@ input[type="time"] {
   cursor: pointer;
   font-weight: bold;
   margin-top: 24px;
+  margin-right: 10px;
 }
 
 .create-card .create-btn:hover {
   background-color: #1a2a6c;
 }
-
 
 .hidden-checkbox {
   display: none;
@@ -873,8 +883,10 @@ input[type="time"] {
 }
 
 .custom-checkbox {
-  flex-basis: calc(33.33% - 10px); /* Distribuisci su 3 colonne con 10px di spazio tra loro */
-  margin-bottom: 10px; /* Distanza verticale tra le righe */
+  flex-basis: calc(33.33% - 10px);
+  /* Distribuisci su 3 colonne con 10px di spazio tra loro */
+  margin-bottom: 10px;
+  /* Distanza verticale tra le righe */
   cursor: pointer;
 }
 
@@ -901,37 +913,38 @@ input[type="time"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px; /* Spazio tra il campo e altri elementi */
+  margin-bottom: 20px;
+  /* Spazio tra il campo e altri elementi */
 }
 
 .price-input-wrapper {
   display: flex;
   align-items: center;
-  margin-bottom:30px;
+  margin-bottom: 30px;
 }
 
 .price-input {
   padding: 10px;
-  border: 2px solid #ccc; 
+  border: 2px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
   text-align: center;
-  width: 128px; 
+  width: 128px;
 }
 
-.price-btn{
+.price-btn {
   color: black;
   font-size: 20px;
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
-  margin: 0 5px; /* Spazio tra i pulsanti e il campo di input */
+  margin: 0 5px;
 }
 
 
 .price-btn:hover {
-  background-color: #0056b3; /* Cambia colore al passaggio del mouse */
+  background-color: #0056b3;
 }
 
 /* Rimuovi il pulsante up/down dell'input number */
@@ -940,6 +953,21 @@ input[type="number"]::-webkit-outer-spin-button {
   appearance: none;
   margin: 0;
 }
+
+.progress-bar {
+  background-color: #f0f0f0;
+  height: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.progress {
+  background-color: #0056b3;
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.3s ease-in-out;
+}
+
 
 
 
@@ -1015,7 +1043,8 @@ input[type="number"]::-webkit-outer-spin-button {
   padding: 20px;
   margin-top: 20px;
   display: flex;
-  align-items: center; /* Centro l'avatar e il nome verticalmente */
+  align-items: center;
+  /* Centro l'avatar e il nome verticalmente */
 }
 
 .owner-details img.avatar {
@@ -1026,7 +1055,8 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .owner-info {
-  flex-grow: 1; /* Fa espandere il nome per occupare lo spazio disponibile */
+  flex-grow: 1;
+  /* Fa espandere il nome per occupare lo spazio disponibile */
 }
 
 .owner-name {
@@ -1090,5 +1120,3 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 20px;
   margin-top: 10px;
 }
-
-

@@ -1,17 +1,15 @@
 <x-layout>
     @include('partials._navbar')
     <div class="create-container">
-
-        <!-- Barra di avanzamento -->
-        <div class="create-progress">
-            <div class="create-progress-bar" id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-
         @if ($currentStep === 1)
 
         <div class="create-card">
             <form id="create-form" method="POST" action="/parks/create/step1">
                 @csrf
+
+                <div class="progress-bar">
+                    <div class="progress" style="width: {{ ($currentStep - 1) * 16.67 }}%;"></div>
+                </div>
 
                 <h2>Dati Parcheggio</h2>
 
@@ -39,8 +37,7 @@
                 @enderror
 
 
-                <button type="submit" class="create-btn btn-primary">Avanti</button>
-
+                <button type="submit" class="create-btn btn-primary">Successivo</button>
             </form>
         </div>
         @endif
@@ -50,6 +47,9 @@
         <div class="create-card">
             <form id="card-form" method="POST" action="/parks/create/step2">
                 @csrf
+                <div class="progress-bar">
+                    <div class="progress" style="width: {{ ($currentStep - 1) * 16.67 }}%;"></div>
+                </div>
                 <h2>Altri dettagli</h2>
 
                 <label for="image_path">Foto</label>
@@ -58,8 +58,10 @@
                 <label for="description">Descrizione</label>
                 <input type="text" id="description" name="description" class="form-control" required>
 
-                <button type="submit" class="create-btn btn-primary">Avanti</button>
-
+                <div class="button-wrapper">
+                    <button type="button" class="create-btn btn-secondary" onclick="history.back()">Precedente</button>
+                    <button type="submit" class="create-btn btn-primary">Successivo</button>
+                </div>
             </form>
         </div>
         @endif
@@ -68,6 +70,9 @@
         <div class="create-card">
             <form id="create-form" method="POST" action="/parks/create/step3">
                 @csrf
+                <div class="progress-bar">
+                    <div class="progress" style="width: {{ ($currentStep - 1) * 16.67 }}%;"></div>
+                </div>
                 <h2>Altri dettagli</h2>
 
                 <h3>Quali veicoli può ospitare?</h3>
@@ -118,8 +123,10 @@
                     </div>
 
                 </div>
-
-                <button type="submit" class="create-btn btn-primary">Avanti</button>
+                <div class="button-wrapper">
+                    <button type="button" class="create-btn btn-secondary" onclick="history.back()">Precedente</button>
+                    <button type="submit" class="create-btn btn-primary">Successivo</button>
+                </div>
 
             </form>
         </div>
@@ -128,6 +135,9 @@
         @if ($currentStep === 4)
         <div class="create-card">
             <form id="create-form" method="POST" action="/parks/create/step4">
+                <div class="progress-bar">
+                    <div class="progress" style="width: {{ ($currentStep - 1) * 16.67 }}%;"></div>
+                </div>
                 <h2>Metodo di Noleggio</h2>
                 @csrf
 
@@ -144,7 +154,10 @@
                     <label for="shark" class="custom-label">Shark Connect</label>
                 </div>
 
-                <button type="submit" class="create-btn btn-primary">Avanti</button>
+                <div class="button-wrapper">
+                    <button type="button" class="create-btn btn-secondary" onclick="history.back()">Precedente</button>
+                    <button type="submit" class="create-btn btn-primary">Successivo</button>
+                </div>
             </form>
         </div>
         @endif
@@ -153,6 +166,9 @@
         <div class="create-card">
             <form id="create-form" method="POST" action="/parks/create/step5">
                 @csrf
+                <div class="progress-bar">
+                    <div class="progress" style="width: {{ ($currentStep - 1) * 16.67 }}%;"></div>
+                </div>
                 <h2>Accordiamo il prezzo</h2>
                 <div class="price-input-container">
                     <label for="price">Prezzo in euro sui 30 minuti:</label>
@@ -167,7 +183,10 @@
                 <p>Il 10% sarà preso per supportare la piattaforma.</p>
 
 
-                <button type="submit" class="create-btn btn-primary">Avanti</button>
+                <div class="button-wrapper">
+                    <button type="button" class="create-btn btn-secondary" onclick="history.back()">Precedente</button>
+                    <button type="submit" class="create-btn btn-primary">Successivo</button>
+                </div>
             </form>
         </div>
         @endif
@@ -176,6 +195,9 @@
         @if ($currentStep === 6)
         <div class="create-card">
             <form id="create-form" method="POST" action="/parks/store">
+                <div class="progress-bar">
+                    <div class="progress" style="width: {{ ($currentStep - 1) * 16.67 }}%;"></div>
+                </div>
                 @csrf
                 <h2>Termini e condizioni</h2>
 
@@ -184,7 +206,10 @@
 
 
 
-                <button type="submit" class="create-btn btn-primary">Avanti</button>
+                <div class="button-wrapper">
+                    <button type="button" class="create-btn btn-secondary" onclick="history.back()">Precedente</button>
+                    <button type="submit" class="create-btn btn-primary">Successivo</button>
+                </div>
             </form>
         </div>
         @endif
