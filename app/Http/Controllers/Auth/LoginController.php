@@ -21,6 +21,8 @@ class LoginController extends Controller
     |
     */
 
+    use AuthenticatesUsers;
+
     /**
      * Where to redirect users after login.
      *
@@ -33,12 +35,6 @@ class LoginController extends Controller
      *
      * @return void
      */
-
-    public function showLoginForm()
-    {
-        return view('users.login');
-    }
-
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -70,20 +66,5 @@ class LoginController extends Controller
         } else {
             return back()->withErrors(['password' => 'Invalid Credentials'])->onlyInput();
         }
-    }
-
-
-    /**
-     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
-     */
-
-    protected function logout(Request $request)
-    {
-        auth()->logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/');
     }
 }

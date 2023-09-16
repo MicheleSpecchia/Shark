@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -23,6 +24,8 @@ class RegisterController extends Controller
     |
     */
 
+    use RegistersUsers;
+
     /**
      * Where to redirect users after registration.
      *
@@ -35,12 +38,6 @@ class RegisterController extends Controller
      *
      * @return void
      */
-
-    public function showRegistrationForm()
-    {
-        return view('users.register');
-    }
-
     public function __construct()
     {
         $this->middleware('guest');
@@ -52,13 +49,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
 
     protected function store(Request $request)
     {
@@ -74,8 +72,23 @@ class RegisterController extends Controller
         $user = User::create($form_field);
 
         auth()->login($user);
-        
+
         return redirect('/user')->with('message', 'user created and logged in');
     }
-   
+
+
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\Models\User
+     */
+    protected function create(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+    }
 }

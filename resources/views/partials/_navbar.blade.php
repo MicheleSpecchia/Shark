@@ -4,7 +4,7 @@
             <img src="{{asset('images/logo.png')}}" class="logo-img">
         </a>
         <ul>
-            <li><a href="#">About</a></li>
+            <li><a href="{{ route('about') }}">About</a></li>
             <li><a href="#">Affitta con Shark</a></li>
             <li><a href="#">Tutorial</a></li>
             @guest

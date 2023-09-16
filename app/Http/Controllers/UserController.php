@@ -26,7 +26,7 @@ class UserController extends Controller
     public function index()
     {
         return view('user', [
-            'parks' => Park::latest()->paginate(6)
+            'parks' => Park::latest()->paginate(8)
         ]);
     }
 
