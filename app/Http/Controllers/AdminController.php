@@ -48,10 +48,42 @@ class AdminController extends Controller
             $parks_daily_count[] = $parksCount;
         }
 
+        $users = User::select('id', 'nome', 'cognome', 'email')->get();
+
+        // Recupera tutti i parcheggi dal database
+        $parks = Park::all();
+
         return view('admin.dashboard', [
             'reservations_count' => $reservations_count,
             'cumulative_users_count' => $cumulative_users_count,
             'parks_daily_count' => $parks_daily_count,
+            'users' => $users,
+            'parks' => $parks  // Aggiunto l'array dei parcheggi alla view
         ]);
+    }
+
+    public function deleteUser($id)
+    {
+        try {
+            $user = User::find($id);
+            $user->delete();
+            return response()->json(['success' => true], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false], 500);
+        }
+    }
+
+    public function deletePark($id)
+    {
+        try {
+            $park = Park::find($id);
+            if (!$park) {
+                return response()->json(['success' => false, 'message' => 'Parcheggio non trovato'], 404);
+            }
+            $park->delete();
+            return response()->json(['success' => true], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
 }

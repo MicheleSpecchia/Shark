@@ -12,9 +12,19 @@
     <!-- Importazione della libreria Chart.js per creare grafici -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @vite(['resources/js/app.js'])
+    <!-- PER CHIAMATA AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="dashboard-overview">
+
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
 
     <!-- Barra di navigazione in alto -->
     <div class="navbar">Pannello di Amministrazione Shark</div>
@@ -24,47 +34,106 @@
         <!-- Barra laterale con link di navigazione -->
         <div class="sidebar">
             <!-- Ogni link punta a una sezione specifica o esegue un'azione -->
-            <a href="#overview">Panoramica</a>
-            <a href="#parcheggi">Parcheggi</a>
-            <a href="#prenotazioni">Prenotazioni</a>
-            <a href="#utenti">Utenti</a>
+            <a href="#" onclick="showSection('overview')">Panoramica</a>
+            <a href="#" onclick="showSection('parcheggi')">Parcheggi</a>
+            <a href="#" onclick="showSection('prenotazioni')">Prenotazioni</a>
+            <a href="#" onclick="showSection('utenti')">Utenti</a>
             <a href="#settings">Impostazioni</a>
             <a href="#logout" onclick="performLogout()">Logout</a> <!-- Azione di logout -->
         </div>
 
         <!-- Contenuto principale -->
         <div class="main-content">
-            <!-- Titolo della sezione Panoramica -->
-            <h1>Overview e statistiche generali</h1>
+            <div id="section-overview" class="dashboard-section">
 
-            <!-- Contenitore per il grafico delle prenotazioni -->
-            <div class="table-container">
-                <div class="chart-title">
-                    Prenotazioni recenti
+                <!-- Titolo della sezione Panoramica -->
+                <h1>Overview e statistiche generali</h1>
+
+                <!-- Contenitore per il grafico delle prenotazioni -->
+                <div class="table-container">
+                    <div class="chart-title">
+                        Prenotazioni recenti
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="reservationsChart"></canvas> <!-- Area per il grafico delle prenotazioni -->
+                    </div>
                 </div>
-                <div class="chart-container">
-                    <canvas id="reservationsChart"></canvas> <!-- Area per il grafico delle prenotazioni -->
+
+                <!-- Contenitore per il grafico degli utenti -->
+                <div class="table-container">
+                    <div class="chart-title">
+                        Andamento iscritti
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="usersChart"></canvas> <!-- Area per il grafico degli utenti -->
+                    </div>
+                </div>
+
+                <!-- Contenitore per il grafico dei parcheggi -->
+                <div class="table-container">
+                    <div class="chart-title">
+                        Parcheggi aggiunti di recente
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="parksChart"></canvas> <!-- Area per il grafico dei parcheggi -->
+                    </div>
                 </div>
             </div>
-
-            <!-- Contenitore per il grafico degli utenti -->
-            <div class="table-container">
-                <div class="chart-title">
-                    Andamento iscritti
-                </div>
-                <div class="chart-container">
-                    <canvas id="usersChart"></canvas> <!-- Area per il grafico degli utenti -->
-                </div>
+            <!-- SEZIONE UTENTI -->
+            <div id="section-utenti" class="dashboard-section" style="display: none;">
+                <h2>Lista Utenti</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Cognome</th>
+                            <th>Email</th>
+                            <th>Azione</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($users as $user)
+                        <tr data-id="{{ $user->id }}"> <!-- Aggiunto attributo data-id -->
+                            <td>{{ $user->nome }}</td>
+                            <td>{{ $user->cognome }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                                <button class="delete-user-btn">Elimina</button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-
-            <!-- Contenitore per il grafico dei parcheggi -->
-            <div class="table-container">
-                <div class="chart-title">
-                    Parcheggi aggiunti di recente
-                </div>
-                <div class="chart-container">
-                    <canvas id="parksChart"></canvas> <!-- Area per il grafico dei parcheggi -->
-                </div>
+            <div id="section-prenotazioni" class="dashboard-section" style="display: none;">
+                <!-- contenuto delle prenotazioni -->
+            </div>
+            <!-- SEZIONE PARCHEGGI -->
+            <div id="section-parcheggi" class="dashboard-section" style="display: none;">
+                <h2>Lista Parcheggi</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Posizione</th>
+                            <!-- Aggiungi altre colonne se hai altri campi nel tuo modello Park -->
+                            <th>Prezzo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($parks as $park)
+                        <tr data-id="{{ $park->id }}">
+                            <td>{{ $park->id }}</td>
+                            <td>{{ $park->location }}</td>
+                            <td>{{ $park->price }}$</td>
+                            <!-- Aggiungi altre celle se hai altri campi nel tuo modello Park -->
+                            <td>
+                                <button class="delete-park-btn">Elimina</button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -130,6 +199,111 @@
             document.body.appendChild(form);
             form.submit();
         }
+        //Per fare in modo che le sezioni si cambino ma senza aggiornare la pagina
+        function showSection(sectionId) {
+            // Nascondi tutte le sezioni
+            let sections = document.querySelectorAll('.dashboard-section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Mostra la sezione selezionata
+            document.getElementById('section-' + sectionId).style.display = 'block';
+        }
+
+        //eliminazione con chiamat ajax
+        $(document).ready(function() {
+            $('.delete-user-btn').on('click', function(e) {
+                e.preventDefault(); // Evita l'invio del form al click
+
+                let userRow = $(this).closest('tr');
+                let userId = userRow.data('id');
+
+                Swal.fire({
+                    title: 'Sei sicuro?',
+                    text: "Una volta eliminato, non potrai più recuperare questo utente!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sì, elimina!',
+                    cancelButtonText: 'Annulla'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/admin/users/delete/' + userId,
+                            type: 'DELETE',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    userRow.remove();
+                                    Swal.fire(
+                                        'Eliminato!',
+                                        'L\'utente è stato eliminato con successo.',
+                                        'success'
+                                    );
+                                } else {
+                                    Swal.fire(
+                                        'Errore',
+                                        'Si è verificato un errore. Riprova.',
+                                        'error'
+                                    );
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+        //eliminazione parcheggi con chiamata AJAX
+        $(document).ready(function() {
+            $('.delete-park-btn').on('click', function(e) {
+                e.preventDefault();
+
+                let parkRow = $(this).closest('tr');
+                let parkId = parkRow.data('id');
+
+                Swal.fire({
+                    title: 'Sei sicuro?',
+                    text: "Una volta eliminato, non potrai più recuperare questo parcheggio!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sì, elimina!',
+                    cancelButtonText: 'Annulla'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/admin/parks/delete/' + parkId,
+                            type: 'DELETE',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    parkRow.remove();
+                                    Swal.fire(
+                                        'Eliminato!',
+                                        'Il parcheggio è stato eliminato con successo.',
+                                        'success'
+                                    );
+                                } else {
+                                    Swal.fire(
+                                        'Errore',
+                                        'Si è verificato un errore. Riprova.',
+                                        'error'
+                                    );
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        });
     </script>
 </body>
 

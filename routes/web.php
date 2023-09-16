@@ -11,6 +11,16 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\UtentiController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +45,8 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 #--- MULTIUSER ROUTES---#
 Route::get('/user', [UserController::class, 'index'])->middleware('preventback');
-Route::get('/admin', [AdminController::class, 'index'])->middleware('preventback');
+Route::get('/admin', [AdminController::class, 'index'])->middleware('preventback')->name('admin.dashboard');
+
 
 
 #--- PARKS ---#
@@ -64,6 +75,9 @@ Route::post('/parks/{park}/reservations/{reservation}/reviews', [ParkController:
 Route::post('prenota', [ReservationController::class, 'store'])->middleware('auth');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
+#admin#
+Route::delete('/admin/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
+Route::delete('/admin/parks/delete/{id}', [AdminController::class, 'deletePark'])->name('admin.parks.delete');
 
 
 #--- PAGINA PROFILO UTENTE ---#
