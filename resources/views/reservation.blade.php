@@ -4,14 +4,7 @@
     <!-- Contenitore principale -->
     <div class="container mt-4">
 
-        <!-- Titolo -->
-        <h4 class="title-header mb-2" id="mainTitle">
-            @if(count($reservations->where('review', null)) > 0)
-                Cancella una prenotazione o lascia una recensione :)
-            @else
-                Per il momento, non hai prenotazioni da gestire
-            @endif
-        </h4>
+        <!-- Titolo --> 
 
         <!-- Controllo per verificare la presenza di messaggi nella sessione e visualizzarli -->
         @if(session('message'))

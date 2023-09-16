@@ -1,18 +1,18 @@
 <form class="search-bar" action="/parks/search" method="POST">
     @csrf
 
-    <input type="text" id="location" name="location" placeholder="Città" list="citiesList">
+    <input type="text" id="location" name="location" placeholder="{{ session('search.date-input') !== null ? session('search.location') : 'Città'}}" list="citiesList" >
     <datalist id="citiesList"></datalist>
     @error('location')
     @enderror
 
-    <input type="text" id="date-input" name="date-input" placeholder="Data inizio" readonly>
+    <input type="text" id="date-input" name="date-input" placeholder="{{ session('search.time-input') !== null ? session('search.date-input') : 'Data inizio'}}" readonly>
     @error('date-input')
     @enderror
 
     <select id="time-input" name="time-input" style="display: none;"></select>
 
-    <input type="text" id="date-output" name="date-output" placeholder="Data fine" readonly>
+    <input type="text" id="date-output" name="date-output" placeholder="{{ session('search.date-output') !== null ? session('search.date-output') : 'Data fine'}}" readonly>
     @error('date-input')
     @enderror
 
