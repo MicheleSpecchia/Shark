@@ -62,7 +62,7 @@ class ReservationController extends Controller
         
         $owner_id = session('park_owner');
         $costo = session('costoTotale');
-        $guadagno_admin = $costo * 0.20;
+        $guadagno_admin = $costo * 0.10;
         $guadagno_owner = $costo - $guadagno_admin;        
  
         DB::table('users')
