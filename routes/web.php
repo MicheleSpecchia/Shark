@@ -77,3 +77,9 @@ Route::post('/updateProfile', [UserController::class, 'updateProfile'])->name('p
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+#--- STRIPE  ---#
+Route::get('/payment-success', [ReservationController::class, 'success'])->name('payment.success');
+Route::get('/payment-cancel', [ReservationController::class, 'cancel'])->name('payment.cancel');
+

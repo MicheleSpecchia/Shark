@@ -87,6 +87,10 @@ class UserController extends Controller
         
     }
 
+    public function saldo(){
+        return view('saldo');
+    }
+
 
 
 }
