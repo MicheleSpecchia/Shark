@@ -988,6 +988,37 @@ input[type="time"] {
   background-color: #c0392b;
 }
 
+
+.dashboard-overview .toggle-role-btn {
+  padding: 5px 10px;
+  border: none;
+  background-color: #bfe0f6;  /* Questo è un blu generico, ma puoi scegliere qualsiasi colore tu preferisca */
+  color: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.2s;
+}
+
+.dashboard-overview .toggle-role-btn:hover {
+  background-color: #2980b9;  /* Una versione leggermente più scura del colore del pulsante per l'effetto hover */
+}
+
+.dashboard-overview .toggle-role-btn[data-role="1"] {
+  background-color: green;  /* Colore di sfondo per Admin */
+}
+
+.dashboard-overview .toggle-role-btn[data-role="2"] {
+  background-color: #e74c3c;    /* Colore di sfondo per Utente */
+}
+
+.dashboard-overview .toggle-role-btn[data-role="1"]:hover {
+  background-color: #006400;  /* Una versione leggermente più scura del verde per Admin quando si passa sopra con il mouse */
+}
+
+.dashboard-overview .toggle-role-btn[data-role="2"]:hover {
+  background-color: #8b0000; 
+} /* Una versione
+
 /* Stile per l'intestazione della sezione utenti */
 .dashboard-overview h2 {
   font-size: 20px;  /* Rendilo un po' più piccolo rispetto all'h1 */

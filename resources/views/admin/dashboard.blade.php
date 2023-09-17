@@ -38,7 +38,7 @@
             <a href="#" onclick="showSection('parcheggi')">Parcheggi</a>
             <a href="#" onclick="showSection('prenotazioni')">Prenotazioni</a>
             <a href="#" onclick="showSection('utenti')">Utenti</a>
-            <a href="#settings">Impostazioni</a>
+            <a href="#" onclick="showSection('finanze')">Finanze</a>
             <a href="#logout" onclick="performLogout()">Logout</a> <!-- Azione di logout -->
         </div>
 
@@ -88,7 +88,6 @@
                             <th>Nome</th>
                             <th>Cognome</th>
                             <th>Email</th>
-                            <th>Azione</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,6 +97,9 @@
                             <td>{{ $user->cognome }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
+                                <button class="toggle-role-btn" data-role="{{ $user->role }}">
+                                    {{ $user->role == 1 ? 'Admin' : 'Utente' }}
+                                </button>
                                 <button class="delete-user-btn">Elimina</button>
                             </td>
                         </tr>
@@ -106,7 +108,27 @@
                 </table>
             </div>
             <div id="section-prenotazioni" class="dashboard-section" style="display: none;">
-                <!-- contenuto delle prenotazioni -->
+                <h2>Lista Prenotazioni</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Email Utente</th>
+                            <th>Luogo</th>
+                            <th>Prezzo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($reservations as $reservation)
+                        <tr data-id="{{ $reservation->id }}">
+                            <td>{{ $reservation->id }}</td>
+                            <td>{{ $reservation->user->email }}</td>
+                            <td>{{ $reservation->park->location }}</td>
+                            <td>{{ $reservation->price }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
             <!-- SEZIONE PARCHEGGI -->
             <div id="section-parcheggi" class="dashboard-section" style="display: none;">
@@ -135,33 +157,57 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- SEZIONE FIANANZE -->
+            <div id="section-finanze" class="dashboard-section" style="display: none;">
+                <h2>Statistiche Finanziarie</h2>
+
+                <!-- Contenitore per il grafico dei soldi in movimento -->
+                <div class="table-container">
+                    <div class="chart-title">
+                        Soldi in movimento (ultimi 7 giorni)
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="moneyFlowChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Sezione per visualizzare il guadagno stimato -->
+                <div class="table-container">
+                    <div class="chart-title">
+                        Guadagno stimato netto Shark (ultimi 7 giorni)
+                    </div>
+                    <div class="earnings-display">
+                        <h3 style="color: green;">+ €{{ number_format($estimated_earnings, 2) }}</h3>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Elemento nascosto che contiene i dati per i grafici -->
-    <div id="chartData" data-reservations="{{ json_encode($reservations_count) }}" data-cumulative-users="{{ json_encode($cumulative_users_count) }}" data-parks="{{ json_encode($parks_daily_count) }}" style="display:none;">
+    <div id="chartData" data-reservations="{{ json_encode($reservations_count) }}" data-cumulative-users="{{ json_encode($cumulative_users_count) }}" data-parks="{{ json_encode($parks_daily_count) }}" data-money-flow="{{ json_encode($money_flow) }}" style="display:none;">
     </div>
 
     <!-- Script che genera i grafici utilizzando i dati forniti e la libreria Chart.js -->
     <script>
         // Esegue il codice dopo che il documento è completamente caricato
         document.addEventListener('DOMContentLoaded', function() {
-            // Raccoglie i dati dai dataset dell'elemento e inizializza le variabili
             const reservationsData = JSON.parse(document.getElementById('chartData').getAttribute('data-reservations'));
             const cumulativeUsersData = JSON.parse(document.getElementById('chartData').getAttribute('data-cumulative-users'));
             const parksData = JSON.parse(document.getElementById('chartData').getAttribute('data-parks'));
+            const moneyFlowData = JSON.parse(document.getElementById('chartData').getAttribute('data-money-flow'));
 
-            // Funzione per generare un grafico
             const generateChart = (canvasId, data, title, tipo) => {
                 new Chart(document.getElementById(canvasId), {
-                    type: tipo, // Tipo di grafico
+                    type: tipo,
                     data: {
                         labels: ['7 giorni fa', '6 giorni fa', '5 giorni fa', '4 giorni fa', '3 giorni fa', '2 giorni fa', 'Ieri'],
                         datasets: [{
                             label: title,
-                            data: Object.values(data), // Valori dell'oggetto come dati
+                            data: data,
                             backgroundColor: '#1a2a6c',
-                            borderColor: '#1a2a6c', // Colore del bordo
+                            borderColor: '#1a2a6c',
                             borderWidth: 1
                         }]
                     },
@@ -175,11 +221,12 @@
                 });
             }
 
-            // Genera i tre grafici con i dati forniti
             generateChart('reservationsChart', reservationsData, 'Prenotazioni', 'bar');
             generateChart('usersChart', cumulativeUsersData, 'Utenti', 'line');
             generateChart('parksChart', parksData, 'Parcheggi', 'line');
+            generateChart('moneyFlowChart', moneyFlowData, 'Soldi in movimento', 'bar');
         });
+
 
 
         function performLogout() {
@@ -224,7 +271,7 @@
                     text: "Una volta eliminato, non potrai più recuperare questo utente!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#1a2a6c',
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Sì, elimina!',
                     cancelButtonText: 'Annulla'
@@ -258,6 +305,65 @@
             });
         });
 
+
+        //cambaimento ruolo user
+        $(document).ready(function() {
+            $('.toggle-role-btn').on('click', function(e) {
+                e.preventDefault();
+
+                const button = $(this);
+                const userRow = button.closest('tr');
+                const userId = userRow.data('id');
+                const currentRole = button.data('role');
+                const newRole = currentRole == 1 ? 2 : 1;
+
+                let confirmationText = currentRole == 1 ?
+                    "Vuoi cambiare questo amministratore in utente?" :
+                    "Vuoi cambiare questo utente in amministratore?";
+
+                Swal.fire({
+                    title: 'Sei sicuro?',
+                    text: confirmationText,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#1a2a6c',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sì, cambia!',
+                    cancelButtonText: 'Annulla'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/admin/parks/updaterole/' + userId,
+                            type: 'POST',
+                            data: {
+                                role: newRole,
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    button.data('role', newRole);
+                                    button.text(newRole == 1 ? 'Admin' : 'Utente');
+                                    button.css('background-color', newRole == 1 ? 'green' : 'red');
+                                    Swal.fire(
+                                        'Cambiato!',
+                                        'Il ruolo dell\'utente è stato modificato con successo.',
+                                        'success'
+                                    );
+                                } else {
+                                    Swal.fire(
+                                        'Errore',
+                                        'Si è verificato un errore. Riprova.',
+                                        'error'
+                                    );
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+
         //eliminazione parcheggi con chiamata AJAX
         $(document).ready(function() {
             $('.delete-park-btn').on('click', function(e) {
@@ -271,7 +377,7 @@
                     text: "Una volta eliminato, non potrai più recuperare questo parcheggio!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#1a2a6c',
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Sì, elimina!',
                     cancelButtonText: 'Annulla'

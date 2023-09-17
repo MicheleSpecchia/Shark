@@ -31,6 +31,8 @@ class AdminController extends Controller
         $cumulative_users_count = [];
         $parks_daily_count = [];
         $totalUsers = 0;
+        $money_flow = [];
+        $totalMoneyFlow = 0; // Per calcolare il totale
 
         for ($i = 6; $i >= 0; $i--) {
             $day = Carbon::now()->subDays($i);
@@ -46,21 +48,31 @@ class AdminController extends Controller
             // Parcheggi
             $parksCount = Park::whereDate('created_at', $day)->count();
             $parks_daily_count[] = $parksCount;
+
+            // Soldi in movimento
+            $dailyAmount = Reservation::whereDate('created_at', $day)->sum('price');
+            $money_flow[] = $dailyAmount;
+            $totalMoneyFlow += $dailyAmount; // Aggiunge l'importo quotidiano al totale
         }
 
-        $users = User::select('id', 'nome', 'cognome', 'email')->get();
+        $estimatedEarnings = $totalMoneyFlow * 0.10;
 
-        // Recupera tutti i parcheggi dal database
+        $users = User::select('id', 'nome', 'cognome', 'email', 'role')->get();
         $parks = Park::all();
+        $reservations = Reservation::with('user', 'park')->get();
 
         return view('admin.dashboard', [
             'reservations_count' => $reservations_count,
             'cumulative_users_count' => $cumulative_users_count,
             'parks_daily_count' => $parks_daily_count,
             'users' => $users,
-            'parks' => $parks  // Aggiunto l'array dei parcheggi alla view
+            'parks' => $parks,
+            'reservations' => $reservations,
+            'money_flow' => $money_flow,
+            'estimated_earnings' => $estimatedEarnings,
         ]);
     }
+
 
     public function deleteUser($id)
     {
@@ -81,6 +93,27 @@ class AdminController extends Controller
                 return response()->json(['success' => false, 'message' => 'Parcheggio non trovato'], 404);
             }
             $park->delete();
+            return response()->json(['success' => true], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+    public function toggleUserRole($id, Request $request)
+    {
+        try {
+            $user = User::find($id);
+            if (!$user) {
+                return response()->json(['success' => false, 'message' => 'Utente non trovato'], 404);
+            }
+
+            $role = $request->input('role');
+            if (!in_array($role, [1, 2])) {
+                return response()->json(['success' => false, 'message' => 'Ruolo non valido'], 400);
+            }
+
+            $user->role = $role;
+            $user->save();
+
             return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);

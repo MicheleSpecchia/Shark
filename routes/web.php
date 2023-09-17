@@ -78,6 +78,8 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 #admin#
 Route::delete('/admin/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
 Route::delete('/admin/parks/delete/{id}', [AdminController::class, 'deletePark'])->name('admin.parks.delete');
+Route::post('/admin/parks/updaterole/{id}', [AdminController::class, 'toggleUserRole']);
+
 
 
 #--- PAGINA PROFILO UTENTE ---#
