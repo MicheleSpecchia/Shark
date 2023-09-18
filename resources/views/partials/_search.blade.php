@@ -1,22 +1,22 @@
 <form class="search-bar" action="/parks/search" method="POST">
     @csrf
 
-    <input type="text" id="location" name="location" placeholder="{{ session('search.date-input') !== null ? session('search.location') : 'Città'}}" list="citiesList" >
+    <input type="text" id="location" name="location" placeholder="{{ session('search.date-input') !== null ? session('search.location') : 'Città'}}" list="citiesList" required>
     <datalist id="citiesList"></datalist>
     @error('location')
     @enderror
 
-    <input type="text" id="date-input" name="date-input" placeholder="{{ session('search.time-input') !== null ? session('search.date-input') : 'Data inizio'}}" readonly>
+    <input type="text" id="date-input" name="date-input" placeholder="{{ session('search.time-input') !== null ? session('search.date-input') : 'Data inizio'}}" readonly required>
     @error('date-input')
     @enderror
 
-    <select id="time-input" name="time-input" style="display: none;"></select>
+    <select id="time-input" name="time-input" style="display: none;" required></select>
 
-    <input type="text" id="date-output" name="date-output" placeholder="{{ session('search.date-output') !== null ? session('search.date-output') : 'Data fine'}}" readonly>
+    <input type="text" id="date-output" name="date-output" placeholder="{{ session('search.date-output') !== null ? session('search.date-output') : 'Data fine'}}" readonly required>
     @error('date-input')
     @enderror
 
-    <select id="time-output" name="time-output" style="display: none;"></select>
+    <select id="time-output" name="time-output" style="display: none;" required></select>
 
     <select id="veicolo" name="veicolo">
         <option value="auto">Auto</option>

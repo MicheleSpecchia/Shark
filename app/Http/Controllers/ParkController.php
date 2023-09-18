@@ -22,9 +22,9 @@ class ParkController extends Controller
     public function show(Park $park)
     {
         $park->load('user');
-        
+
         $reviews = $park->reviews;
-        
+
 
         return view('parks.show', [
             'park' => $park,
@@ -50,9 +50,6 @@ class ParkController extends Controller
         $checkInTime = $request->input('time-input');
         $checkOutTime = $request->input('time-output');
 
-        /*--- sessione avvio     ---*/
-        
-
         session()->put('search.location', $request->input('location'));
         session()->put('search.date-input', $request->input('date-input'));
         session()->put('search.time-input', $request->input('time-input'));
@@ -70,7 +67,7 @@ class ParkController extends Controller
         } elseif ($vehicle === 'moto') {
             $query->where('motocicli', 1);
         } elseif ($vehicle === 'camper') {
-            $query->where('furgoni', 1);
+            $query->where('camper', 1);
         }
 
         $parks = $query->get();
@@ -107,7 +104,7 @@ class ParkController extends Controller
                     break;
             }
         } else {
-            return view('home-parks', compact('parks'));
+            return view('home', compact('parks'));
         }
     }
 
@@ -172,13 +169,13 @@ class ParkController extends Controller
 
     public function storeStep2(Request $request)
     {
+
         $form_field = $request->validate([
             'image_path' => 'required',
             'description' => 'required',
         ]);
 
         session(['step2' => $form_field]);
-
         $currentStep = 3;
         return view('parks.create', compact('currentStep'));
     }
@@ -186,16 +183,15 @@ class ParkController extends Controller
     public function storeStep3(Request $request)
     {
         $form_field = $request->validate([
-            'automobili',
-            'motocicli',
-            'camper',
-            'optional',
-            'camere',
-            'tastierino',
-            'aperto',
-            'chiuso',
-            'totem',
-            'privato',
+            'automobili' => 'nullable',
+            'motocicli' => 'nullable',
+            'camper' => 'nullable',
+            'camere' => 'nullable',
+            'tastierino' => 'nullable',
+            'aperto' => 'nullable',
+            'chiuso' => 'nullable',
+            'totem' => 'nullable',
+            'privato' => 'nullable',
         ]);
 
         session(['step3' => $form_field]);
@@ -238,19 +234,14 @@ class ParkController extends Controller
     }
 
     //store park data
-    public function store(Request $request)
+    public function parkStore(Request $request)
     {
+
         $step1Data = session('step1');
         $step2Data = session('step2');
         $step3Data = session('step3');
         $step4Data = session('step4');
         $step5Data = session('step5');
-        $step6Data = session('step6');
-
-
-        if ($request->hasFile('foto')) {
-            $form_field['foto'] = $request->file('foto')->store('fotos', 'public');
-        }
 
         $park = new Park;
 
@@ -266,17 +257,17 @@ class ParkController extends Controller
         //step3
         $park['automobili'] = in_array('automobili', $step3Data) ? 1 : 0;
         $park['motocicli'] = in_array('motocicli', $step3Data) ? 1 : 0;
-        $park['camper'] = in_array('camper', $step3Data)  ? 1 : 0;
-        $park['camere'] = in_array('camere', $step3Data)  ? 1 : 0;
-        $park['tastierino'] = in_array('tastierino', $step3Data)  ? 1 : 0;
-        $park['aperto'] = in_array('aperto', $step3Data)  ? 1 : 0;
-        $park['chiuso'] = in_array('chiuso', $step3Data)  ? 1 : 0;
-        $park['totem'] = in_array('totem', $step3Data)  ? 1 : 0;
+        $park['camper'] = in_array('camper', $step3Data) ? 1 : 0;
+        $park['camere'] = in_array('camere', $step3Data) ? 1 : 0;
+        $park['tastierino'] = in_array('tastierino', $step3Data) ? 1 : 0;
+        $park['aperto'] = in_array('aperto', $step3Data) ? 1 : 0;
+        $park['chiuso'] = in_array('chiuso', $step3Data) ? 1 : 0;
+        $park['totem'] = in_array('totem', $step3Data) ? 1 : 0;
         $park['privato'] = in_array('privato', $step3Data)  ? 1 : 0;
 
         //step4
-        $park['scambio'] = in_array('scambio', $step4Data)  ? 1 : 0;
-        $park['shark'] = in_array('shark', $step4Data)  ? 1 : 0;
+        $park['scambio'] = in_array('scambio', $step4Data) ? 1 : 0;
+        $park['shark'] = in_array('shark', $step4Data) ? 1 : 0;
 
         //step5
         $park['price'] = $step5Data['price'];
@@ -286,7 +277,7 @@ class ParkController extends Controller
         $parkImg = new ParkImage;
         $parkImg['park_id'] = $park['id'];
         $parkImg['image_path'] = $step2Data['image_path'];
-
+        $parkImg->save();
 
         return redirect('/')->with('message', 'Annuncio created successfully!');
     }
@@ -296,7 +287,6 @@ class ParkController extends Controller
         return view('parks.edit', ['park' => $park]);
     }
 
-    //store park data
     public function update(Request $request, Park $park)
     {
         if ($park->user_id != auth()->id()) {
@@ -307,31 +297,54 @@ class ParkController extends Controller
             'address' => 'required',
             'cap' => 'required',
             'location' => 'required',
-            'civico' => 'required',
             'description' => 'required'
         ]);
 
-        if ($request->hasFile('foto')) {
-            $form_field['foto'] = $request->file('foto')->store('fotos', 'public');
-        }
-
         $park->update($form_field);
 
-        return back()->with('message', 'Annuncio updated successfully!');
+
+        if ($request->hasFile('foto')) {
+            $form_field['foto'] = $request->file('foto')->store('fotos', 'public');
+            $parkImg = new ParkImage;
+            $parkImg['park_id'] = $park['id'];
+            $parkImg['image_path'] = $form_field['foto'];
+            $parkImg->save();
+        }
+
+        return redirect('parks/manage');
     }
 
     public function destroy(Park $park)
     {
+
+        $uncompletedReservations = $park->reservations->filter(function ($reservation) {
+            return $reservation->data_fine >= now();
+        });
+
+        if ($uncompletedReservations->count() > 0) {
+            return back()->with('error', 'Non puoi eliminare il parco perché ha prenotazioni non terminate.');
+        }
+
         if ($park->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
         }
 
         $park->delete();
-        return redirect('/')->with('message', 'Annuncio deleted successfully!');
+        return redirect('parks/manage');
     }
 
-    public function manage(Park $park)
+    public function manage()
     {
-        return view('parks.manage', ['parks' => auth()->user()->parks()->get()]);
+        $userId = Auth::user()->id;
+        $userParks = Park::where('user_id', $userId)->get();
+        return view('parks.manage', ['parks' => $userParks]);
+    }
+
+    public function parkReservation($parkId)
+    {
+        $park = Park::findOrFail($parkId);
+        $prenotazioni = $park->reservations;
+
+        return view('parks.park-reserv', compact('prenotazioni', 'park'));
     }
 }
