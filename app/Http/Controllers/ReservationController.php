@@ -31,7 +31,7 @@ class ReservationController extends Controller
         $form_field['price'] = $park->price;
 
         Reservation::create($form_field);
-        return redirect('/')->with('message', 'Prenotazione effettuata con successo.');
+        return redirect('/user-reservations')->with('message', 'Prenotazione effettuata con successo.');
     }
 
     public function index()

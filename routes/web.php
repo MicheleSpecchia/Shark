@@ -48,16 +48,21 @@ Route::get('/user', [UserController::class, 'index'])->middleware('preventback')
 Route::get('/admin', [AdminController::class, 'index'])->middleware('preventback')->name('admin.dashboard');
 
 
-
 #--- PARKS ---#
 Route::post('/parks/search', [ParkController::class, 'search']);
+Route::get('/parks/manage', [ParkController::class, 'manage'])->middleware('auth');
+Route::get('/parks/{id}/reservation', [ParkController::class, 'parkReservation'])->middleware('auth');
 Route::get('/parks/create', [ParkController::class, 'create'])->middleware('auth');
-Route::post('/parks', [ParkController::class, 'store'])->middleware('auth');
+Route::post('/parks/create/step1', [ParkController::class, 'storeStep1'])->middleware('auth');
+Route::post('/parks/create/step2', [ParkController::class, 'storeStep2'])->middleware('auth');
+Route::post('/parks/create/step3', [ParkController::class, 'storeStep3'])->middleware('auth');
+Route::post('/parks/create/step4', [ParkController::class, 'storeStep4'])->middleware('auth');
+Route::post('/parks/create/step5', [ParkController::class, 'storeStep5'])->middleware('auth');
+Route::post('/parks/store', [ParkController::class, 'parkStore'])->middleware('auth');
 Route::get('/parks/{park}/edit', [ParkController::class, 'edit'])->middleware('auth');
 Route::get('/parks/{park}', [ParkController::class, 'show'])->middleware('auth');
 Route::put('/parks/{park}', [ParkController::class, 'update'])->middleware('auth');
 Route::delete('/parks/{park}', [ParkController::class, 'destroy'])->middleware('auth');
-Route::get('/parks/manage', [ParkController::class, 'manage'])->middleware('auth');
 Route::middleware(['auth'])->group(function () {
     Route::get('/parks/{park}/reviews/create', [ParkController::class, 'createReview'])->name('reviews.create');
     Route::post('/parks/{park}/reviews', [ParkController::class, 'storeReview'])->name('reviews.store');
@@ -84,12 +89,9 @@ Route::post('/admin/parks/updaterole/{id}', [AdminController::class, 'toggleUser
 
 #--- PAGINA PROFILO UTENTE ---#
 Route::get('/editProfile', [HomeController::class, 'editProfile']);
-
 Route::post('/updateAvatar', [UserController::class, 'update'])->name('avatar.update');
-
 Route::post('/updateProfile', [UserController::class, 'updateProfile'])->name('profile.update');
 
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

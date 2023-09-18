@@ -7,7 +7,7 @@
                     <div class="col">
                         <div class="search-form">
                             <div class="location">
-                                <input type="text" id="location" name="location" placeholder="Città, Indirizzo.." class="location-input" list="citiesList">
+                                <input type="text" id="location" name="location" placeholder="Città, Indirizzo.." class="location-input" list="citiesList" required>
                                 <datalist id="citiesList"></datalist>
                                 <span class="icon-sb"> <i class="fa fa-map-marker" style="color: #bdbec1;"></i></span>
                                 @error('location')
@@ -28,26 +28,26 @@
                     <div class="col">
                         <div class="search-form">
                             <div class="date-input">
-                                <input type="text" id="date-input" name="date-input" placeholder="Data di inizio" readonly>
+                                <input type="text" id="date-input" name="date-input" placeholder="Data di inizio" readonly required>
                                 <span class="icon-sb"> <i class="fa-solid fa-calendar-day" style="color: #bdbec1;"></i></span>
                                 @error('date-input')
                                 @enderror
                             </div>
                             <div class="time-input">
-                                <select id="time-input" name="time-input" style="display: none;"></select>
+                                <select id="time-input" name="time-input" style="display: none;" required></select>
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="search-form">
                             <div class="date-output">
-                                <input type="text" id="date-output" name="date-output" placeholder="Data di fine" readonly>
+                                <input type="text" id="date-output" name="date-output" placeholder="Data di fine" readonly required>
                                 <span class="icon-sb"> <i class="fa-solid fa-calendar-day" style="color: #bdbec1;"></i></span>
                                 @error('date-output')
                                 @enderror
                             </div>
                             <div class="time-output">
-                                <select id="time-output" name="time-output" style="display: none;"></select>
+                                <select id="time-output" name="time-output" style="display: none;" required></select>
                             </div>
                         </div>
                     </div>

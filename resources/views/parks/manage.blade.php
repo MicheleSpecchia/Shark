@@ -1,45 +1,68 @@
 <x-layout>
-    
-        <header>
-            <h1 class="text-3xl text-center font-bold my-6 uppercase">
-                Manage Ads
-            </h1>
-        </header>
+    @include('partials._navbar')
 
-        <table class="w-full table-auto rounded-sm">
-            <tbody>
-                @unless($parks->isEmpty())
-                @foreach($parks as $park)
-                <tr class="border-gray-300">
-                    <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                        <a href="/parks/{{$park -> id}}">
-                            {{$park->address}}
-                        </a>
-                    </td>
-                    <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                        <a href="/parks/{{$park->id}}/edit" class="text-blue-400 px-6 py-2 rounded-xl"><i class="fa-solid fa-pen-to-square"></i>
-                            Edit</a>
-                    </td>
-                    <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                        <form method="POST" action="/parks/{{$park -> id}}">
+    @if(session('message'))
+    <div class="notification mb-4">
+        {{ session('message') }}
+    </div>
+    @endif
+
+    <div class="container">
+        <div class="row d-flex mt-5">
+
+            @unless(count($parks)==0)
+            @foreach($parks as $park)
+            <div class="col-12 col-md-4 col-lg-3 mb-5">
+                <div class="card-wrap p-3" style="background-color: rgba(255, 255, 255, 0.7); border-radius: 15px;">
+
+                    <div class="con-img-wrap m-auto">
+                        <img src="{{$park->foto ? asset('storage/' . $park->foto) : asset('/images/vision.png')}}" class="img-fluid mx-auto d-block" style="border-radius: 15px;" alt="product picture">
+                    </div>
+
+                    <div class="con-wrap mt-4">
+                        <h2 class="fs-4 mt-4 fw-bold text-truncate" style="color: #1a2a6c; max-width: 100%;">{{$park->location}}</h2>
+                        <div class="d-flex bottom mb-2">
+                            <div class="rating-cover">
+                                @for ($i = 1; $i <= 5; $i++) @if ($i <=round($park->average_rating))
+                                    <i class="fas fa-star" style="color: #1a2a6c;"></i>
+                                    @else
+                                    <i class="far fa-star" style="color: #1a2a6c;"></i>
+                                    @endif
+                                    @endfor
+                                    <span class="ml-2 small" style="color: #1a2a6c;">{{ $park->reviews_count }} reviews</span>
+                            </div>
+                        </div>
+                        <p class="mb-0 fs-5" style="color: #1a2a6c;">A partire da {{ $park->price }}€ l'ora</p>
+                    </div>
+
+                    <div class="manage-btn-container">
+                        <form method="POST" action="/parks/{{$park->id}}">
                             @csrf
                             @method('DELETE')
-                            <button class="text-red-500">
+                            <button type="submit" class="btn btn-danger ">
                                 <i class="fa-solid fa-trash"></i>
-                                Delete
+
                             </button>
                         </form>
-                    </td>
-                </tr>
-                @endforeach
-                @else
-                <tr class="border-gray-300">
-                    <td class="px4 py-8 border-t border-b border-gray-300-text-lg">
-                        <p class="text-center">No Ads Found</p>
-                    </td>
-                </tr>
-                @endunless
-            </tbody>
-        </table>
-   
+
+
+                        <a href="/parks/{{$park->id}}/edit" class="btn btn-success ">
+                            <i class="fa-solid fa-pen-to-square"></i>  
+                        </a>
+
+                        <a href="/parks/{{$park->id}}/reservation" class="btn btn-secondary ">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+            @endforeach
+            @endunless
+
+        </div>
+    </div>
+
 </x-layout>
