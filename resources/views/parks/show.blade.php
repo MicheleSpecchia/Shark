@@ -3,6 +3,7 @@
 
 @include('partials._navbar')
 
+
 <?php    
 
     session()->put('park_owner', $park->user->id);
@@ -29,7 +30,23 @@
         'cancel_url' => route('payment.cancel')
         
       ]);
+
+      $images = $park->images;
+
 ?>
+
+<script>
+  $(document).ready(function() {
+    $('#imageCarousel').carousel(); // Inizializza il carousel
+
+    // Aggiorna il carousel ogni 5 secondi (puoi personalizzare l'intervallo)
+    setInterval(function() {
+      $('#imageCarousel').carousel('next');
+    }, 3000); // 5000 millisecondi (5 secondi)
+  });
+</script>
+
+
 
 
 
@@ -37,10 +54,38 @@
 
 <div class="container mt-5">
     <div class="row">
+        
         <div class="col-lg-6">
+            <br>
+            <br>
             <div class="park-details">
-                <img src="{{ asset('/images/vision.png')}}" alt="Park Image" class="img-fluid">
-                <h1>{{ $park->location }}</h1>
+
+            <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    @foreach ($images as $key => $image)
+      <li data-target="#imageCarousel" data-slide-to="{{ $key }}" class="{{ $key === 0 ? 'active' : '' }}"></li>
+    @endforeach
+  </ol>
+  <div class="carousel-inner">
+    @foreach ($images as $key => $image)
+      <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+        <img src="{{ asset($image->image_path) }}" class="d-block w-100" alt="Image">
+      </div>
+    @endforeach
+  </div>
+  <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+
+
+                <h1>{{ $park->location }} </h1>
                 <p>{{ $park->address }}</p>
                 <p>{{ $park->description }}</p>
                 <div class="park-rating">
@@ -64,31 +109,32 @@
             </div>
         </div>
         <div class="col-lg-6">
+            <br>
+            <br>
             <div class="booking-form">
                 <form method="POST" action="/create-checkout-session" style="background: #fff; border: 2px solid white; border-radius: 20px;" readonly>
                     @csrf
                     <input type="hidden" value="{{ auth()->user()->id }}" name="user_id">
                     <input type="hidden" value="{{ $park->id }}" name="park_id">
-
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo">
                     <div class="form-group">
                         <label for="check-in">Check-in</label>
-                        <input type="date" name="data_inizio" class="form-control" value="{{ session('search.date-input') }}" >
+                        <input type="date" name="data_inizio" class="form-control" value="{{ session('search.date-input') }}" readonly >
                     </div>
                     <div class="form-group">
                         <label for="check-out">Check-out</label>
-                        <input type="date" name="data_fine" class="form-control" value="{{ session('search.date-output') }}" >
+                        <input type="date" name="data_fine" class="form-control" value="{{ session('search.date-output') }}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="start-time">Ora inizio</label>
-                        <input type="time" name="start_time" class="form-control" value="{{ session('search.time-input') }}" >
+                        <input type="time" name="start_time" class="form-control" value="{{ session('search.time-input') }}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="end-time">Ora fine</label>
-                        <input type="time" name="end_time" class="form-control" value="{{ session('search.time-output') }}" >
+                        <input type="time" name="end_time" class="form-control" value="{{ session('search.time-output') }}" readonly>
                     </div>
 
-
+                    <br>
+                    <br>
                     
 
                     <button id="checkout-button" type="button" class="btn btn-primary btn-book">Procedi al pagamento</button>
@@ -102,7 +148,7 @@
 
     <div class="row mt-5">
         <div class="col-lg-12">
-            <h2>Recensioni</h2>
+            <h2 style="font-size: 30px; font-weight: bold;">Recensioni</h2>
             <div class="reviews">
                 @foreach ($reviews as $review)
                     <div class="review">
@@ -186,6 +232,15 @@
 }
 
 </style>
+
+
+
+
+
+
+
+
+
 
 
 

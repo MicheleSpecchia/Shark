@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Park;
 use App\Models\Reservation;
 use App\Models\ParkImage;
+
 use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\ParkReview;
@@ -41,6 +42,7 @@ class ParkController extends Controller
         $costoTotale = $minutiPrenotazione * $costoAlMinuto;
 
         session()->put('costoTotale', $costoTotale);
+
 
 
 

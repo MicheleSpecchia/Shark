@@ -33,7 +33,7 @@ nav {
 }
 
 .logo-img {
-  width: 120px;
+  width: 100px;
 }
 
 .user-pic {
@@ -53,11 +53,17 @@ nav ul li {
   display: inline-block;
   list-style: none;
   margin: 10px 20px;
+  margin-top: 50px;
 }
 
 nav ul li a {
   color: #ffff;
   text-decoration: none;
+}
+
+nav ul li a:hover {
+  text-decoration: underline; /* Aggiunge la sottolineatura quando si passa sopra il link */
+  color: #ffff; /* Cambia il colore del testo in bianco quando si passa sopra */
 }
 
 .sub-menu-wrap {
@@ -981,17 +987,19 @@ input[type="number"]::-webkit-outer-spin-button {
 .park-details {
   color: #fff;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: #fff;
   border-radius: 15px;
 }
 
 .park-details h1 {
   font-size: 36px;
   margin-top: 10px;
+  color: #1a2a6c;
 }
 
 .park-details p {
   font-size: 18px;
+  color: #1a2a6c;
 }
 
 .park-rating {
@@ -1004,26 +1012,7 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-top: 10px;
   color: #1a2a6c;
 }
-/*
-.booking-form {
-  padding: 20px;
-}
 
-.booking-form .form-group {
-  margin-bottom: 15px;
-}
-
-.booking-form .btn-book {
-  background-color: #1a2a6c;
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 15px;
-  padding: 10px 20px;
-}
-*/
-
-/* Stile per gli input del form */
 .booking-form input[type="text"],
 .booking-form input[type="date"],
 .booking-form input[type="time"],
@@ -1084,7 +1073,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .review {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: #fff;
   border-radius: 15px;
   padding: 20px;
   margin-bottom: 20px;
