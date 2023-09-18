@@ -316,7 +316,8 @@ class ParkController extends Controller
             'address' => 'required',
             'cap' => 'required',
             'location' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'price' => 'required'
         ]);
 
         $park->update($form_field);
