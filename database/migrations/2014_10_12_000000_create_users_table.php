@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('cognome');
             $table->string('email')->unique();
-            $table->integer('saldo')->default('0');
+            $table->decimal('saldo', 10, 2)->default(0.00);
             $table->string('indirizzo')->nullable();
             $table->integer('role')->default('2'); //1-admin 2-user
             $table->timestamp('email_verified_at')->nullable();

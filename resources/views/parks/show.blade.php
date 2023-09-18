@@ -1,5 +1,37 @@
-<div>
+
 <x-layout>
+
+@include('partials._navbar')
+
+<?php    
+
+    session()->put('park_owner', $park->user->id);
+    session()->put('search.id', $park->id);
+
+    require_once __DIR__.'/../../../vendor/autoload.php';
+
+    $stripe = new \Stripe\StripeClient('sk_test_51Nqy3OE170HprCCokbkqEcvfni4Rxp8d0MGSawjcL6uryUjqRclA01e40rPgUmpMSME4qkZlohHOET1nQLYQWaxI00Fz1hoCnH');
+
+    $checkout_session = $stripe->checkout->sessions->create([
+        'line_items' => [[
+          'price_data' => [
+            'currency' => 'eur',
+            'product_data' => [
+              'name' => $park->location .', id: ' . $park->id,
+              'images' => ['https://cdn.pixabay.com/photo/2016/03/21/23/25/link-1271843_1280.png', ],
+            ],
+            'unit_amount' => $costoTotale * 100,
+          ],
+          'quantity' => 1,
+        ]],
+        'mode' => 'payment',
+        'success_url' => route('payment.success'), 
+        'cancel_url' => route('payment.cancel')
+        
+      ]);
+?>
+
+
 
 
 
@@ -26,14 +58,14 @@
                 <div class="owner-details">
                     <img src="{{ asset($park->user->avatar) }}" alt="Avatar" class="avatar">
                     <div class="owner-info">
-                        <h4 class="owner-name">   {{ $park->user->nome }}</h4>
+                        <h4 class="owner-name">   {{ $park->user->nome }} </h4>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="booking-form">
-                <form method="POST" action="/prenota" style="background: #fff; border: 2px solid white; border-radius: 20px;" readonly>
+                <form method="POST" action="/create-checkout-session" style="background: #fff; border: 2px solid white; border-radius: 20px;" readonly>
                     @csrf
                     <input type="hidden" value="{{ auth()->user()->id }}" name="user_id">
                     <input type="hidden" value="{{ $park->id }}" name="park_id">
@@ -56,11 +88,15 @@
                         <input type="time" name="end_time" class="form-control" value="{{ session('search.time-output') }}" >
                     </div>
 
-                    <input type="hidden" value="{{ session('search.date-input') }}" name="veicolo">
 
-                    <button type="submit" class="btn btn-primary btn-book">Prenota ora</button>
+                    
+
+                    <button id="checkout-button" type="button" class="btn btn-primary btn-book">Procedi al pagamento</button>
                 </form>
             </div>
+
+            <br>
+            <div id="google-map"></div>
         </div>
     </div>
 
@@ -88,6 +124,68 @@
     </div>
 </div>
 
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const stripe = Stripe('pk_test_51Nqy3OE170HprCCoEC9V2cfuddNFtuBxyYavedqEZa4fEuV2X7M5IK7aejhkkORm1sDSt44M5zg8yrn1OSFWSwjD0018JYulB5');
+    const btn = document.getElementById("checkout-button");
+    btn.addEventListener('click', function(e){
+        e.preventDefault();
+        stripe.redirectToCheckout({
+            sessionId: "<?php  echo  $checkout_session->id ?>"
+        });
+    })
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDncvVdJPnvpnO55knsADnEEdyvxgM1ZYw&callback=initMap" async defer></script>
+<script>
+    function initMap() {
+        // Imposta l'indirizzo del parco (sostituisci con l'indirizzo effettivo)
+        
+        var parkAddress = "{{$park->address}}";
+
+        // Crea un oggetto geocoder per convertire l'indirizzo in coordinate
+        var geocoder = new google.maps.Geocoder();
+
+        // Seleziona l'elemento HTML in cui verrà visualizzata la mappa
+        var mapElement = document.getElementById('google-map');
+
+        // Inizializza la mappa centrata sull'indirizzo del parco
+        var map = new google.maps.Map(mapElement, {
+            zoom: 15,
+            center: { lat: 0, lng: 0 } // Le coordinate verranno aggiornate successivamente
+        });
+
+        // Converte l'indirizzo in coordinate geografiche
+        geocoder.geocode({ 'address': parkAddress }, function(results, status) {
+            if (status === 'OK') {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                    title: "Posizione del parco"
+                });
+            } else {
+                console.error('Impossibile trovare l\'indirizzo: ' + status);
+            }
+        });
+    }
+</script>
+
+
+
+<style>
+    #google-map {
+    width: 100%;
+    height: 400px; /* Altezza della mappa */
+    border: 2px solid #ccc; /* Bordo sottile grigio */
+    border-radius: 10px; /* Bordi arrotondati */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+
+    
+}
+
+</style>
 
 
 

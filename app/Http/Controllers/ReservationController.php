@@ -6,12 +6,23 @@ use Illuminate\Http\Request;
 use App\Models\Reservation;
 use Illuminate\Validation\Rule;
 use App\Models\ParkReview;
+use Illuminate\Support\Facades\DB;
+
+
+
+use Stripe\Stripe;
+use Stripe\PaymentIntent;
+
+
+
+
 
 class ReservationController extends Controller
 {
 
     public function store(Request $request)
     {
+
         $form_field = $request->validate([
             'user_id' => 'required',
             'park_id' => 'required|exists:parks,id',
@@ -31,8 +42,49 @@ class ReservationController extends Controller
         $form_field['price'] = $park->price;
 
         Reservation::create($form_field);
+
         return redirect('/user-reservations')->with('message', 'Prenotazione effettuata con successo.');
+
     }
+
+    public function success(Request $request)
+    {
+        // Effettua la creazione di una nuova prenotazione
+        $reservation = new Reservation();
+        $reservation->user_id = auth()->user()->id;
+        $reservation->park_id = session('search.id');
+        $reservation->data_inizio = session('search.date-input');
+        $reservation->data_fine = session('search.date-output');
+        $reservation->start_time = session('search.time-input');
+        $reservation->end_time = session('search.time-output');
+        $reservation->price = session('costoTotale');
+        $reservation->veicolo = session('search.veicolo');
+        $reservation->save();
+        
+        $owner_id = session('park_owner');
+        $costo = session('costoTotale');
+        $guadagno_admin = $costo * 0.10;
+        $guadagno_owner = $costo - $guadagno_admin;        
+ 
+        DB::table('users')
+        ->where('id', $owner_id)
+        ->increment('saldo', $guadagno_owner);
+
+        DB::table('users')
+        ->where('role', 1)
+        ->increment('saldo', $guadagno_admin);
+
+
+
+
+        return view('payment-success'); 
+    }
+
+    public function cancel(){
+        return view('home');
+    }
+
+    
 
     public function index()
     {
@@ -78,4 +130,7 @@ class ReservationController extends Controller
             return back()->with('error', 'Si è verificato un errore durante la cancellazione.');
         }
     }
+
+
+    
 }

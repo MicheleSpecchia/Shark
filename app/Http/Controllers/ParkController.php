@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-
 class ParkController extends Controller
 {
 
@@ -26,9 +25,29 @@ class ParkController extends Controller
         $reviews = $park->reviews;
 
 
+        //calcolo costo prenotazione
+        $dataInizioPrenotazione = session('search.date-input');
+        $orarioInizioPrenotazione = session('search.time-input');
+        $dataFinePrenotazione = session('search.date-output');
+        $orarioFinePrenotazione = session('search.time-output');
+    
+        $inizio = Carbon::parse($dataInizioPrenotazione . ' ' . $orarioInizioPrenotazione);
+        $fine = Carbon::parse($dataFinePrenotazione . ' ' . $orarioFinePrenotazione);
+    
+        $minutiPrenotazione = $inizio->diffInMinutes($fine); //minuti totali
+        $minutiPrenotazione = $minutiPrenotazione / 30; //numero di intervalli di 30 minuti
+    
+        $costoAlMinuto = $park->price;  //prezzo per 30min
+        $costoTotale = $minutiPrenotazione * $costoAlMinuto;
+
+        session()->put('costoTotale', $costoTotale);
+
+
+
         return view('parks.show', [
             'park' => $park,
             'reviews' => $reviews,
+            'costoTotale' => $costoTotale,
         ]);
     }
 
@@ -347,4 +366,6 @@ class ParkController extends Controller
 
         return view('parks.park-reserv', compact('prenotazioni', 'park'));
     }
+
+    
 }
