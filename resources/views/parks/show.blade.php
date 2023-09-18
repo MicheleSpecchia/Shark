@@ -50,6 +50,7 @@
                         @auth
                         <input type="hidden" value="{{ auth()->user()->id }}" name="user_id">
                         <input type="hidden" value="{{ $park->id }}" name="park_id">
+                        <input type="hidden" value="{{ $park->veicolo }}" name="veicolo">
                         @endauth
                         <div class="form-group">
                             <label for="check-in">Check-in</label>
