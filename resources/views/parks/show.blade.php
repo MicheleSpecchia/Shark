@@ -1,6 +1,7 @@
 <x-layout>
     @include('partials._navbar')
 
+
     <?php
 
     session()->put('park_owner', $park->user->id);
@@ -27,7 +28,25 @@
         'cancel_url' => route('payment.cancel')
 
     ]);
+
+    $images = $park->images;
+
     ?>
+
+    <script>
+        $(document).ready(function() {
+            $('#imageCarousel').carousel(); // Inizializza il carousel
+
+            // Aggiorna il carousel ogni 5 secondi (puoi personalizzare l'intervallo)
+            setInterval(function() {
+                $('#imageCarousel').carousel('next');
+            }, 3000); // 5000 millisecondi (5 secondi)
+        });
+    </script>
+
+
+
+
 
     <h2 style="text-align: center;">PRENOTA SUBITO IL PARCHEGGIO</h2>
 
@@ -35,8 +54,32 @@
         <div class="row">
             <!-- Colonna in alto a sinistra per l'immagine -->
             <div class="col-lg-6">
-                <div class="parks-img">
-                    <img src="{{ asset('/images/vision.png')}}" alt="Park Image" class="img-fluid">
+                <br>
+                <br>
+                <div class="park-img">
+
+                    <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            @foreach ($images as $key => $image)
+                            <li data-target="#imageCarousel" data-slide-to="{{ $key }}" class="{{ $key === 0 ? 'active' : '' }}"></li>
+                            @endforeach
+                        </ol>
+                        <div class="carousel-inner">
+                            @foreach ($images as $key => $image)
+                            <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                                <img src="{{ asset($image->image_path) }}" class="d-block w-100" alt="Image">
+                            </div>
+                            @endforeach
+                        </div>
+                        <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -72,6 +115,7 @@
                         @auth
                         @if(auth()->user()->id === $park->user_id)
                         <a class="btn btn-primary btn-book" style="border-radius: 15px;">Che bel parcheggio!</a>
+
                         @else
                         <button id="checkout-button" type="button" class="btn btn-primary btn-book">Procedi al pagamento</button>
                         @endif
@@ -85,6 +129,8 @@
 
             </div>
         </div>
+
+
 
         <div class="row">
             <!-- Colonna in basso a sinistra per il form -->
@@ -210,8 +256,6 @@
             padding: 20px;
         }
     </style>
-
-
 
 
 </x-layout>
