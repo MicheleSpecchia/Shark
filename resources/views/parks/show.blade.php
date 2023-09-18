@@ -39,7 +39,7 @@
     <div class="row">
         <div class="col-lg-6">
             <div class="park-details">
-                <img src="{{asset('images/vision.png')}}" alt="Park Image" class="img-fluid">
+                <img src="{{ asset('/images/vision.png')}}" alt="Park Image" class="img-fluid">
                 <h1>{{ $park->location }}</h1>
                 <p>{{ $park->address }}</p>
                 <p>{{ $park->description }}</p>

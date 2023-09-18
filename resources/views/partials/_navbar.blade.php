@@ -4,10 +4,15 @@
             <img src="{{asset('images/logo.png')}}" class="logo-img">
         </a>
         <ul>
-            <li><a href="{{ route('about') }}">About</a></li>
-            <li><a href="#">Affitta con Shark</a></li>
-            <li><a href="#">Tutorial</a></li>
+
+            <li><a href="#">About</a></li>
+            @auth
+            <li><a href="/parks/create">Affitta con Shark</a></li>
+            @endauth
+            <li><a href="/user-reservations">Tutorial</a></li>
+
             @guest
+            <li><a href="/login">Affitta con Shark</a></li>
             <li><a href="/login">Login</a></li>
             <li><a href="/register">Sing up</a></li>
             @endguest
@@ -30,10 +35,9 @@
                     <span>></span>
                 </a>
 
-                <a href="#" class="sub-menu-link">
+                <a href="/parks/manage" class="sub-menu-link">
                     <img src="{{asset('images/setting.png')}}" alt="">
-                    <p>Settings</p>
-                    <span>></span>
+                    <p>I tuoi parcheggi</p>
                 </a>
 
                 <a href="#" class="sub-menu-link">

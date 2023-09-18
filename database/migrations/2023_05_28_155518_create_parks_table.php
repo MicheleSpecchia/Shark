@@ -18,11 +18,19 @@ return new class extends Migration
             $table->string('cap');
             $table->string('location');
             $table->longText('description');
-            $table->float('stars');
+            $table->float('stars')->nullable();
+            $table->integer('automobili');
+            $table->integer('motocicli');
+            $table->integer('camper');
+            $table->integer('camere');
+            $table->integer('tastierino');
+            $table->integer('aperto');
+            $table->integer('chiuso');
+            $table->integer('totem');
+            $table->integer('privato');
+            $table->integer('scambio');
+            $table->integer('shark');
             $table->float('price');
-            $table->boolean('automobili');
-            $table->boolean('motocicli');
-            $table->boolean('camper');
             $table->timestamps();
         });
     }

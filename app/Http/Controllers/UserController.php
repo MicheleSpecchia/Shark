@@ -25,14 +25,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user', [
-            'parks' => Park::latest()->paginate(8)
-        ]);
+        return view('user');
     }
 
-    
-
-    
     public function update(Request $request)
     {
         // Valida i dati del form
