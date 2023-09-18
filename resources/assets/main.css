@@ -819,7 +819,7 @@ input[type="time"] {
   margin-top: 10px;
   color: #1a2a6c;
 }
-
+/*
 .booking-form {
   padding: 20px;
 }
@@ -836,6 +836,63 @@ input[type="time"] {
   border-radius: 15px;
   padding: 10px 20px;
 }
+*/
+
+/* Stile per gli input del form */
+.booking-form input[type="text"],
+.booking-form input[type="date"],
+.booking-form input[type="time"],
+.booking-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #f8f8f8;
+}
+
+/* Stile per le etichette dei campi */
+.booking-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+/* Stile per il pulsante di invio */
+.booking-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.booking-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Stile per i messaggi di errore */
+.error-message {
+    color: #ff0000;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* Stile generale per il form */
+.booking-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/**/
+
 
 .reviews {
   margin-top: 20px;

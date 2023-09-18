@@ -58,7 +58,7 @@
                 <div class="owner-details">
                     <img src="{{ asset($park->user->avatar) }}" alt="Avatar" class="avatar">
                     <div class="owner-info">
-                        <h4 class="owner-name">   {{ $park->user->nome }}  {{ session('park_owner')}}   {{$park->user->id}}</h4>
+                        <h4 class="owner-name">   {{ $park->user->nome }} </h4>
                     </div>
                 </div>
             </div>
@@ -94,6 +94,9 @@
                     <button id="checkout-button" type="button" class="btn btn-primary btn-book">Procedi al pagamento</button>
                 </form>
             </div>
+
+            <br>
+            <div id="google-map"></div>
         </div>
     </div>
 
@@ -122,7 +125,6 @@
 </div>
 
 
-
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     const stripe = Stripe('pk_test_51Nqy3OE170HprCCoEC9V2cfuddNFtuBxyYavedqEZa4fEuV2X7M5IK7aejhkkORm1sDSt44M5zg8yrn1OSFWSwjD0018JYulB5');
@@ -135,6 +137,55 @@
     })
 </script>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDncvVdJPnvpnO55knsADnEEdyvxgM1ZYw&callback=initMap" async defer></script>
+<script>
+    function initMap() {
+        // Imposta l'indirizzo del parco (sostituisci con l'indirizzo effettivo)
+        
+        var parkAddress = "{{$park->address}}";
+
+        // Crea un oggetto geocoder per convertire l'indirizzo in coordinate
+        var geocoder = new google.maps.Geocoder();
+
+        // Seleziona l'elemento HTML in cui verrà visualizzata la mappa
+        var mapElement = document.getElementById('google-map');
+
+        // Inizializza la mappa centrata sull'indirizzo del parco
+        var map = new google.maps.Map(mapElement, {
+            zoom: 15,
+            center: { lat: 0, lng: 0 } // Le coordinate verranno aggiornate successivamente
+        });
+
+        // Converte l'indirizzo in coordinate geografiche
+        geocoder.geocode({ 'address': parkAddress }, function(results, status) {
+            if (status === 'OK') {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                    title: "Posizione del parco"
+                });
+            } else {
+                console.error('Impossibile trovare l\'indirizzo: ' + status);
+            }
+        });
+    }
+</script>
+
+
+
+<style>
+    #google-map {
+    width: 100%;
+    height: 400px; /* Altezza della mappa */
+    border: 2px solid #ccc; /* Bordo sottile grigio */
+    border-radius: 10px; /* Bordi arrotondati */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+
+    
+}
+
+</style>
 
 
 
