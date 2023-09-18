@@ -30,13 +30,13 @@ class ParkController extends Controller
         $orarioInizioPrenotazione = session('search.time-input');
         $dataFinePrenotazione = session('search.date-output');
         $orarioFinePrenotazione = session('search.time-output');
-    
+
         $inizio = Carbon::parse($dataInizioPrenotazione . ' ' . $orarioInizioPrenotazione);
         $fine = Carbon::parse($dataFinePrenotazione . ' ' . $orarioFinePrenotazione);
-    
+
         $minutiPrenotazione = $inizio->diffInMinutes($fine); //minuti totali
         $minutiPrenotazione = $minutiPrenotazione / 30; //numero di intervalli di 30 minuti
-    
+
         $costoAlMinuto = $park->price;  //prezzo per 30min
         $costoTotale = $minutiPrenotazione * $costoAlMinuto;
 
@@ -127,44 +127,26 @@ class ParkController extends Controller
         }
     }
 
-    public function createReview(Park $park, Reservation $reservation)
-    {
-        // Verifica che la prenotazione appartenga al parco specificato
-        if ($park->id != $reservation->park_id) {
-            abort(403, 'Mismatch between park and reservation.');
-        }
-
-
-        // verifica che la prenotazione sia stata completata
-        if ($reservation->data_fine < now() && $reservation->user_id == auth()->id()) {
-            return view('create_review', ['park' => $park, 'reservation' => $reservation]);
-        } else {
-            abort(403, 'Unauthorized Action');
-        }
-    }
 
     public function storeReview(Request $request, Park $park, Reservation $reservation)
     {
-        // Validazione dei dati inseriti dall'utente
-        $data = $request->validate([
-            'title' => 'required|max:255',
-            'feedback' => 'required',
-            'rating' => 'required|integer|min:1|max:5',
-        ]);
+        try {
+            $data = $request->validate([
+                'title' => 'required|max:255',
+                'feedback' => 'required',
+                'rating' => 'required|integer|min:1|max:5',
+            ]);
 
-        // Creazione di una nuova recensione e assegnazione dei dati
-        $review = new ParkReview($data);
+            $review = new ParkReview($data);
+            $review->user_id = auth()->id();
+            $review->park_id = $park->id;
+            $review->reservation_id = $reservation->id;
+            $review->save();
 
-        // Assegnazione degli ID dell'utente, del parco e della prenotazione alla recensione
-        $review->user_id = auth()->id();
-        $review->park_id = $park->id;
-        $review->reservation_id = $reservation->id;  // Questa è la nuova riga
-
-        // Salvataggio della recensione nel database
-        $review->save();
-
-        // Reindirizzamento verso la pagina delle prenotazioni con un messaggio di conferma
-        return redirect()->route('user.reservations')->with('message', 'Recensione inviata con successo!');
+            return response()->json(['status' => 'success']);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
+        }
     }
 
     public function create()
@@ -366,6 +348,4 @@ class ParkController extends Controller
 
         return view('parks.park-reserv', compact('prenotazioni', 'park'));
     }
-
-    
 }
