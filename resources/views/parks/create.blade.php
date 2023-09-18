@@ -53,10 +53,10 @@
                 <h2>Altri dettagli</h2>
 
                 <label for="image_path">Foto</label>
-                <input type="file" id="image_path" name="image_path[]" class="form-control" multiple required>
+                <input type="file" id="image_path" name="image_path" required />
 
                 <label for="description">Descrizione</label>
-                <input type="text" id="description" name="description" class="form-control" required>
+                <textarea id="description" name="description" class="form-control" row="10" required></textarea>
 
                 <div class="button-wrapper">
                     <button type="button" class="create-btn btn-secondary" onclick="history.back()">Precedente</button>
@@ -76,22 +76,24 @@
                 <h2>Altri dettagli</h2>
 
                 <h3>Quali veicoli può ospitare?</h3>
+                <p>Fai attenzione.</p>
+                <p> Dovresti selezionare almeno una categoria delle tre per rendere il tuo parcheggio visibile.</p>
                 <div class="checkbox-container">
 
                     <div class="custom-checkbox">
                         <input type="checkbox" id="automobili" name="automobili" value="automobili" class="hidden-checkbox">
-                        <label for="automobili" class="custom-label">
+                        <label for="automobili" class="custom-label" value="automobili">
                             automobili</label>
                     </div>
 
                     <div class="custom-checkbox">
                         <input type="checkbox" id="motocicli" name="motocicli" value="motocicli" class="hidden-checkbox">
-                        <label for="motocicli" class="custom-label">motocicli</label>
+                        <label for="motocicli" class="custom-label" value="motocicli">motocicli</label>
                     </div>
 
                     <div class="custom-checkbox">
                         <input type="checkbox" id="camper" name="camper" value="camper" class="hidden-checkbox">
-                        <label for="camper" class="custom-label">camper</label>
+                        <label for="camper" class="custom-label" value="camper">camper</label>
                     </div>
                 </div>
 
@@ -99,27 +101,27 @@
                 <div class="checkbox-container">
                     <div class="custom-checkbox">
                         <input type="checkbox" id="camere" name="camere" value="camere" class="hidden-checkbox">
-                        <label for="camere" class="custom-label">videosorveglianza</label>
+                        <label for="camere" class="custom-label" value="camere">videosorveglianza</label>
                     </div>
                     <div class="custom-checkbox">
                         <input type="checkbox" id="tastierino" name="tastierino" value="tastierino" class="hidden-checkbox">
-                        <label for="tastierino" class="custom-label">tastierino</label>
+                        <label for="tastierino" class="custom-label" value="tastierino">tastierino</label>
                     </div>
                     <div class="custom-checkbox">
                         <input type="checkbox" id="privato" name="privato" value="privato" class="hidden-checkbox">
-                        <label for="privato" class="custom-label">privato</label>
+                        <label for="privato" class="custom-label" value="privato">privato</label>
                     </div>
                     <div class="custom-checkbox">
                         <input type="checkbox" id="aperto" name="aperto" value="aperto" class="hidden-checkbox">
-                        <label for="aperto" class="custom-label">all'aperto</label>
+                        <label for="aperto" class="custom-label" value="aperto">all'aperto</label>
                     </div>
                     <div class="custom-checkbox">
                         <input type="checkbox" id="chiuso" name="chiuso" value="chiuso" class="hidden-checkbox">
-                        <label for="chiuso" class="custom-label">al chiuso</label>
+                        <label for="chiuso" class="custom-label" value="chiuso">al chiuso</label>
                     </div>
                     <div class="custom-checkbox">
                         <input type="checkbox" id="totem" name="totem" value="totem" class="hidden-checkbox">
-                        <label for="totem" class="custom-label">totem elettrico</label>
+                        <label for="totem" class="custom-label" value="totem">totem elettrico</label>
                     </div>
 
                 </div>
@@ -144,7 +146,7 @@
                 <p>Puoi decidere se accordarti con l'affittuario tramite scambio di chiavi:</p>
                 <div class="custom-checkbox" data-group="only1">
                     <input type="checkbox" id="scambio" name="scambio" value="scambio" class="hidden-checkbox">
-                    <label for="scambio" class="custom-label">scambio di chiavi</label>
+                    <label for="scambio" class="custom-label">Scambio di Chiavi</label>
                 </div>
 
                 <p>Puoi optare per la nostra offerta <a href="/offer">Shark Connect<a>: </p>
@@ -174,10 +176,11 @@
                     <label for="price">Prezzo in euro sui 30 minuti:</label>
                     <div class="price-input-wrapper">
                         <button type="button" class="price-btn" id="decrement">-</button>
-                        <input type="number" id="price" name="price" class="price-input" value="0" min="0">
+                        <input type="number" id="price" name="price" class="price-input" step="0.10" min="0" value="0.00">
                         <button type="button" class="price-btn" id="increment">+</button>
                     </div>
                 </div>
+
                 <p>Il prezzo da inserire si basa sui 30 minuti.</p>
                 <p>Il 90% del guadagno verrà accreditato direttamente sul tuo conto.</p>
                 <p>Il 10% sarà preso per supportare la piattaforma.</p>
@@ -241,17 +244,17 @@
 
         incrementButton.addEventListener("click", function() {
             let currentPrice = parseFloat(priceInput.value) || 0;
-            currentPrice += 1;
-            priceInput.value = currentPrice;
+            currentPrice += 0.10;
+            priceInput.value = currentPrice.toFixed(2); // Mostra sempre due decimali
         });
 
         decrementButton.addEventListener("click", function() {
             let currentPrice = parseFloat(priceInput.value) || 0;
-            currentPrice -= 1;
+            currentPrice -= 0.10;
             if (currentPrice < 0) {
                 currentPrice = 0;
             }
-            priceInput.value = currentPrice;
+            priceInput.value = currentPrice.toFixed(2); // Mostra sempre due decimali
         });
     });
 </script>

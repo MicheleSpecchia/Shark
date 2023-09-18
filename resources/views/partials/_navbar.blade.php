@@ -38,7 +38,6 @@
                 <a href="/parks/manage" class="sub-menu-link">
                     <img src="{{asset('images/setting.png')}}" alt="">
                     <p>I tuoi parcheggi</p>
-                    <span>></span>
                 </a>
 
                 <a href="#" class="sub-menu-link">

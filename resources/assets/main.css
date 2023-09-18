@@ -821,7 +821,7 @@ input[type="time"] {
   flex: 1;
   padding: 20px;
   margin-top: 64px;
-  margin-bottom: 20px;
+  margin-bottom: 64px;
   width: 700px;
 }
 
@@ -868,6 +868,11 @@ input[type="time"] {
   margin-right: 10px;
 }
 
+.create-card a{
+  text-align: center;
+  text-decoration: none;
+}
+
 .create-card .create-btn:hover {
   background-color: #1a2a6c;
 }
@@ -891,6 +896,7 @@ input[type="time"] {
 }
 
 .custom-label {
+  text-align: center;
   background-color: white;
   display: inline-block;
   padding: 5px 10px;
@@ -1120,3 +1126,104 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 20px;
   margin-top: 10px;
 }
+
+
+/* CSS per il messaggio popup e il design */
+.popup {
+  display: none;
+  position: fixed;
+  top: 20%; /* Sposta il popup più in alto rispetto al 50% originale */
+  left: 50%;
+  transform: translate(-50%, 0); /* Non spostare verticalmente (0) */
+  background-color: rgba(255, 0, 0, 0.8);
+  z-index: 999;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  color: #fff;
+  width: 80%; /* Rendi il popup più lungo rispetto al 400px originale */
+  max-width: 600px; /* Imposta una larghezza massima */
+}
+
+.popup-content {
+  margin: 0 auto;
+}
+
+.popup h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.popup p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.popup.active {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+.manage-btn-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px; 
+}
+
+.btn-manage {
+  flex: 1;
+  margin: 0 5px;
+  margin-left: 10px;
+}
+
+.btn-fixed-size {
+  width: 120px; /* Imposta la larghezza desiderata per tutti i pulsanti */
+  height: 40px; /* Imposta l'altezza desiderata per tutti i pulsanti */
+  font-size: 14px; /* Imposta la dimensione del testo dei pulsanti */
+  padding: 5px 10px; /* Imposta il padding interno dei pulsanti */
+}
+
+/* Nel tuo file CSS personalizzato o framework CSS */
+.table-container {
+  background-color: #fff; /* Imposta il background su bianco */
+  padding: 20px; /* Aggiungi un po' di spazio interno per separare il contenuto dal bordo */
+  border: 1px solid #ddd; /* Aggiungi un bordo se desideri */
+  border-radius: 5px; /* Aggiungi un po' di bordo arrotondato se desideri */
+}
+
+.status-circle {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.blue {
+  background-color: rgb(0, 225, 255);
+}
+
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.table-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  color: black;
+}
+
