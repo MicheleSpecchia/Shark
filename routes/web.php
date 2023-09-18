@@ -60,12 +60,11 @@ Route::post('/parks/create/step4', [ParkController::class, 'storeStep4'])->middl
 Route::post('/parks/create/step5', [ParkController::class, 'storeStep5'])->middleware('auth');
 Route::post('/parks/store', [ParkController::class, 'parkStore'])->middleware('auth');
 Route::get('/parks/{park}/edit', [ParkController::class, 'edit'])->middleware('auth');
-Route::get('/parks/{park}', [ParkController::class, 'show'])->middleware('auth');
+Route::get('/parks/{park}', [ParkController::class, 'show']);
 Route::put('/parks/{park}', [ParkController::class, 'update'])->middleware('auth');
 Route::delete('/parks/{park}', [ParkController::class, 'destroy'])->middleware('auth');
 Route::middleware(['auth'])->group(function () {
-    Route::get('/parks/{park}/reviews/create', [ParkController::class, 'createReview'])->name('reviews.create');
-    Route::post('/parks/{park}/reviews', [ParkController::class, 'storeReview'])->name('reviews.store');
+    Route::post('/parks/{park}/reservations/{reservation}/reviews', [ParkController::class, 'storeReview'])->name('reviews.store');
 });
 
 
@@ -100,4 +99,3 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 #--- STRIPE  ---#
 Route::get('/payment-success', [ReservationController::class, 'success'])->name('payment.success');
 Route::get('/payment-cancel', [ReservationController::class, 'cancel'])->name('payment.cancel');
-
