@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('cap');
             $table->string('location');
             $table->longText('description');
+            $table->string('foto') -> nullable();
             $table->float('stars')->nullable();
             $table->integer('automobili');
             $table->integer('motocicli');

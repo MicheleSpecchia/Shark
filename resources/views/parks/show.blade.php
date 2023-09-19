@@ -55,7 +55,11 @@
             <!-- Colonna in alto a sinistra per l'immagine -->
             <div class="col-lg-6">
                 <div class="parks-img">
-                    <img src="{{ asset('/images/vision.png')}}" alt="Park Image" class="img-fluid">
+                    @if($park->foto)
+                    <img src="{{asset($park->foto)}}" class="img-fluid mx-auto d-block" style="border-radius: 15px;" alt="product picture">
+                    @else
+                    <img src="{{asset('/images/vision.png')}}" class="img-fluid mx-auto d-block" style="border-radius: 15px;" alt="product picture">
+                    @endif
                 </div>
             </div>
 

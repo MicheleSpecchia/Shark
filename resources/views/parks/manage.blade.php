@@ -16,7 +16,11 @@
                 <div class="card-wrap p-3" style="background-color: white; border-radius: 15px;">
 
                     <div class="con-img-wrap m-auto">
-                        <img src="{{$park->foto ? asset('storage/' . $park->foto) : asset('/images/vision.png')}}" class="img-fluid mx-auto d-block" style="border-radius: 15px;" alt="product picture">
+                        @if($park->foto)
+                        <img src="{{asset($park->foto)}}" class="img-fluid mx-auto d-block" style="border-radius: 15px;" alt="product picture">
+                        @else
+                        <img src="{{asset('/images/vision.png')}}" class="img-fluid mx-auto d-block" style="border-radius: 15px;" alt="product picture">
+                        @endif
                     </div>
 
                     <div class="con-wrap mt-4">

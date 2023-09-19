@@ -52,9 +52,6 @@
                 </div>
                 <h2>Altri dettagli</h2>
 
-                <label for="image_path">Foto</label>
-                <input type="file" id="image_path" name="image_path" required />
-
                 <label for="description">Descrizione</label>
                 <textarea id="description" name="description" class="form-control" row="10" required></textarea>
 
@@ -202,12 +199,11 @@
                     <div class="progress" style="width: {{ ($currentStep - 1) * 16.67 }}%;"></div>
                 </div>
                 @csrf
+
                 <h2>Termini e condizioni</h2>
 
                 <label for="cond">Termini e condizioni</label>
                 <input type="checkbox" id="cond" name="cond" value="cond" required> Accetto Termini e Condizioni
-
-
 
                 <div class="button-wrapper">
                     <button type="button" class="create-btn btn-secondary" onclick="history.back()">Precedente</button>

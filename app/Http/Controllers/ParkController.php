@@ -42,8 +42,6 @@ class ParkController extends Controller
 
         session()->put('costoTotale', $costoTotale);
 
-
-
         return view('parks.show', [
             'park' => $park,
             'reviews' => $reviews,
@@ -169,7 +167,6 @@ class ParkController extends Controller
     {
 
         $form_field = $request->validate([
-            'image_path' => 'required',
             'description' => 'required',
         ]);
 
@@ -222,19 +219,9 @@ class ParkController extends Controller
         return view('parks.create', compact('currentStep'));
     }
 
-    public function storeStep6(Request $request)
-    {
-        $form_field = $request->validate([
-            'cond'
-        ]);
-
-        session(['step6' => $form_field]);
-    }
-
     //store park data
     public function parkStore(Request $request)
     {
-
         $step1Data = session('step1');
         $step2Data = session('step2');
         $step3Data = session('step3');
@@ -272,11 +259,6 @@ class ParkController extends Controller
 
         $park->save();
 
-        $parkImg = new ParkImage;
-        $parkImg['park_id'] = $park['id'];
-        $parkImg['image_path'] = $step2Data['image_path'];
-        $parkImg->save();
-
         return redirect('/')->with('message', 'Annuncio created successfully!');
     }
 
@@ -296,6 +278,7 @@ class ParkController extends Controller
             'cap' => 'required',
             'location' => 'required',
             'description' => 'required',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'price' => 'required'
         ]);
 
@@ -303,11 +286,11 @@ class ParkController extends Controller
 
 
         if ($request->hasFile('foto')) {
-            $form_field['foto'] = $request->file('foto')->store('fotos', 'public');
-            $parkImg = new ParkImage;
-            $parkImg['park_id'] = $park['id'];
-            $parkImg['image_path'] = $form_field['foto'];
-            $parkImg->save();
+            $image = $request->file('foto');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images', $imageName);
+            $park['foto'] = 'storage/images/' . $imageName;
+            $park->save();
         }
 
         return redirect('parks/manage');

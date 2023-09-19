@@ -29,7 +29,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        function miaFunction() {
+        function submenu() {
             var subMenuWrap = document.querySelector('.sub-menu-wrap');
             if (subMenuWrap.style.display === 'none' || subMenuWrap.style.display === '') {
                 subMenuWrap.style.display = 'block'; // Mostra l'elemento

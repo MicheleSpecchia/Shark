@@ -19,7 +19,7 @@
         </ul>
 
         @auth
-        <img src="{{  auth()->user()->avatar  }}" class="user-pic" onclick="miaFunction()">
+        <img src="{{  auth()->user()->avatar  }}" class="user-pic" onclick="submenu()">
 
         <div class="sub-menu-wrap" id="subMenu">
             <div class="sub-menu" style="border-radius: 10px">
