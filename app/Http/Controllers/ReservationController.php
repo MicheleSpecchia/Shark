@@ -7,6 +7,8 @@ use App\Models\Reservation;
 use Illuminate\Validation\Rule;
 use App\Models\ParkReview;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Park;
 
 
 
@@ -44,7 +46,6 @@ class ReservationController extends Controller
         Reservation::create($form_field);
 
         return redirect('/user-reservations')->with('message', 'Prenotazione effettuata con successo.');
-
     }
 
     public function success(Request $request)
@@ -60,17 +61,18 @@ class ReservationController extends Controller
         $reservation->price = session('costoTotale');
         $reservation->veicolo = session('search.veicolo');
         $reservation->save();
-        
+
         $owner_id = session('park_owner');
         $costo = session('costoTotale');
         $guadagno_admin = $costo * 0.10;
-        $guadagno_owner = $costo - $guadagno_admin;        
- 
-        DB::table('users')
-        ->where('id', $owner_id)
-        ->increment('saldo', $guadagno_owner);
+        $guadagno_owner = $costo - $guadagno_admin;
 
         DB::table('users')
+            ->where('id', $owner_id)
+            ->increment('saldo', $guadagno_owner);
+
+        DB::table('users')
+
         ->where('role', 1)
         ->increment('saldo', $guadagno_admin);
         return redirect('/user-reservations')->with('message', 'Prenotazione effettuata con successo.'); 
@@ -80,7 +82,7 @@ class ReservationController extends Controller
         return redirect('/user-reservations')->with('message', 'Error! Prenotazione non effettuata.');
     }
 
-    
+
 
     public function index()
     {
@@ -111,6 +113,26 @@ class ReservationController extends Controller
     {
         try {
             $reservation = Reservation::findOrFail($id);
+            $price = $reservation->price;
+            $adminFee = $price * 0.10;
+            $ownerAmount = $price - $adminFee;
+
+            // Deduci il 10% dal saldo dell'admin
+            $admin = User::find(1);
+            $admin->saldo -= $adminFee;
+            $admin->save();
+
+            // Trova il proprietario del parcheggio e deduci l'importo
+            $parkOwner = Park::find($reservation->park_id)->user; // Supponendo che ci sia una relazione tra il parcheggio e l'utente
+            $parkOwner->saldo -= $ownerAmount;
+            $parkOwner->save();
+
+            // Accredita l'intero importo al saldo dell'utente che ha fatto la prenotazione
+            $user = User::find($reservation->user_id);
+            $user->saldo += $price;
+            $user->save();
+
+            // Ora cancella la prenotazione
             $reservation->delete();
 
             if (request()->ajax()) {
@@ -126,7 +148,4 @@ class ReservationController extends Controller
             return back()->with('error', 'Si è verificato un errore durante la cancellazione.');
         }
     }
-
-
-    
 }
