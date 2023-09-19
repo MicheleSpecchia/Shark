@@ -72,18 +72,14 @@ class ReservationController extends Controller
             ->increment('saldo', $guadagno_owner);
 
         DB::table('users')
-            ->where('role', 1)
-            ->increment('saldo', $guadagno_admin);
 
-
-
-
-        return view('payment-success');
+        ->where('role', 1)
+        ->increment('saldo', $guadagno_admin);
+        return redirect('/user-reservations')->with('message', 'Prenotazione effettuata con successo.'); 
     }
 
-    public function cancel()
-    {
-        return view('home');
+    public function cancel(){
+        return redirect('/user-reservations')->with('message', 'Error! Prenotazione non effettuata.');
     }
 
 

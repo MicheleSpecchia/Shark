@@ -24,7 +24,7 @@
                     <td>{{ $prenotazione->data_fine }}</td>
                     <td>{{ $prenotazione->start_time }}</td>
                     <td>{{ $prenotazione->end_time }}</td>
-                    <td>{{ $prenotazione->price }}</td>
+                    <td>{{ $prenotazione->price }}€</td>
                     <td>{{ $prenotazione->veicolo }}</td>
                     <td>
                         @php

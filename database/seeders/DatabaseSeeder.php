@@ -18,29 +18,35 @@ class DatabaseSeeder extends Seeder
         $user = User::factory()->create([
             'nome' => 'Michele ',
             'cognome' => 'Specchia',
-            'email' => 'michele@gmail.com',
+            'email' => 'michele.specchia@edu.unife.it',
             'role'  => '1',
-            'indirizzo' => 'Via Capretta Felice 1',
+            'indirizzo' => 'Piazzetta Colomba 4',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'remember_token' => '2389731509'
         ]);
 
         $user = User::factory()->create([
-            'nome' => 'Luca',
-            'cognome' => 'Faccio',
-            'email' => 'lucafaccio@gmail.com',
+            'nome' => 'Alessandro',
+            'cognome' => 'Notaro',
+            'email' => 'alessandro.notaro@edu.unife.it',
             'role'  => '2',
-            'indirizzo' => 'Via Capretta Triste 1',
+            'indirizzo' => 'Via Piangipane 7',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+            'remember_token' => '9085876012'
+        ]);
+
+        $user = User::factory()->create([
+            'nome' => 'Riccardp',
+            'cognome' => 'Marra',
+            'email' => 'riccardo.marra01@edu.unife.it',
+            'role'  => '2',
+            'indirizzo' => 'Via Piangipane 7',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'remember_token' => '9085876012'
         ]);
 
         $parks = Park::factory(12)->create();
-
-        // Assumendo che tu abbia un ReservationSeeder per generare le prenotazioni
         $this->call(ReservationsTableSeeder::class);
-
-        // Ora che hai utenti, parchi e prenotazioni, genera le recensioni dei parchi
         $this->call(ParkReviewSeeder::class);
     }    
 }
