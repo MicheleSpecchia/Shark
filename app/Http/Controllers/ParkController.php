@@ -37,8 +37,12 @@ class ParkController extends Controller
     
         $minutiPrenotazione = $inizio->diffInMinutes($fine); //minuti totali
         $minutiPrenotazione = $minutiPrenotazione / 30; //numero di intervalli di 30 minuti
-    
-        $costoAlMinuto = $park->price;  //prezzo per 30min
+        
+
+        //logica prezzo con sconti progressivi
+        $costoMinimo = $park->price;  //prezzo per 30min
+        
+        
         $costoTotale = $minutiPrenotazione * $costoAlMinuto;
 
         session()->put('costoTotale', $costoTotale);

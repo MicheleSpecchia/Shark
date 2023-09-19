@@ -58,7 +58,7 @@
         <div class="col-lg-6">
             <br>
             <br>
-            <div class="park-details">
+            <div class="park-details" style="height: 955px">
 
             <div id="imageCarousel" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
