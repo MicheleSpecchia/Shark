@@ -9,6 +9,7 @@ body {
 
 
 /* NAVBAR-UTENTE */
+/* NAVBAR-UTENTE */
 * {
   margin: 0;
   padding: 0;
@@ -33,7 +34,7 @@ nav {
 }
 
 .logo-img {
-  width: 120px;
+  width: 100px;
 }
 
 .user-pic {
@@ -53,11 +54,17 @@ nav ul li {
   display: inline-block;
   list-style: none;
   margin: 10px 20px;
+  margin-top: 50px;
 }
 
 nav ul li a {
   color: #ffff;
   text-decoration: none;
+}
+
+nav ul li a:hover {
+  text-decoration: underline; /* Aggiunge la sottolineatura quando si passa sopra il link */
+  color: #ffff; /* Cambia il colore del testo in bianco quando si passa sopra */
 }
 
 .sub-menu-wrap {

@@ -5,11 +5,11 @@
         </a>
         <ul>
 
-            <li><a href="#">About</a></li>
+            <li><a href="/about">About</a></li>
             @auth
             <li><a href="/parks/create">Affitta con Shark</a></li>
             @endauth
-            <li><a href="/user-reservations">Tutorial</a></li>
+            
 
             @guest
             <li><a href="/login">Affitta con Shark</a></li>
@@ -19,20 +19,19 @@
         </ul>
 
         @auth
-        <img src="{{auth()->user()->avatar}}" class="user-pic" onclick="miaFunction()">
+        <img src="{{  auth()->user()->avatar  }}" class="user-pic" onclick="miaFunction()">
 
         <div class="sub-menu-wrap" id="subMenu">
             <div class="sub-menu" style="border-radius: 10px">
                 <div class="user-info">
                     <img src="{{ auth()->user()->avatar  }}" class="user-pic">
-                    <h2 style="margin-top: 30px; transition: none">{{ auth()->user()->nome }}</h2>
+                    <h2 style="margin-top: 30px; transition: none">{{ auth()->user()->nome }} <br> {{auth()->user()->saldo}}€ </h2>
                 </div>
                 <hr>
 
                 <a href="/editProfile" class="sub-menu-link">
                     <img src="{{asset('images/profile.png')}}" alt="">
                     <p>Edit profile</p>
-                    <span>></span>
                 </a>
 
                 <a href="/parks/manage" class="sub-menu-link">
@@ -43,19 +42,16 @@
                 <a href="#" class="sub-menu-link">
                     <img src="{{asset('images/help.png')}}" alt="">
                     <p>Help and support</p>
-                    <span>></span>
                 </a>
 
                 <a href="{{ route('user.reservations') }}" class="sub-menu-link">
                     <img src="{{asset('images/reservation.png')}}" alt="">
                     <p>Prenotazioni effettuate</p>
-                    <span>></span>
                 </a>
 
                 <a href="#" class="sub-menu-link" onclick="performLogout()">
                     <img src="{{asset('images/logout.png')}}" alt="">
                     <p>Logout</p>
-                    <span>></span>
                 </a>
             </div>
         </div>
