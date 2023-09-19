@@ -380,6 +380,9 @@ h2,
   position: relative;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center;
 }
 
 /* Prima parte dello sfondo (colore superiore) */
@@ -399,23 +402,28 @@ h2,
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-}
-
-/* Stile del contenitore del logo e del modulo di accesso */
-.logo-form-container {
-  display: flex;
+  width: 100%; 
+  max-width: 500px; 
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border: 2px solid #1e4beb;
+  margin: 20px; 
 }
+
+/* Stile del modulo di accesso */
+.login-form {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+  width: 100%; /* Usa larghezza al 100% per adattarsi al contenuto */
+}
+
 
 /* Stile del logo */
 .logo {
   flex: 1;
   text-align: center;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -427,17 +435,6 @@ h2,
   height: auto;
 }
 
-/* Stile del modulo di accesso */
-.login-form {
-  flex: 1;
-  padding: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 500px;
-}
 
 .login-form h2 {
   text-align: center;
@@ -468,15 +465,16 @@ h2,
   font-weight: bold;
 }
 
+/* Stile del pulsante "ACCEDI" */
 .login-form button {
-  width: 50%;
+  width: 100%; /* Larghezza al 100% per adattarsi al contenuto */
   padding: 10px;
   background-color: #007bff;
   color: #fff;
   border: none;
   cursor: pointer;
   font-weight: bold;
-  margin-top: 20px
+  margin-top: 20px;
 }
 
 .login-form button:hover {
@@ -485,7 +483,7 @@ h2,
 
 .additional-links {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 20px; /* Ridotto lo spazio superiore */
 }
 
 .additional-links a {
@@ -1112,7 +1110,6 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-top: 20px;
   display: flex;
   align-items: center;
-  /* Centro l'avatar e il nome verticalmente */
 }
 
 .owner-details img.avatar {

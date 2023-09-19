@@ -140,7 +140,6 @@
                     <h1>Dati Parcheggio</h1>
                     <p>Città: {{$park->location}}</p>
                     <p>Indirizzo: {{$park->address}}</p>
-                    <p>Desrizione: {{ $park->description }}</p>
                     <div class="park-rating">
                         @for ($i = 1; $i <= 5; $i++) @if ($i <=$park->stars)
                             <i class="fas fa-star"></i>
@@ -152,18 +151,20 @@
                     <p class="park-price">A partire da {{ $park->price }}€ la mezz'ora</p>
 
                     <!-- Aggiungi immagine profilo e nome dell'utente qui -->
-                    <div class="owner-details">
-                        <img src="{{ asset($park->user->avatar) }}" alt="Avatar" class="avatar">
-                        <div class="owner-info">
-                            <h1> {{ $park->user->nome }} </h1>
-                        </div>
-                    </div>
+
                 </div>
             </div>
 
             <!-- Colonna in basso a destra per la mappa -->
             <div class="col-lg-6">
                 <div id="google-map"></div>
+            </div>
+        </div>
+
+        <div class="owner-details" style="background:#fff;">
+            <img src="{{ asset($park->user->avatar) }}" alt="Avatar" class="avatar">
+            <div class="owner-info">
+                <h2 style="color:#1a2a6c;"> {{ $park->user->nome }} </h2>
             </div>
         </div>
 

@@ -14,9 +14,9 @@
 
         </div>
         </div>
-    @endif
+        @endif
 
-    @if(isset($parks) && count($parks) > 0)
+        @if(isset($parks) && count($parks) > 0)
 
         <div class="search-content">
             @include('partials._search')
@@ -34,11 +34,8 @@
             </div>
         </div>
 
-        <div>
-            {{ $parks->links('pagination::bootstrap-4') }}
-        </div>
 
-    @endif
+        @endif
 
         <div id="popup" class="popup">
             <div class="popup-content">
@@ -57,4 +54,4 @@
     document.getElementById('popup').style.display = 'none';
     }, 5000);
     </script>
-@endif
+    @endif

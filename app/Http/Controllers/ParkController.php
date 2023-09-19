@@ -111,9 +111,6 @@ class ParkController extends Controller
             }
         }
 
-        $perPage = 8;
-        $page = $request->input('page', 1);
-        $parks = new Paginator($availableParks, $perPage, $page);
         if (Auth::user()) {
             $user_role = Auth::user()->role;
 
