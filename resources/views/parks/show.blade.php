@@ -54,34 +54,11 @@
         <div class="row">
             <!-- Colonna in alto a sinistra per l'immagine -->
             <div class="col-lg-6">
-                <br>
-                <br>
-                <div class="park-img">
-
-                    <div id="imageCarousel" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            @foreach ($images as $key => $image)
-                            <li data-target="#imageCarousel" data-slide-to="{{ $key }}" class="{{ $key === 0 ? 'active' : '' }}"></li>
-                            @endforeach
-                        </ol>
-                        <div class="carousel-inner">
-                            @foreach ($images as $key => $image)
-                            <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
-                                <img src="{{ asset($image->image_path) }}" class="d-block w-100" alt="Image">
-                            </div>
-                            @endforeach
-                        </div>
-                        <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
+                <div class="parks-img">
+                    <img src="{{ asset('/images/vision.png')}}" alt="Park Image" class="img-fluid">
                 </div>
             </div>
+
 
             <!-- Colonna in alto a destra per i dati del parcheggio -->
             <div class="col-lg-6">
@@ -97,19 +74,19 @@
                         @endauth
                         <div class="form-group">
                             <label for="check-in">Check-in</label>
-                            <input type="date" name="data_inizio" class="form-control" value="{{ session('search.date-input') }}">
+                            <input type="text" name="data_inizio" class="form-control" value="{{ session('search.date-input') }}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="check-out">Check-out</label>
-                            <input type="date" name="data_fine" class="form-control" value="{{ session('search.date-output') }}">
+                            <input type="text" name="data_fine" class="form-control" value="{{ session('search.date-output') }}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="start-time">Ora inizio</label>
-                            <input type="time" name="start_time" class="form-control" value="{{ session('search.time-input') }}">
+                            <input type="text" name="start_time" class="form-control" value="{{ session('search.time-input') }}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="end-time">Ora fine</label>
-                            <input type="time" name="end_time" class="form-control" value="{{ session('search.time-output') }}">
+                            <input type="text" name="end_time" class="form-control" value="{{ session('search.time-output') }}" readonly>
                         </div>
 
                         @auth

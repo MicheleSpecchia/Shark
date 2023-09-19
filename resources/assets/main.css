@@ -63,8 +63,9 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  text-decoration: underline; /* Aggiunge la sottolineatura quando si passa sopra il link */
-  color: #ffff; /* Cambia il colore del testo in bianco quando si passa sopra */
+  color: #ffff;
+  text-decoration: none;
+  border-bottom: 2px solid #ffffff;
 }
 
 .sub-menu-wrap {

@@ -9,7 +9,7 @@
             @auth
             <li><a href="/parks/create">Affitta con Shark</a></li>
             @endauth
-            
+
 
             @guest
             <li><a href="/login">Affitta con Shark</a></li>
@@ -34,20 +34,19 @@
                     <p>Edit profile</p>
                 </a>
 
+                @if(auth()->user()->parks->count() > 0)
                 <a href="/parks/manage" class="sub-menu-link">
                     <img src="{{asset('images/setting.png')}}" alt="">
                     <p>I tuoi parcheggi</p>
                 </a>
+                @endif
 
-                <a href="#" class="sub-menu-link">
-                    <img src="{{asset('images/help.png')}}" alt="">
-                    <p>Help and support</p>
-                </a>
-
+                @if(auth()->user()->reservations->count() > 0)
                 <a href="{{ route('user.reservations') }}" class="sub-menu-link">
                     <img src="{{asset('images/reservation.png')}}" alt="">
                     <p>Prenotazioni effettuate</p>
                 </a>
+                @endif
 
                 <a href="#" class="sub-menu-link" onclick="performLogout()">
                     <img src="{{asset('images/logout.png')}}" alt="">
