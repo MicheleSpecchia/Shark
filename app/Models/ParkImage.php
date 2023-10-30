@@ -18,4 +18,5 @@ class ParkImage extends Model
     {
         return $this->belongsTo(Park::class);
     }
+    
 }
