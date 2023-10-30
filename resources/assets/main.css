@@ -9,6 +9,7 @@ body {
 
 
 /* NAVBAR-UTENTE */
+/* NAVBAR-UTENTE */
 * {
   margin: 0;
   padding: 0;
@@ -386,6 +387,9 @@ h2,
   position: relative;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center;
 }
 
 /* Prima parte dello sfondo (colore superiore) */
@@ -405,23 +409,28 @@ h2,
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-}
-
-/* Stile del contenitore del logo e del modulo di accesso */
-.logo-form-container {
-  display: flex;
+  width: 100%; 
+  max-width: 500px; 
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border: 2px solid #1e4beb;
+  margin: 20px; 
 }
+
+/* Stile del modulo di accesso */
+.login-form {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+  width: 100%; /* Usa larghezza al 100% per adattarsi al contenuto */
+}
+
 
 /* Stile del logo */
 .logo {
   flex: 1;
   text-align: center;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -433,17 +442,6 @@ h2,
   height: auto;
 }
 
-/* Stile del modulo di accesso */
-.login-form {
-  flex: 1;
-  padding: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 500px;
-}
 
 .login-form h2 {
   text-align: center;
@@ -474,15 +472,16 @@ h2,
   font-weight: bold;
 }
 
+/* Stile del pulsante "ACCEDI" */
 .login-form button {
-  width: 50%;
+  width: 100%; /* Larghezza al 100% per adattarsi al contenuto */
   padding: 10px;
   background-color: #007bff;
   color: #fff;
   border: none;
   cursor: pointer;
   font-weight: bold;
-  margin-top: 20px
+  margin-top: 20px;
 }
 
 .login-form button:hover {
@@ -491,7 +490,7 @@ h2,
 
 .additional-links {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 20px; /* Ridotto lo spazio superiore */
 }
 
 .additional-links a {
@@ -874,7 +873,7 @@ input[type="time"] {
   margin-right: 10px;
 }
 
-.create-card a{
+.create-card a {
   text-align: center;
   text-decoration: none;
 }
@@ -980,26 +979,48 @@ input[type="number"]::-webkit-outer-spin-button {
   transition: width 0.3s ease-in-out;
 }
 
-
-
-
 /*--- SHOW PARK ---*/
 .park-details {
-  color: #fff;
+  color: #1a2a6c;
+  font: bold;
   padding: 20px;
   background-color: #fff;
-  border-radius: 15px;
+  border-radius: 20px;
+  border: 2px solid white;
+  height: 500px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.parks-img {
+  height: 500px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.park-img img {
+  width: 100%;
+  /* L'immagine coprirà l'intera larghezza del contenitore */
+  height: auto;
+  /* L'altezza sarà ridimensionata in modo proporzionale */
+  display: block;
+  /* Rimuove spazi vuoti verticali sotto l'immagine */
+
 }
 
 .park-details h1 {
   font-size: 36px;
   margin-top: 10px;
+
   color: #1a2a6c;
 }
 
 .park-details p {
   font-size: 18px;
   color: #1a2a6c;
+
 }
 
 .park-rating {
@@ -1013,57 +1034,60 @@ input[type="number"]::-webkit-outer-spin-button {
   color: #1a2a6c;
 }
 
+/* Stile generale per il form */
+.booking-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: 500px;
+}
+
 .booking-form input[type="text"],
 .booking-form input[type="date"],
 .booking-form input[type="time"],
 .booking-form select {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-    background-color: #f8f8f8;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: #f8f8f8;
 }
 
 /* Stile per le etichette dei campi */
 .booking-form label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 10px;
-    font-size: 18px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
 }
 
 /* Stile per il pulsante di invio */
 .booking-form button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
 }
 
 .booking-form button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 /* Stile per i messaggi di errore */
 .error-message {
-    color: #ff0000;
-    font-size: 16px;
-    margin-top: 10px;
+  color: #ff0000;
+  font-size: 16px;
+  margin-top: 10px;
 }
 
-/* Stile generale per il form */
-.booking-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
+
 
 /**/
 
@@ -1096,7 +1120,6 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-top: 20px;
   display: flex;
   align-items: center;
-  /* Centro l'avatar e il nome verticalmente */
 }
 
 .owner-details img.avatar {
@@ -1255,12 +1278,17 @@ input[type="number"]::-webkit-outer-spin-button {
   justify-content: center;
   align-items: center;
 }
+
 .dashboard-overview h1 {
-  font-size: 24px;  /* rendilo più piccolo, ad esempio 24px */
-  color: #1a2a6c;  /* colore specificato */
-  text-decoration: underline;  /* sottolineato */
+  font-size: 24px;
+  /* rendilo più piccolo, ad esempio 24px */
+  color: #1a2a6c;
+  /* colore specificato */
+  text-decoration: underline;
+  /* sottolineato */
   /* e puoi anche aggiungere altre proprietà se necessario */
 }
+
 /*ADMIN SEZIONE UTENTI*/
 /* Aggiunte e modifiche agli stili per la sezione Utenti */
 
@@ -1271,19 +1299,25 @@ input[type="number"]::-webkit-outer-spin-button {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.dashboard-overview table th, .dashboard-overview table td {
-  padding: 10px 20px; /* Aggiunto padding orizzontale */
+.dashboard-overview table th,
+.dashboard-overview table td {
+  padding: 10px 20px;
+  /* Aggiunto padding orizzontale */
   border-bottom: 1px solid #e0e0e0;
   text-align: left;
-  color: #1a2a6c; /* Colore del testo per matchare con il resto della dashboard */
+  color: #1a2a6c;
+  /* Colore del testo per matchare con il resto della dashboard */
 }
 
-.dashboard-overview table tr:last-child th, .dashboard-overview table tr:last-child td {
-  border-bottom: none; /* Rimuove il bordo dall'ultima riga */
+.dashboard-overview table tr:last-child th,
+.dashboard-overview table tr:last-child td {
+  border-bottom: none;
+  /* Rimuove il bordo dall'ultima riga */
 }
 
 .dashboard-overview table tr:hover {
-  background-color: #f4f8ff; /* Sfondo leggermente più chiaro al passaggio del mouse */
+  background-color: #f4f8ff;
+  /* Sfondo leggermente più chiaro al passaggio del mouse */
 }
 
 .dashboard-overview .delete-user-btn {
@@ -1318,7 +1352,8 @@ input[type="number"]::-webkit-outer-spin-button {
 .dashboard-overview .toggle-role-btn {
   padding: 5px 10px;
   border: none;
-  background-color: #bfe0f6;  /* Questo è un blu generico, ma puoi scegliere qualsiasi colore tu preferisca */
+  background-color: #bfe0f6;
+  /* Questo è un blu generico, ma puoi scegliere qualsiasi colore tu preferisca */
   color: #fff;
   cursor: pointer;
   border-radius: 3px;
@@ -1326,47 +1361,60 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .dashboard-overview .toggle-role-btn:hover {
-  background-color: #2980b9;  /* Una versione leggermente più scura del colore del pulsante per l'effetto hover */
+  background-color: #2980b9;
+  /* Una versione leggermente più scura del colore del pulsante per l'effetto hover */
 }
 
 .dashboard-overview .toggle-role-btn[data-role="1"] {
-  background-color: green;  /* Colore di sfondo per Admin */
+  background-color: green;
+  /* Colore di sfondo per Admin */
 }
 
 .dashboard-overview .toggle-role-btn[data-role="2"] {
-  background-color: #e74c3c;    /* Colore di sfondo per Utente */
+  background-color: #e74c3c;
+  /* Colore di sfondo per Utente */
 }
 
 .dashboard-overview .toggle-role-btn[data-role="1"]:hover {
-  background-color: #006400;  /* Una versione leggermente più scura del verde per Admin quando si passa sopra con il mouse */
+  background-color: #006400;
+  /* Una versione leggermente più scura del verde per Admin quando si passa sopra con il mouse */
 }
 
 .dashboard-overview .toggle-role-btn[data-role="2"]:hover {
-  background-color: #8b0000; 
-} /* Una versione
+  background-color: #8b0000;
+}
+
+/* Una versione
 
 /* Stile per l'intestazione della sezione utenti */
 .dashboard-overview h2 {
-  font-size: 20px;  /* Rendilo un po' più piccolo rispetto all'h1 */
-  color: #1a2a6c;  /* Uguale al resto della dashboard */
-  margin-bottom: 20px; /* Spazio tra l'intestazione e la tabella */
+  font-size: 20px;
+  /* Rendilo un po' più piccolo rispetto all'h1 */
+  color: #1a2a6c;
+  /* Uguale al resto della dashboard */
+  margin-bottom: 20px;
+  /* Spazio tra l'intestazione e la tabella */
 }
 
 /* CSS per il messaggio popup e il design */
 .popup {
   display: none;
   position: fixed;
-  top: 20%; /* Sposta il popup più in alto rispetto al 50% originale */
+  top: 20%;
+  /* Sposta il popup più in alto rispetto al 50% originale */
   left: 50%;
-  transform: translate(-50%, 0); /* Non spostare verticalmente (0) */
+  transform: translate(-50%, 0);
+  /* Non spostare verticalmente (0) */
   background-color: rgba(255, 0, 0, 0.8);
   z-index: 999;
   padding: 20px;
   border-radius: 5px;
   text-align: center;
   color: #fff;
-  width: 80%; /* Rendi il popup più lungo rispetto al 400px originale */
-  max-width: 600px; /* Imposta una larghezza massima */
+  width: 80%;
+  /* Rendi il popup più lungo rispetto al 400px originale */
+  max-width: 600px;
+  /* Imposta una larghezza massima */
 }
 
 .popup-content {
@@ -1389,10 +1437,11 @@ input[type="number"]::-webkit-outer-spin-button {
 
 @keyframes fadeIn {
   0% {
-      opacity: 0;
+    opacity: 0;
   }
+
   100% {
-      opacity: 1;
+    opacity: 1;
   }
 }
 
@@ -1400,7 +1449,7 @@ input[type="number"]::-webkit-outer-spin-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px; 
+  margin-top: 10px;
 }
 
 .btn-manage {
@@ -1410,18 +1459,26 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .btn-fixed-size {
-  width: 120px; /* Imposta la larghezza desiderata per tutti i pulsanti */
-  height: 40px; /* Imposta l'altezza desiderata per tutti i pulsanti */
-  font-size: 14px; /* Imposta la dimensione del testo dei pulsanti */
-  padding: 5px 10px; /* Imposta il padding interno dei pulsanti */
+  width: 120px;
+  /* Imposta la larghezza desiderata per tutti i pulsanti */
+  height: 40px;
+  /* Imposta l'altezza desiderata per tutti i pulsanti */
+  font-size: 14px;
+  /* Imposta la dimensione del testo dei pulsanti */
+  padding: 5px 10px;
+  /* Imposta il padding interno dei pulsanti */
 }
 
 /* Nel tuo file CSS personalizzato o framework CSS */
 .table-container {
-  background-color: #fff; /* Imposta il background su bianco */
-  padding: 20px; /* Aggiungi un po' di spazio interno per separare il contenuto dal bordo */
-  border: 1px solid #ddd; /* Aggiungi un bordo se desideri */
-  border-radius: 5px; /* Aggiungi un po' di bordo arrotondato se desideri */
+  background-color: #fff;
+  /* Imposta il background su bianco */
+  padding: 20px;
+  /* Aggiungi un po' di spazio interno per separare il contenuto dal bordo */
+  border: 1px solid #ddd;
+  /* Aggiungi un bordo se desideri */
+  border-radius: 5px;
+  /* Aggiungi un po' di bordo arrotondato se desideri */
 }
 
 .status-circle {
@@ -1450,5 +1507,3 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-top: 20px;
   color: black;
 }
-
-
